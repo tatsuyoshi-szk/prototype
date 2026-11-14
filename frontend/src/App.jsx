@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getSession } from './api.js'
 import Chat from './Chat.jsx'
+import Header from './Header.jsx'
 import Survey from './Survey.jsx'
 import Result from './Result.jsx'
 
@@ -34,14 +35,14 @@ export default function App() {
   const onSid = (sid) => { setSidInUrl(sid); go({ sid }) }
 
   if (state.phase === 'loading') {
-    return <div id="app"><header>就活相談チャット</header><div className="log"><div className="msg system">読み込み中…</div></div></div>
+    return <div id="app"><Header step={1} /><div className="log"><div className="msg system">読み込み中… / Loading…</div></div></div>
   }
   if (state.phase === 'lost') {
     return (
       <div id="app">
-        <header>就活相談チャット</header>
+        <Header step={1} />
         <div className="log">
-          <div className="msg error">この会話が見つかりません（サーバーを再起動すると、途中の会話は消えます）。</div>
+          <div className="msg error" role="alert">この会話が見つかりません（サーバーを再起動すると、途中の会話は消えます）。</div>
           <button className="btn" onClick={() => { setSidInUrl(null); setState(FRESH) }}>新しく始める</button>
         </div>
       </div>
@@ -50,19 +51,20 @@ export default function App() {
 
   return (
     <div id="app">
-      <header>就活相談チャット</header>
+      <Header step={state.phase === 'chat' ? 1 : state.phase === 'result' ? 3 : 2} />
       <Chat
         sid={state.sid}
         initial={state.transcript}
         locked={state.phase !== 'chat'}
+        fold={state.phase === 'survey' || state.phase === 'result'}
         onSid={onSid}
         onFinished={(axes) => go({ phase: 'done', axes })}
       >
         {state.phase === 'done' && (
           <div className="panel">
-            <h2>会話が終わりました。あなたの就活軸</h2>
+            <h2>会話が終わりました。あなたの就活軸 <span className="en">Your priorities</span></h2>
             <ul>{state.axes.map((a) => <li key={a}>{a}</li>)}</ul>
-            <button className="btn" onClick={() => go({ phase: 'survey' })}>アンケートに進む</button>
+            <button className="btn" onClick={() => go({ phase: 'survey' })}>アンケートに進む <span className="en">Next: Rate</span></button>
           </div>
         )}
         {state.phase === 'survey' && (

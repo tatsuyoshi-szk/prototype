@@ -56,12 +56,11 @@ export default function Survey({ sid, onDone }) {
         <b>「譲れない」</b>にチェックした項目は、<b>絞り込みの条件</b>になります。その項目で<b>4点以上（根拠が確認できた企業）</b>だけが、結果に残ります。重みは、最大（{hi}点）として扱います。
         チェックが多いほど、残る企業は少なくなります。
       </p>
-      {error && <div className="msg error">{error}</div>}
       <div className="sheet">
         <div className="row head">
           <div />
           {scale.map((s) => <div key={s.value}>{s.value}<br />{s.label}</div>)}
-          <div>譲れない</div>
+          <div>譲れない<br />Must-have</div>
         </div>
         {survey.questions.map((q, i) => (
           <div key={q.id} className={'row' + (missing.includes(q.id) && !answers[q.id] ? ' missing' : '')}>
@@ -92,14 +91,15 @@ export default function Survey({ sid, onDone }) {
                   if (e.target.checked) setAnswers((a) => ({ ...a, [q.id]: hi }))      // 譲れない項目は、最大の点数にする
                 }}
               />
-              <span>譲れない</span>
+              <span>譲れない<small>Must-have</small></span>
             </label>
           </div>
         ))}
       </div>
+      {error && <div className="msg error" role="alert">{error}</div>}
       <div className="footer">
         <span className="progress">{done} / {total} 項目 回答済み　／　譲れない条件：{must.length}個</span>
-        <button className="btn" type="submit" disabled={busy}>{busy ? '送信中…' : '送信する'}</button>
+        <button className="btn" type="submit" disabled={busy}>{busy ? '送信中…' : '結果を見る'}</button>
       </div>
     </form>
   )

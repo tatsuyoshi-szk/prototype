@@ -21,20 +21,23 @@ function Card({ c }) {
   return (
     <div className="card">
       <div className="top">
-        <span className="no">{c.rank}位</span>
-        <span className="nm">{c.name}</span>
-        {c.industry && <span className="ind">{c.industry}</span>}
-        <span className="pt">{c.score}点</span>
+        <span className={'no' + (c.rank <= 3 ? ' top3' : '')} aria-label={`${c.rank}位`}>{c.rank}</span>
+        <div className="who">
+          <span className="nm">{c.name}</span>
+          {c.industry && <span className="ind">{c.industry}</span>}
+        </div>
+        <div className="pt"><span className="pt-n">{c.score}</span><span className="pt-u">/100</span></div>
       </div>
+      <div className="bar" role="img" aria-label={`${c.score}点（100点満点）`}><span style={{ width: `${Math.min(100, c.score)}%` }} /></div>
       {c.strengths.length > 0 && (
         <>
-          <div className="good">合うところ</div>
+          <div className="good"><span className="mark" aria-hidden="true">✓</span>合うところ <span className="en">Good fit</span></div>
           <ul>{c.strengths.map((x, i) => <Reason key={i} x={x} />)}</ul>
         </>
       )}
       {c.concerns.length > 0 && (
         <>
-          <div className="warn">気になるところ</div>
+          <div className="warn"><span className="mark" aria-hidden="true">!</span>気になるところ <span className="en">Check</span></div>
           <ul>{c.concerns.map((x, i) => <Reason key={i} x={x} />)}</ul>
         </>
       )}
@@ -79,7 +82,8 @@ function Progress({ info }) {
   const m = Math.floor((info.elapsed || 0) / 60), sec = (info.elapsed || 0) % 60
   return (
     <div className="progress-box">
-      <div>現在調査中です…（経過 {m}分{String(sec).padStart(2, '0')}秒）</div>
+      <div className="wait-title">現在調査中です… <span className="en">Searching</span></div>
+      <div className="wait-time">経過 <span className="num">{m}:{String(sec).padStart(2, '0')}</span></div>
       <div className="note">全部で3〜5分ほどかかります。このページを開いたままにしてください。</div>
     </div>
   )
@@ -114,17 +118,17 @@ export default function Result({ sid, ranking: initial }) {
 
   return (
     <>
-      <div className="msg system">アンケートにご協力ありがとうございました。</div>
+      <div className="msg system">アンケートにご協力ありがとうございました。 / Thank you!</div>
       {!ranking && !error && <Progress info={info} />}
       {error && (
         <>
-          <div className="msg error">{error}</div>
+          <div className="msg error" role="alert">{error}</div>
           <button className="btn" onClick={() => setAttempt((n) => n + 1)}>もう一度探す</button>
         </>
       )}
       {ranking && (
         <div className="rank">
-          <h2>{ranking.top.length ? `あなたに合う企業 ${ranking.top.length}社` : '条件に合う企業が見つかりませんでした'}</h2>
+          <h2>{ranking.top.length ? `あなたに合う企業 ${ranking.top.length}社` : '条件に合う企業が見つかりませんでした'} <span className="en">Your matches</span></h2>
           <div className="note">就活軸：{(ranking.axes || []).join('、')}</div>
           <Screening s={ranking.screening} />
           {ranking.top.map((c) => <Card key={c.id} c={c} />)}
