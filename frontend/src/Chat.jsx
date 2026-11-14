@@ -5,12 +5,9 @@ import { sendChat } from './api.js'
 function Welcome() {
   return (
     <section className="welcome" aria-label="はじめに / Welcome">
-      <p className="hello" aria-label="こんにちは。Hello. Xin chào. 你好. 안녕하세요.">
+      <p className="hello" aria-label="こんにちは。Hello.">
         <span lang="ja">こんにちは</span>
         <span lang="en">Hello</span>
-        <span lang="vi">Xin chào</span>
-        <span lang="zh">你好</span>
-        <span lang="ko">안녕하세요</span>
       </p>
       <h1>あなたに合う会社を、一緒に探しましょう。</h1>
       <p className="lead">
