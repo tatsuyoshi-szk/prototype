@@ -6,3 +6,8 @@ frontend/node_modules/
 frontend/dist/
 _snapshots/
 backend/cache/
+tests/e2e/node_modules/
+tests/e2e/fixtures.json
+tests/e2e/shots*/
+tests/e2e/*.png
+tools/measure_result.json

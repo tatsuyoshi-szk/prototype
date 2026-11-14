@@ -163,7 +163,7 @@ def judge_axes(axes: list[str], companies: list[dict], client, model: str = MODE
 # ---------------------------------------------------------------- ランキング
 
 def rank(axes: list[str], result: dict, top_n: int = TOP_N, client=None, model: str = MODEL,
-         companies: list[dict] | None = None, fits: dict | None = None) -> dict:
+         companies: list[dict] | None = None, fits: dict | None = None, lang: str = "ja") -> dict:
     """アンケートの結果から、企業のランキングを作る。
 
     axes:   個人軸の名前の一覧
@@ -180,9 +180,11 @@ def rank(axes: list[str], result: dict, top_n: int = TOP_N, client=None, model: 
         raise RankingError("個人軸の数と、アンケートの項目の数が合いません")
 
     common = score_common(companies)
+    en = lang == "en"
+    quote = (lambda a: f"“{a}”") if en else (lambda a: f"「{a}」")      # 軸の名前を囲む記号
     must = [m for m in (result.get("must_have") or [])]
     qname = {q["id"]: q["name"] for q in questions}
-    must_labels = [(f"「{job_axes[axis_qids.index(m)]}」" if m in axis_qids else qname.get(m, m)) for m in must if m in qname]
+    must_labels = [(quote(job_axes[axis_qids.index(m)]) if m in axis_qids else qname.get(m, m)) for m in must if m in qname]
     if fits is None:      # 軸の判定が渡されていなければ、保存済みの事実から、AIに判定させる
         fits = judge_axes(job_axes, companies, client, model)
 
@@ -203,9 +205,10 @@ def rank(axes: list[str], result: dict, top_n: int = TOP_N, client=None, model: 
                     fact = facts[cell["fact"] - 1] if cell["fact"] else None
                     basis, url = (fact["fact"], fact["url"]) if fact else ("", "")
                 if fact is None:
-                    basis, url = "判断できる事実が見つからなかったため、中立の3点", ""
+                    basis, url = ("No fact was found to judge this, so the neutral score of 3 is used." if en
+                                  else "判断できる事実が見つからなかったため、中立の3点"), ""
                 s, unknown, display = (fit - 1) / 4, fact is None, f"{fit}/5"
-                label = f"「{job_axes[i]}」"
+                label = quote(job_axes[i])
             else:
                 info = common[c["id"]].get(q["id"])
                 if info is None:      # 企業のデータにない項目は、計算に入れない
@@ -226,9 +229,9 @@ def rank(axes: list[str], result: dict, top_n: int = TOP_N, client=None, model: 
             if x is None:
                 continue
             if x["unknown"]:
-                failed.append({"label": x["label"], "reason": "根拠が見つからず、確認できない"})
+                failed.append({"label": x["label"], "reason": "No evidence found" if en else "根拠が見つからず、確認できない"})
             elif x["score"] < MUST_MIN:
-                failed.append({"label": x["label"], "reason": f"{x['display']}で、4点以上が必要"})
+                failed.append({"label": x["label"], "reason": f"{x['display']}; needs 4 or higher" if en else f"{x['display']}で、4点以上が必要"})
 
         known = [x for x in contribs if not x["unknown"]]
         strengths = sorted((x for x in known if x["score"] >= STRENGTH_MIN),
@@ -238,6 +241,7 @@ def rank(axes: list[str], result: dict, top_n: int = TOP_N, client=None, model: 
         fmt = lambda x: {"label": x["label"], "detail": x["display"], "basis": x["basis"], "url": x["url"]}
         rows.append({
             "id": c["id"], "name": c["name"], "industry": c.get("industry", ""),
+            "name_en": c.get("name_en", ""), "industry_en": c.get("industry_en", ""),
             "score": round(total * 100, 1),
             "strengths": [fmt(x) for x in strengths], "concerns": [fmt(x) for x in concerns],
             "unknown_count": sum(1 for x in contribs if x["unknown"] and not x["is_axis"]),
@@ -245,7 +249,7 @@ def rank(axes: list[str], result: dict, top_n: int = TOP_N, client=None, model: 
             "profile": c.get("profile", ""), "failed": failed,
         })
     rows.sort(key=lambda r: r["score"], reverse=True)
-    excluded = [{"name": r["name"], "failed": r["failed"]} for r in rows if r["failed"]]
+    excluded = [{"name": r["name"], "name_en": r["name_en"], "failed": r["failed"]} for r in rows if r["failed"]]
     rows = [r for r in rows if not r["failed"]]          # 譲れない条件を、すべて満たした企業だけを順位づけする
     for i, r in enumerate(rows, 1):
         r["rank"] = i
@@ -253,9 +257,9 @@ def rank(axes: list[str], result: dict, top_n: int = TOP_N, client=None, model: 
     return {
         "dummy": all(c.get("dummy") for c in companies),     # ダミーデータだけで計算したか
         "top": rows[:top_n],
-        "others": [{"rank": r["rank"], "name": r["name"], "score": r["score"]} for r in rows[top_n:]],
+        "others": [{"rank": r["rank"], "name": r["name"], "name_en": r["name_en"], "score": r["score"]} for r in rows[top_n:]],
         "companies_count": len(companies),
-        "axes": job_axes,
+        "axes": job_axes, "lang": lang,
         "screening": {"labels": must_labels, "total": len(companies),
                       "passed": len(rows), "excluded": excluded},
         "collected_from": dates[0] if dates else "", "collected_to": dates[-1] if dates else "",

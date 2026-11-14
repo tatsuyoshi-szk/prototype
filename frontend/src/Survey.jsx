@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { getSurvey, submitSurvey } from './api.js'
+import { useT } from './i18n.jsx'
 
-// 重み付けアンケート：全項目に 1〜5 で答えると送信できる。
+// 重み付けアンケート：全項目に 1〜5 で答えると送信できる。項目名・説明・段階の言葉は、サーバーが会話の言語で返す。
 export default function Survey({ sid, onDone }) {
+  const t = useT()
   const [survey, setSurvey] = useState(null)
   const [answers, setAnswers] = useState({})
   const [missing, setMissing] = useState([])
@@ -16,8 +18,8 @@ export default function Survey({ sid, onDone }) {
       .catch((e) => (e.data?.answered ? onDone() : setError(e.message)))
   }, [sid])
 
-  if (error && !survey) return <div className="msg error">{error}</div>
-  if (!survey) return <div className="msg system">アンケートを読み込み中…</div>
+  if (error && !survey) return <div className="msg error" role="alert">{error}</div>
+  if (!survey) return <div className="msg system">{t.surveyLoading}</div>
 
   const total = survey.questions.length
   const done = survey.questions.filter((q) => answers[q.id]).length
@@ -30,7 +32,7 @@ export default function Survey({ sid, onDone }) {
     const miss = survey.questions.filter((q) => !answers[q.id]).map((q) => q.id)
     setMissing(miss)
     if (miss.length) {
-      setError(`まだ選んでいない項目が ${miss.length} 個あります。赤い行を選んでください。`)
+      setError(t.missing(miss.length))
       return
     }
     setError('')
@@ -50,17 +52,14 @@ export default function Survey({ sid, onDone }) {
       <h2>{survey.title}</h2>
       <p className="lead">
         {survey.lead.split('\n').map((l, i) => <span key={i}>{l}<br /></span>)}
-        <small>{scale.map((s) => `${s.value}：${s.label}`).join(' / ')}</small>
+        <small>{scale.map((s) => `${s.value}: ${s.label}`).join(' / ')}</small>
       </p>
-      <p className="must-help">
-        <b>「譲れない」</b>にチェックした項目は、<b>絞り込みの条件</b>になります。その項目で<b>4点以上（根拠が確認できた企業）</b>だけが、結果に残ります。重みは、最大（{hi}点）として扱います。
-        チェックが多いほど、残る企業は少なくなります。
-      </p>
+      <p className="must-help">{t.mustHelp(hi)}</p>
       <div className="sheet">
         <div className="row head">
           <div />
           {scale.map((s) => <div key={s.value}>{s.value}<br />{s.label}</div>)}
-          <div>譲れない<br />Must-have</div>
+          <div>{t.mustHead[0]}<br />{t.mustHead[1]}</div>
         </div>
         {survey.questions.map((q, i) => (
           <div key={q.id} className={'row' + (missing.includes(q.id) && !answers[q.id] ? ' missing' : '')}>
@@ -82,7 +81,7 @@ export default function Survey({ sid, onDone }) {
                 <span>{s.value}{(s.value === lo || s.value === hi) && <small>{s.label}</small>}</span>
               </label>
             ))}
-            <label className="must" title="この項目を、絞り込みの条件にする">
+            <label className="must" title={t.mustTitle}>
               <input
                 type="checkbox"
                 checked={must.includes(q.id)}
@@ -91,15 +90,15 @@ export default function Survey({ sid, onDone }) {
                   if (e.target.checked) setAnswers((a) => ({ ...a, [q.id]: hi }))      // 譲れない項目は、最大の点数にする
                 }}
               />
-              <span>譲れない<small>Must-have</small></span>
+              <span>{t.mustHead[0]}<small>{t.mustHead[1]}</small></span>
             </label>
           </div>
         ))}
       </div>
       {error && <div className="msg error" role="alert">{error}</div>}
       <div className="footer">
-        <span className="progress">{done} / {total} 項目 回答済み　／　譲れない条件：{must.length}個</span>
-        <button className="btn" type="submit" disabled={busy}>{busy ? '送信中…' : '結果を見る'}</button>
+        <span className="progress">{t.progress(done, total, must.length)}</span>
+        <button className="btn" type="submit" disabled={busy}>{busy ? t.submitting : t.submit}</button>
       </div>
     </form>
   )

@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { sendChat } from './api.js'
+import { useT } from './i18n.jsx'
 
-// 最初の画面：多言語のあいさつ。次にすることは、「自分のことを書く」の1つだけ。
+// 最初の画面：日本語と英語のあいさつ。言語は、最初のメッセージで決まる（日本語でも、英語でも書ける）。
+// 次にすることは、「自分のことを書く」の1つだけ。
 function Welcome() {
   return (
     <section className="welcome" aria-label="はじめに / Welcome">
@@ -9,24 +11,29 @@ function Welcome() {
         <span lang="ja">こんにちは</span>
         <span lang="en">Hello</span>
       </p>
-      <h1>あなたに合う会社を、一緒に探しましょう。</h1>
+      <h1>
+        あなたに合う会社を、一緒に探しましょう。
+        <span className="h1-en" lang="en">Let’s find the companies that fit you.</span>
+      </h1>
       <p className="lead">
         <span>まず、あなたのことを、下の入力欄に書いてください。</span>
-        <span>やさしい日本語で大丈夫です。</span>
+        <span>日本語でも英語でも、やさしい言葉で大丈夫です。</span>
+        <span className="lead-en" lang="en">Tell us about yourself below. You can write in Japanese or English.</span>
       </p>
       <ul className="hints">
-        <li>どこから来ましたか</li>
-        <li>日本で、どんな仕事がしたいですか</li>
-        <li>いまの気持ち（不安、楽しみ）</li>
+        <li>どこから来ましたか<small lang="en">Where are you from?</small></li>
+        <li>日本で、どんな仕事がしたいですか<small lang="en">What work do you want to do in Japan?</small></li>
+        <li>いまの気持ち（不安、楽しみ）<small lang="en">How you feel (worries, hopes)</small></li>
       </ul>
     </section>
   )
 }
 
 // 会話の画面。children には、会話のあとに続く画面（軸の確認、アンケート、結果）が入る。
-export default function Chat({ sid, initial, locked, fold, onSid, onFinished, children }) {
+export default function Chat({ sid, initial, locked, fold, onSid, onLang, onFinished, children }) {
+  const t = useT()
   const [messages, setMessages] = useState(() =>
-    initial.map((t) => ({ role: t.role === 'student' ? 'student' : 'advisor', text: t.text })),
+    initial.map((m) => ({ role: m.role === 'student' ? 'student' : 'advisor', text: m.text })),
   )
   const [text, setText] = useState('')
   const [busy, setBusy] = useState(false)
@@ -42,23 +49,24 @@ export default function Chat({ sid, initial, locked, fold, onSid, onFinished, ch
   }, [messages, busy, error, children, fold])
 
   async function submit() {
-    const t = text.trim()
-    if (!t || busy || locked) return
+    const v = text.trim()
+    if (!v || busy || locked) return
     setError('')
     setBusy(true)
-    setMessages((m) => [...m, { role: 'student', text: t }])
+    setMessages((m) => [...m, { role: 'student', text: v }])
     setText('')
     try {
-      const data = await sendChat(sidRef.current, t)
+      const data = await sendChat(sidRef.current, v)
       sidRef.current = data.session_id
       onSid(data.session_id)
+      if (data.lang) onLang(data.lang)        // 画面の言語を、会話の言語にそろえる
       setMessages((m) => [...m, { role: 'advisor', text: data.message }])
       if (data.finished) onFinished(data.axes || [])
     } catch (e) {
       // 失敗：送った文章を入力欄に戻して、もう一度送れるようにする
       if (e.data?.session_id) sidRef.current = e.data.session_id
       setMessages((m) => m.slice(0, -1))
-      setText(t)
+      setText(v)
       setError(e.message)
     } finally {
       setBusy(false)
@@ -93,11 +101,11 @@ export default function Chat({ sid, initial, locked, fold, onSid, onFinished, ch
         {fold ? (
           // アンケート・結果のときは、会話を折りたたんで、結果を上に出す
           <details className="history">
-            <summary>会話を見る <span className="en">Show conversation</span>（{messages.length}）</summary>
+            <summary>{t.showConv} <span className="en">{t.showConvEn}</span>（{messages.length}）</summary>
             <div className="history-body">{turns}</div>
           </details>
         ) : turns}
-        {busy && <div className="msg system">考え中…（少し時間がかかります） / Thinking…</div>}
+        {busy && <div className="msg system">{t.thinking}</div>}
         {error && <div className="msg error" role="alert">{error}</div>}
         <div className="after" ref={afterRef}>{children}</div>
         <div ref={endRef} />
@@ -109,12 +117,12 @@ export default function Chat({ sid, initial, locked, fold, onSid, onFinished, ch
             value={text}
             disabled={busy}
             autoFocus
-            aria-label="メッセージ / Message"
-            placeholder="ここに書いてください（Enterで送る、Shift+Enterで改行）"
+            aria-label={t.messageLabel}
+            placeholder={t.placeholder}
             onChange={(e) => setText(e.target.value)}
             onKeyDown={onKeyDown}
           />
-          <button type="submit" disabled={busy || !text.trim()}>送る</button>
+          <button type="submit" disabled={busy || !text.trim()}>{t.send}</button>
         </form>
       )}
     </>

@@ -46,6 +46,7 @@ IDS = ("foreign_staff_ratio foreign_manager_ratio evaluation_system english_sele
        "multilingual_docs visa_support living_support community_erg culture_religion home_leave "
        "global_offices global_review_score foreigner_reviews").split()
 NO_BASIS = "公開情報から確認できなかったため、基準どおり低い点（言及なし）"
+NO_BASIS_EN = "Not confirmed in public information, so scored low per the rubric (no mention found)."
 
 
 class PipelineError(RuntimeError):
@@ -106,12 +107,14 @@ def select_companies(axes: list[str], client, model: str = MAIN_MODEL, n: int = 
 - 就活軸のそれぞれに合う企業が、ある程度含まれるようにする。同じ業界は、多くても4社まで。大企業だけに偏らない。
 - 実在が確かな企業だけを選ぶ。名前を作らない。正式な日本語の企業名で書く（例：「トヨタ自動車」）。
 - id は、英小文字・数字・アンダースコアだけの短い名前（例：toyota）。{n}社の中で重複させない。
+- name_en は、その企業の一般的な英語表記（例：Toyota Motor）、industry_en は、業界の英語名（例：Automotive）。
 
 # 就活軸
 {axes_text}{avoid_text}"""
     row = {"type": "object", "properties": {"id": {"type": "string"}, "name": {"type": "string"},
-                                            "industry": {"type": "string"}},
-           "required": ["id", "name", "industry"], "additionalProperties": False}
+                                            "industry": {"type": "string"}, "name_en": {"type": "string"},
+                                            "industry_en": {"type": "string"}},
+           "required": ["id", "name", "industry", "name_en", "industry_en"], "additionalProperties": False}
     schema = {"type": "object", "properties": {"companies": {"type": "array", "items": row}},
               "required": ["companies"], "additionalProperties": False}
     data = structured(client, model, prompt, schema, effort="low", max_tokens=4000)
@@ -122,7 +125,8 @@ def select_companies(axes: list[str], client, model: str = MAIN_MODEL, n: int = 
         if not cid or not name or cid in seen_id or name in seen_name:
             continue
         seen_id.add(cid); seen_name.add(name)
-        out.append({"id": cid, "name": name, "industry": (c["industry"] or "").strip()})
+        out.append({"id": cid, "name": name, "industry": (c["industry"] or "").strip(),
+                    "name_en": (c.get("name_en") or "").strip(), "industry_en": (c.get("industry_en") or "").strip()})
     if len(out) < 1:
         raise PipelineError("企業を選べませんでした")
     return out[:n]
@@ -296,6 +300,7 @@ def _clean_evidence(raw: dict, batch: list[dict]) -> list[dict]:
             items[iid] = {"finding": str(it.get("finding") or "未確認"), "source_url": url if _is_http(url) else ""}
         out.append({
             "id": cid, "name": wanted[cid]["name"], "industry": c.get("industry") or wanted[cid]["industry"],
+            "name_en": wanted[cid].get("name_en", ""), "industry_en": wanted[cid].get("industry_en", ""),
             "collected_at": date.today().isoformat(),
             "profile": str(c.get("profile") or ""),
             "profile_url": c.get("profile_url") if _is_http(c.get("profile_url")) else "",
@@ -348,7 +353,8 @@ def _allowed_urls(ev: dict) -> set[str]:
     return {u for u in urls if u}
 
 
-def score_company(ev: dict, axes: list[str], rubric: list[dict], client, model: str = MAIN_MODEL) -> tuple[dict, list[dict]]:
+def score_company(ev: dict, axes: list[str], rubric: list[dict], client, model: str = MAIN_MODEL,
+                  lang: str = "ja") -> tuple[dict, list[dict]]:
     """1社分を採点する。戻り値は (企業のデータ, 軸の判定 [{fit, fact, basis, url}])。"""
     nl = chr(10)
     lines = []
@@ -358,6 +364,8 @@ def score_company(ev: dict, axes: list[str], rubric: list[dict], client, model: 
     facts = nl.join(f"- {a['fact']}（出典: {a['source_url']}）" for a in ev["axis_facts"]) or "- （なし）"
     offices = "、".join(ev["global_offices_list"]) or "（確認できた国名の一覧なし）"
     axes_text = nl.join(f"a{i}: {a}" for i, a in enumerate(axes, 1))
+    lang_note = ("\n- 言語：basis は、**英語**で書く（短く、やさしい英語。日本語の事実は、英語に訳してまとめる）。数字と出典URLは、そのまま。末尾の注記も英語にする（「（検索結果の抜粋）」は「(search result excerpt)」、「二次情報」は「(secondary info)」）。"
+                 if lang == "en" else "")
     prompt = f"""あなたは、企業のグローバル度を採点する担当です。調査担当が集めた「事実と出典URL」だけをもとに、採点してください。
 
 # 採点基準（共通14項目。1〜5点）
@@ -370,7 +378,7 @@ def score_company(ev: dict, axes: list[str], rubric: list[dict], client, model: 
 - 根拠がないとき（「未確認」、出典URLがない、など）：evidence_found を false にし、score は基準の「言及なし・確認できない」に当たる点（多くは1点）、basis と source_url は空文字にする。
 - 一部しか確認できなかったとき（例：海外拠点の国が一部しか分からない）は、確認できた範囲で基準に当てはめる。basis に、その範囲を書く。
 - 古い情報：根拠が2021年より前の情報だけのときは、基準に当てはめた点から1点下げる（最低1点）。basis に、その年を書く（例：「2015年の情報」）。
-  年が書かれていない情報は、そのまま使ってよい。
+  年が書かれていない情報は、そのまま使ってよい。{lang_note}
 - 「（検索結果の抜粋）」と書かれた事実は、出典URLがあれば根拠にしてよい。ただし basis の末尾に「（検索結果の抜粋）」と書く。出典URLのない事実、「参考値」とだけ書かれた事実は、根拠にしない。
 
 # 就活軸の判定
@@ -400,7 +408,8 @@ def score_company(ev: dict, axes: list[str], rubric: list[dict], client, model: 
             items[iid] = {"score": cell["score"], "basis": cell["basis"], "source_url": cell["url"],
                           "unconfirmed": False, "finding": src["finding"]}
         else:        # 根拠（出典つきの事実）がないものは、1点・根拠なし
-            items[iid] = {"score": 1, "basis": NO_BASIS, "source_url": "", "unconfirmed": True, "finding": src["finding"]}
+            items[iid] = {"score": 1, "basis": NO_BASIS_EN if lang == "en" else NO_BASIS, "source_url": "",
+                          "unconfirmed": True, "finding": src["finding"]}
     fits = []
     for i in range(1, len(axes) + 1):
         cell = _cell(data, "axes", f"a{i}", "fit")
@@ -408,6 +417,7 @@ def score_company(ev: dict, axes: list[str], rubric: list[dict], client, model: 
         fits.append({"fit": cell["score"] if ok else 3, "fact": 0,
                      "basis": cell["basis"] if ok else "", "url": cell["url"] if ok else ""})
     company = {**{k: ev[k] for k in ("id", "name", "industry", "profile", "profile_url", "global_offices_list", "axis_facts")},
+               "name_en": ev.get("name_en", ""), "industry_en": ev.get("industry_en", ""),
                "collected_at": ev.get("collected_at") or date.today().isoformat(), "dummy": False, "items": items,
                "sources": [u for u in [ev["profile_url"]] if u]}
     return company, fits
@@ -417,7 +427,7 @@ def score_company(ev: dict, axes: list[str], rubric: list[dict], client, model: 
 
 def run_research(axes: list[str], client=None, progress=None, *, main_model: str = MAIN_MODEL,
                  sub_model: str = SUB_MODEL, n_companies: int = N_COMPANIES, avoid: list[str] | None = None,
-                 research_only: bool = False) -> dict:
+                 research_only: bool = False, lang: str = "ja") -> dict:
     """企業を選び、サブエージェントで調べ、採点する。戻り値は {"companies": [...], "fits": {企業id: [...]}, "failed": [...]}。"""
     client = client or anthropic.Anthropic(max_retries=4)
     progress = progress or (lambda stage, detail="": None)
@@ -431,7 +441,8 @@ def run_research(axes: list[str], client=None, progress=None, *, main_model: str
     for c in chosen:
         hit = load_cached(c["name"])
         if hit:
-            cached.append({**hit, "id": c["id"]})      # id は、今回の選定のものにそろえる
+            cached.append({**hit, "id": c["id"], "name_en": c.get("name_en") or hit.get("name_en", ""),
+                           "industry_en": c.get("industry_en") or hit.get("industry_en", "")})      # id と英語名は、今回の選定のものにそろえる
         else:
             todo.append(c)
 
@@ -478,7 +489,7 @@ def run_research(axes: list[str], client=None, progress=None, *, main_model: str
 
     def score(ev):
         try:
-            return score_company(ev, axes, rubric, client, main_model)
+            return score_company(ev, axes, rubric, client, main_model, lang)
         except (PipelineError, anthropic.APIError, ValueError, KeyError) as exc:
             print(f"採点の失敗（{ev['name']}）: {type(exc).__name__}: {exc}")
             failed.append(ev["name"])

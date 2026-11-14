@@ -34,6 +34,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
 from interviewer import InterviewError, InterviewSession  # noqa: E402
+from interviewer.session import detect_lang  # noqa: E402
 from survey import build_survey, make_result  # noqa: E402
 
 DATA_DIR = ROOT / "data"          # 回答の保存先（個人情報を含む）
@@ -49,6 +50,32 @@ MSG_FAIL = "AIとの通信でエラーが起きました。もう一度送って
 MSG_REFUSED = "この内容には、AIが答えられませんでした。言い方を変えて、もう一度送ってください。"
 MSG_RANK = "企業のランキングを作れませんでした。少し待ってから、ページを読み込み直してください（もう一度、計算します）。"
 MSG_RANK_BUSY = "AIが混み合っています。少し待ってから、ページを読み込み直してください（もう一度、計算します）。"
+
+# 英語の画面向けの文言（日本語の文言が、先頭から一致したら、対応する英語にする）
+MSG_EN = {
+    MSG_AUTH: "The API key is not valid. Check the .env file in the prottype folder.",
+    MSG_BUSY: "The AI is busy. Please wait a moment and send again.",
+    MSG_FAIL: "An error occurred while talking to the AI. Please send again.",
+    MSG_REFUSED: "The AI could not answer this. Please rephrase and send again.",
+    MSG_RANK: "Could not build the company ranking. Please wait a moment and reload the page (it will be calculated again).",
+    MSG_RANK_BUSY: "The AI is busy. Please wait a moment and reload the page (it will be calculated again).",
+    "先にアンケートに答えてください。": "Please answer the survey first.",
+    "会話が見つかりません。ページを読み込み直してください。": "Conversation not found. Please reload the page.",
+}
+
+
+def tr(text: str, lang: str) -> str:
+    """画面に出す文言を、画面の言語にする。"""
+    if lang != "en":
+        return text
+    for ja, en in MSG_EN.items():
+        if text.startswith(ja):
+            return en
+    return text
+
+
+def lang_of(entry: dict) -> str:
+    return getattr(entry["session"], "lang", "ja")
 
 
 # ---------------------------------------------------------------- .env とAPIキー
@@ -125,19 +152,19 @@ def add_ranking(path: Path | None, ranking: dict, research: dict | None = None) 
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
-def default_researcher(axes: list[str], progress) -> dict:
+def default_researcher(axes: list[str], progress, lang: str = "ja") -> dict:
     """企業を選び、サブエージェント（Web）で調べ、採点する。ユーザーが使うたびに行う。"""
     from pipeline import PipelineError, run_research   # 使うときに読み込む（テストでは差し替える）
     try:
-        return run_research(axes, progress=progress)
+        return run_research(axes, progress=progress, lang=lang)
     except PipelineError as exc:
         raise RankingFailed(str(exc)) from exc
 
 
-def default_ranker(axes: list[str], result: dict, research: dict) -> dict:
+def default_ranker(axes: list[str], result: dict, research: dict, lang: str = "ja") -> dict:
     """アンケートの重みと「譲れない条件」で、調査・採点の結果を順位づけする。"""
     from ranking import rank
-    ranking = rank(axes, result, companies=research["companies"], fits=research["fits"])
+    ranking = rank(axes, result, companies=research["companies"], fits=research["fits"], lang=lang)
     ranking["failed"] = research.get("failed", [])
     return ranking
 
@@ -184,18 +211,19 @@ def make_handler(store: Store, ranker, researcher):
             return
         r.update(state="running", stage="select", detail="準備しています", error="", t0=time.time())
         axes = list(entry["session"].axes)
+        lang = lang_of(entry)
 
         def progress(stage: str, detail: str = ""):
             r["stage"], r["detail"] = stage, detail
 
         def work():
             try:
-                r["data"] = researcher(axes, progress)
+                r["data"] = researcher(axes, progress, lang=lang)
                 r["state"] = "done"
             except Exception as exc:   # noqa: BLE001  詳細はコンソールへ
                 traceback.print_exc()
                 _, text = friendly_error(exc)
-                r.update(state="error", error={MSG_FAIL: MSG_RANK, MSG_BUSY: MSG_RANK_BUSY}.get(text, text))
+                r.update(state="error", error=tr({MSG_FAIL: MSG_RANK, MSG_BUSY: MSG_RANK_BUSY}.get(text, text), lang))
 
         threading.Thread(target=work, daemon=True).start()
 
@@ -261,14 +289,14 @@ def make_handler(store: Store, ranker, researcher):
                     return self._json({"error": "会話がまだ終わっていません"}, 400)
                 if entry["saved"]:
                     return self._json({"error": "すでに回答済みです", "answered": True}, 409)
-                return self._json({"survey": build_survey(entry["session"].axes)})
+                return self._json({"survey": build_survey(entry["session"].axes, lang=lang_of(entry))})
             if url.path == "/api/session":
                 sid = (parse_qs(url.query).get("sid") or [""])[0]
                 entry = store.get(sid)
                 if entry is None:
                     return self._json({"error": "会話が見つかりません"}, 404)
                 session = entry["session"]
-                return self._json({"finished": session.finished, "axes": session.axes,
+                return self._json({"lang": lang_of(entry), "finished": session.finished, "axes": session.axes,
                                    "answered": entry["saved"], "transcript": session.transcript(),
                                    "ranking": entry["ranking"]})
             if url.path.startswith("/api/"):
@@ -335,10 +363,10 @@ def make_handler(store: Store, ranker, researcher):
                 except Exception as exc:   # noqa: BLE001  詳細はコンソールへ、画面にはやさしい文言だけ
                     traceback.print_exc()
                     status, text = friendly_error(exc)
-                    return self._json({"error": text, "session_id": sid}, status)
+                    return self._json({"error": tr(text, detect_lang(message)), "session_id": sid}, status)
             if turn.finished:      # 軸が決まったので、アンケートに答えているあいだに、企業の調査を裏で始める
                 start_research(entry)
-            self._json({"session_id": sid, "kind": turn.kind, "message": turn.message,
+            self._json({"session_id": sid, "kind": turn.kind, "message": turn.message, "lang": lang_of(entry),
                         "finished": turn.finished, "axes": turn.axes})
 
         def _submit(self, raw: bytes):
@@ -358,7 +386,7 @@ def make_handler(store: Store, ranker, researcher):
                     return self._json({"error": "会話がまだ終わっていません"}, 400)
                 if entry["saved"]:
                     return self._json({"error": "すでに回答済みです", "answered": True}, 409)
-                survey = build_survey(entry["session"].axes)
+                survey = build_survey(entry["session"].axes, lang=lang_of(entry))
                 valid = {s["value"] for s in survey["scale"]}
                 answers, missing = {}, []
                 for q in survey["questions"]:
@@ -386,12 +414,12 @@ def make_handler(store: Store, ranker, researcher):
                 return self._json({"error": "会話が見つかりません。ページを読み込み直してください。"}, 404)
             with entry["lock"]:
                 if not entry["saved"]:
-                    return self._json({"error": "先にアンケートに答えてください。"}, 400)
+                    return self._json({"error": tr("先にアンケートに答えてください。", lang_of(entry))}, 400)
                 if entry["ranking"] is not None:        # 計算は1回だけ。2回目以降は、保存した結果を返す
                     return self._json({"state": "done", "ranking": entry["ranking"]})
                 r = entry["research"]
                 if r["state"] == "error":
-                    msg = r["error"]
+                    msg = r["error"]      # 調査のスレッドで、すでに画面の言語にしてある
                     r["state"] = "idle"                 # 次に呼ばれたら、調査をやり直す
                     return self._json({"state": "error", "error": msg}, 500)
                 if r["state"] == "idle":                # 復元したときなど、まだ始まっていなければ、ここで始める
@@ -400,11 +428,11 @@ def make_handler(store: Store, ranker, researcher):
                     return self._json({"state": "running", "stage": r["stage"], "detail": r["detail"],
                                        "elapsed": int(time.time() - r["t0"])})
                 try:                                    # 調査が終わっている：重みと譲れない条件で順位づけする
-                    entry["ranking"] = ranker(entry["session"].axes, entry["result"], r["data"])
+                    entry["ranking"] = ranker(entry["session"].axes, entry["result"], r["data"], lang=lang_of(entry))
                 except Exception as exc:   # noqa: BLE001
                     traceback.print_exc()
                     status, text = friendly_error(exc)
-                    text = {MSG_FAIL: MSG_RANK, MSG_BUSY: MSG_RANK_BUSY}.get(text, text)
+                    text = tr({MSG_FAIL: MSG_RANK, MSG_BUSY: MSG_RANK_BUSY}.get(text, text), lang_of(entry))
                     return self._json({"state": "error", "error": text}, status)
                 add_ranking(entry["path"], entry["ranking"], r["data"])
             self._json({"state": "done", "ranking": entry["ranking"]})

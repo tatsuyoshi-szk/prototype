@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -51,7 +52,17 @@ FINAL_REQUEST = (
     "【システムからの依頼】会話は終了しました。これは相談者への返事ではありません。"
     "これまでの会話だけをもとに、システムプロンプトの「最終出力（axes）」のルールに従って、"
     "個人軸の名前だけをJSONで出力してください。"
+    "軸の名前は、相談者が会話で使っていた言語（日本語または英語）で書いてください。"
 )
+
+_JA_CHARS = re.compile(r"[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff]")
+
+
+def detect_lang(text: str) -> str:
+    """文章の言語を、"ja" か "en" で返す。日本語の文字があれば ja、英字だけで3文字以上あれば en、それ以外は ja。"""
+    if _JA_CHARS.search(text or ""):
+        return "ja"
+    return "en" if len(re.findall(r"[A-Za-z]", text or "")) >= 3 else "ja"
 
 LIMIT_NOTICE = (
     "\n\n【システム】質問の回数が上限に達しました。次は、質問をせず、見つけた軸を要約して確認する（kind を confirm にする）か、"
@@ -144,6 +155,14 @@ class InterviewSession:
             del self.history[keep_len:]
             self.questions = keep_questions
             raise
+
+    @property
+    def lang(self) -> str:
+        """会話の言語（相談者の、いちばん新しいメッセージの言語）。画面の言語に使う。"""
+        for m in reversed(self.history):
+            if m["role"] == "user" and isinstance(m["content"], str):
+                return detect_lang(m["content"].replace(LIMIT_NOTICE, ""))
+        return "ja"
 
     def transcript(self) -> list[dict]:
         """会話を [{"role": "student" | "advisor", "text": ...}] で返す。保存・表示用。

@@ -8,6 +8,18 @@ lead: |
   あなたに合う会社のランキングを作るためのアンケートです。
   会社を選ぶとき、それぞれの項目をどのくらい大事にしたいか、1〜5から1つ選んでください。
 
+title_en: "What matters to you when choosing a company - Survey"
+lead_en: |
+  This survey is used to build your company ranking.
+  For each item, choose 1 to 5 for how important it is when you choose a company.
+
+scale_en:
+  1: Not important
+  2: Somewhat unimportant
+  3: Neutral
+  4: Somewhat important
+  5: Important
+
 scale:
   1: 重視していない
   2: どちらかと言えば重視していない
@@ -20,6 +32,8 @@ job_axis_item:
   id: job_axis
   name: あなたの就活軸「{job_axis}」に合っているか
   explain: さきほどの会話で分かった、あなたの就活軸に、その会社がどのくらい合っているか。
+  name_en: "Fit with your priority “{job_axis}”"
+  explain_en: "From our conversation - how well the company fits this priority of yours."
   position: first   # first（先頭）または last（最後）
 
 # 共通項目（すべての学生に同じものを聞く）
@@ -27,55 +41,83 @@ items:
   - id: foreign_staff_ratio
     name: 外国籍社員の割合
     explain: 会社で働く人のうち、外国籍の人がどのくらいいるか。
+    name_en: "Share of foreign-national employees"
+    explain_en: "How many of the people working at the company are foreign nationals."
 
   - id: foreign_manager_ratio
     name: 外国籍役員・管理職の割合
     explain: 社長・役員・部長などの、会社の上の立場に外国籍の人がどのくらいいるか。
+    name_en: "Foreign nationals among executives and managers"
+    explain_en: "How many foreign nationals hold senior positions such as executives and department heads."
 
   - id: evaluation_system
     name: 評価・等級制度の形式
     explain: 仕事をどう評価して、給料や立場（ランク）を決めるかのしくみ。年齢や働いた年数で上がる会社もあれば、成果や役割で決まる会社もある。
+    name_en: "How performance is evaluated and graded"
+    explain_en: "How the company decides pay and rank. Some companies promote by age or years of service; others by results or role."
 
   - id: english_selection
     name: 選考プロセスに英語が使えるか
     explain: 応募書類や面接などの選考を、英語で受けられるか。
+    name_en: "English available in the hiring process"
+    explain_en: "Whether you can take the selection process (application documents, interviews) in English."
 
   - id: required_japanese
     name: 要求される日本語のレベル
     explain: 入社するとき、また働くときに、どのくらいの日本語力が必要か。
+    name_en: "Japanese level required"
+    explain_en: "How much Japanese you need to join and to work at the company."
 
   - id: multilingual_docs
     name: 社内ツールのドキュメントの多言語対応度
     explain: 社内で使うシステムやマニュアルなどの説明が、日本語以外（英語など）でも読めるか。
+    name_en: "Internal tools and documents in other languages"
+    explain_en: "Whether internal systems and manuals can be read in languages other than Japanese, such as English."
 
   - id: visa_support
     name: 外国人のビザ取得へのサポートの充実度
     explain: ビザ（在留資格）の取得や更新の手続きを、会社が手伝ってくれるか。
+    name_en: "Support for getting a visa"
+    explain_en: "Whether the company helps with getting and renewing your visa (residence status)."
 
   - id: living_support
     name: 外国人への衣食住へのサポートの充実度
     explain: 住む家さがし、生活の手続き、食事など、日本での生活を会社が手伝ってくれるか。
+    name_en: "Support for housing and daily life"
+    explain_en: "Whether the company helps with finding a home, daily-life paperwork, meals and other parts of life in Japan."
 
   - id: community_erg
     name: 外国人向けコミュニティ・ERGがあるか
     explain: 外国人社員どうしで集まったり、相談したりできる社内のグループ（ERG：従業員リソースグループ）があるか。
+    name_en: "Communities or ERGs for foreign employees"
+    explain_en: "Whether there are in-company groups (ERGs: employee resource groups) where foreign employees can meet and ask for advice."
 
   - id: culture_religion
     name: 文化・宗教への配慮の充実度
     explain: お祈りの時間や場所、食べ物のきまり、母国の祝日など、文化や宗教に会社が配慮してくれるか。
+    name_en: "Consideration for culture and religion"
+    explain_en: "Whether the company respects culture and religion, such as prayer time and space, food rules, and holidays from your home country."
 
   - id: home_leave
     name: 長期帰国休暇の取りやすさ
     explain: 母国に帰るために、長い休みを取りやすいか。
+    name_en: "Ease of taking long leave to go home"
+    explain_en: "Whether it is easy to take a long break to visit your home country."
 
   - id: global_offices
     name: グローバル拠点
     explain: 海外のどの国・どの町に、会社の支社や工場などがあるか。
+    name_en: "Global offices"
+    explain_en: "In which countries and cities the company has branches or factories."
 
   - id: global_review_score
     name: グローバル口コミサイトのスコア
     explain: 世界中の人が使う会社の口コミサイト（Glassdoor など）で、その会社がどのくらい高く評価されているか。
+    name_en: "Score on global review sites"
+    explain_en: "How highly the company is rated on review sites used worldwide (such as Glassdoor)."
 
   - id: foreigner_reviews
     name: 外国人の口コミによる企業評価
     explain: その会社で実際に働いた外国人社員が、口コミでその会社をどう評価しているか。
+    name_en: "Reviews by foreign employees"
+    explain_en: "How foreign employees who actually worked there rate the company in their reviews."

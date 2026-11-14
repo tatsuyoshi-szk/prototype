@@ -17,7 +17,7 @@ def load_config(path: str | Path = DEFAULT_CONFIG) -> dict:
         return yaml.safe_load(f)
 
 
-def build_survey(job_axis: str | list[str], config: dict | None = None) -> dict:
+def build_survey(job_axis: str | list[str], config: dict | None = None, lang: str = "ja") -> dict:
     """アンケートの定義を作る。
 
     job_axis: 就活軸推定QAで推定した就活軸。例：「海外と関わる製造業の仕事」
@@ -41,17 +41,21 @@ def build_survey(job_axis: str | list[str], config: dict | None = None) -> dict:
     if not axes:
         raise ValueError("就活軸（job_axis）が空です。就活軸推定QAの結果を渡してください。")
     config = config or load_config()
+    en = lang == "en"
+
+    def pick(d: dict, key: str) -> str:      # 英語のときは、<key>_en があればそれを使う
+        return (d.get(key + "_en") if en and d.get(key + "_en") else d.get(key)) or ""
 
     common = [
-        {"id": it["id"], "name": it["name"], "explain": it.get("explain") or "", "source": "common"}
+        {"id": it["id"], "name": pick(it, "name"), "explain": pick(it, "explain"), "source": "common"}
         for it in config["items"]
     ]
     tmpl = config["job_axis_item"]
     axis_qs = [
         {
             "id": tmpl["id"] if len(axes) == 1 else f"{tmpl['id']}_{i}",
-            "name": tmpl["name"].replace("{job_axis}", ax),
-            "explain": (tmpl.get("explain") or "").replace("{job_axis}", ax),
+            "name": pick(tmpl, "name").replace("{job_axis}", ax),
+            "explain": pick(tmpl, "explain").replace("{job_axis}", ax),
             "source": "job_axis",
         }
         for i, ax in enumerate(axes, 1)
@@ -63,11 +67,12 @@ def build_survey(job_axis: str | list[str], config: dict | None = None) -> dict:
         raise ValueError(f"項目IDが重複しています: {ids}")
 
     return {
-        "title": config["title"],
-        "lead": config["lead"].strip(),
+        "title": pick(config, "title"),
+        "lead": pick(config, "lead").strip(),
+        "lang": lang,
         "job_axis": axes[0] if len(axes) == 1 else "、".join(axes),   # 従来との互換のため残す
         "job_axes": axes,
-        "scale": [{"value": int(k), "label": v} for k, v in sorted(config["scale"].items())],
+        "scale": [{"value": int(k), "label": v} for k, v in sorted((config.get("scale_en") if en and config.get("scale_en") else config["scale"]).items())],
         "questions": questions,
     }
 

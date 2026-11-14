@@ -1,14 +1,17 @@
 // バックエンド（JSON API）を呼ぶ。失敗したときは、画面に出してよい文言を持った Error を投げる。
+import { STRINGS, getCurrentLang } from './i18n.jsx'
+
 async function call(path, options) {
+  const t = STRINGS[getCurrentLang()]
   let res
   try {
     res = await fetch(path, options)
   } catch {
-    throw new Error('サーバーにつながりません。サーバーが動いているか確認してください。')
+    throw new Error(t.serverUnreachable)
   }
   const data = await res.json().catch(() => ({}))
   if (!res.ok) {
-    const err = new Error(data.error || 'エラーが起きました。もう一度お試しください。')
+    const err = new Error(data.error || t.genericError)
     err.status = res.status
     err.data = data
     throw err

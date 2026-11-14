@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { fetchRanking } from './api.js'
+import { LangContext, useT } from './i18n.jsx'
+import { useContext } from 'react'
 
 const isHttp = (u) => /^https?:\/\//.test(u || '')     // http(s) のリンクだけを出す
 
@@ -8,45 +10,55 @@ function Link({ url, children }) {
 }
 
 function Reason({ x }) {
+  const t = useT()
   return (
     <li>
-      {x.label}（{x.detail}）
+      {t.detail(x.label, x.detail)}
       {x.basis && <div className="basis">{x.basis}</div>}
-      {isHttp(x.url) && <div className="basis"><Link url={x.url}>出典を開く</Link></div>}
+      {isHttp(x.url) && <div className="basis"><Link url={x.url}>{t.openSource}</Link></div>}
     </li>
   )
 }
 
+// 英語のときは、英語名を大きく、日本語名を小さく出す（英語名がなければ、日本語名だけ）
+function useNames() {
+  const lang = useContext(LangContext)
+  return (o) => (lang === 'en' && o.name_en
+    ? { main: o.name_en, sub: o.name_en === o.name ? '' : o.name, industry: o.industry_en || o.industry }
+    : { main: o.name, sub: '', industry: o.industry })
+}
+
 function Card({ c }) {
+  const t = useT()
+  const names = useNames()(c)
   return (
     <div className="card">
       <div className="top">
-        <span className={'no' + (c.rank <= 3 ? ' top3' : '')} aria-label={`${c.rank}位`}>{c.rank}</span>
+        <span className={'no' + (c.rank <= 3 ? ' top3' : '')} aria-label={t.rankAria(c.rank)}>{c.rank}</span>
         <div className="who">
-          <span className="nm">{c.name}</span>
-          {c.industry && <span className="ind">{c.industry}</span>}
+          <span className="nm">{names.main}</span>
+          {names.sub && <span className="ind">{names.sub}</span>}
+          {names.industry && <span className="ind">{names.industry}</span>}
         </div>
         <div className="pt"><span className="pt-n">{c.score}</span><span className="pt-u">/100</span></div>
       </div>
-      <div className="bar" role="img" aria-label={`${c.score}点（100点満点）`}><span style={{ width: `${Math.min(100, c.score)}%` }} /></div>
+      <div className="bar" role="img" aria-label={t.barAria(c.score)}><span style={{ width: `${Math.min(100, c.score)}%` }} /></div>
       {c.strengths.length > 0 && (
         <>
-          <div className="good"><span className="mark" aria-hidden="true">✓</span>合うところ <span className="en">Good fit</span></div>
+          <div className="good"><span className="mark" aria-hidden="true">✓</span>{t.good} <span className="en">{t.goodEn}</span></div>
           <ul>{c.strengths.map((x, i) => <Reason key={i} x={x} />)}</ul>
         </>
       )}
       {c.concerns.length > 0 && (
         <>
-          <div className="warn"><span className="mark" aria-hidden="true">!</span>気になるところ <span className="en">Check</span></div>
+          <div className="warn"><span className="mark" aria-hidden="true">!</span>{t.warn} <span className="en">{t.warnEn}</span></div>
           <ul>{c.concerns.map((x, i) => <Reason key={i} x={x} />)}</ul>
         </>
       )}
       <div className="meta">
-        {c.unknown_count
-          ? `共通項目のうち、根拠が見つからなかったもの：${c.unknown_count}個（基準どおり低い点で計算）`
-          : '共通項目は、すべて根拠あり'}
+        {t.unknownCount(c.unknown_count)}
         {(c.sources || []).filter(isHttp).map((u, i) => (
-          <span key={u}>{i ? '　' : '　企業の紹介の出典：'}<Link url={u}>[{i + 1}]</Link></span>
+          <span key={u}>{i ? '　' : `　${t.sourcesLabel}`}<Link url={u}>[{i + 1}]</Link></span>
         ))}
       </div>
     </div>
@@ -55,20 +67,22 @@ function Card({ c }) {
 
 // 「譲れない」条件での絞り込みの結果（条件がなければ何も出さない）
 function Screening({ s }) {
+  const t = useT()
+  const names = useNames()
   if (!s || !s.labels?.length) return null
   return (
     <div className="screening">
       <div>
-        <b>譲れない条件：</b>{s.labels.join('、')}<br />
-        {s.total}社のうち、すべて満たした企業は <b>{s.passed}社</b> です（4点以上で、根拠が確認できた企業だけを残しています）。
-        {s.passed === 0 && '条件を減らすと、企業が見つかりやすくなります。'}
+        <b>{t.screenTitle}</b>{s.labels.join(t.sep)}<br />
+        {t.screenResult(s.total, s.passed)}
+        {s.passed === 0 && ` ${t.screenLess}`}
       </div>
       {s.excluded.length > 0 && (
         <details>
-          <summary>除かれた企業（{s.excluded.length}社）と、満たさなかった条件</summary>
+          <summary>{t.excluded(s.excluded.length)}</summary>
           <ul>
             {s.excluded.map((e) => (
-              <li key={e.name}>{e.name}：{e.failed.map((f) => `${f.label}（${f.reason}）`).join('、')}</li>
+              <li key={e.name}>{names(e).main}: {e.failed.map((f) => t.detail(f.label, f.reason)).join(t.sep)}</li>
             ))}
           </ul>
         </details>
@@ -79,20 +93,23 @@ function Screening({ s }) {
 
 // 調査中の表示（経過時間つき）
 function Progress({ info }) {
+  const t = useT()
   const m = Math.floor((info.elapsed || 0) / 60), sec = (info.elapsed || 0) % 60
   return (
     <div className="progress-box">
-      <div className="wait-title">現在調査中です… <span className="en">Searching</span></div>
-      <div className="wait-time">経過 <span className="num">{m}:{String(sec).padStart(2, '0')}</span></div>
-      <div className="note">全部で3〜5分ほどかかります。このページを開いたままにしてください。</div>
+      <div className="wait-title">{t.waitTitle} <span className="en">{t.waitEn}</span></div>
+      <div className="wait-time">{t.elapsed} <span className="num">{m}:{String(sec).padStart(2, '0')}</span></div>
+      <div className="note">{t.waitNote}</div>
     </div>
   )
 }
 
 // アンケートのあと：企業の調査が終わるのを待って（定期的に確認する）、上位をカードで表示する。
 export default function Result({ sid, ranking: initial }) {
+  const t = useT()
+  const names = useNames()
   const [ranking, setRanking] = useState(initial || null)
-  const [info, setInfo] = useState({ stage: 'select', detail: '準備しています', elapsed: 0 })
+  const [info, setInfo] = useState({ stage: 'select', detail: '', elapsed: 0 })
   const [error, setError] = useState('')
   const [attempt, setAttempt] = useState(0)
 
@@ -118,29 +135,30 @@ export default function Result({ sid, ranking: initial }) {
 
   return (
     <>
-      <div className="msg system">アンケートにご協力ありがとうございました。 / Thank you!</div>
+      <div className="msg system">{t.thanks}</div>
       {!ranking && !error && <Progress info={info} />}
       {error && (
         <>
           <div className="msg error" role="alert">{error}</div>
-          <button className="btn" onClick={() => setAttempt((n) => n + 1)}>もう一度探す</button>
+          <button className="btn" onClick={() => setAttempt((n) => n + 1)}>{t.retry}</button>
         </>
       )}
       {ranking && (
         <div className="rank">
-          <h2>{ranking.top.length ? `あなたに合う企業 ${ranking.top.length}社` : '条件に合う企業が見つかりませんでした'} <span className="en">Your matches</span></h2>
-          <div className="note">就活軸：{(ranking.axes || []).join('、')}</div>
+          <h2>{t.matchesTitle(ranking.top.length)} <span className="en">{t.matchesEn}</span></h2>
+          <div className="note">{t.axesLabel}{(ranking.axes || []).join(t.sep)}</div>
           <Screening s={ranking.screening} />
           {ranking.top.map((c) => <Card key={c.id} c={c} />)}
           {ranking.others?.length > 0 && (
             <div className="others">
-              ほかの企業：{ranking.others.map((o) => `${o.rank}位 ${o.name}（${o.score}点）`).join('、')}
+              {t.others}{ranking.others.map((o) => t.otherItem(o, names(o).main)).join(t.sep)}
             </div>
           )}
           <div className="note">
             {ranking.dummy
-              ? `これは動作確認用のダミーデータです。企業はすべて架空で、実在の企業とは関係ありません。対象は ${ranking.companies_count}社です。`
-              : `あなたの就活軸に合わせてAIが選んだ${ranking.companies_count}社を、公開情報をもとにWebで調べて採点したものです。誤りや古い情報が含まれることがあります（調査日：${ranking.collected_to}）。順位は、この${ranking.companies_count}社の中でのものです。${ranking.failed?.length ? `（調べられなかった企業：${ranking.failed.join('、')}）` : ''}`}
+              ? t.footDummy(ranking.companies_count)
+              : t.footNote(ranking.companies_count, ranking.collected_to)}
+            {ranking.failed?.length ? t.failedPrefix(ranking.failed.join(t.sep)) : ''}
           </div>
         </div>
       )}
