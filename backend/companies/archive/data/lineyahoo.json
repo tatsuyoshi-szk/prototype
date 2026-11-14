@@ -1,0 +1,144 @@
+{
+  "id": "lineyahoo",
+  "name": "LINEヤフー",
+  "industry": "インターネット・IT",
+  "profile": "ネットサービス企業。ESGデータでは外国人従業員が2025年度に9,111人（31.4%）、管理職の外国人比率は27.2%。外国籍社員支援の専門チームがビザ手続き（家族の呼び寄せ含む）を支援し、日英韓の翻訳・通訳、祈祷室を整備。海外の主な拠点は韓国、台湾、ベトナム、タイ。",
+  "profile_url": "https://www.lycorp.co.jp/ja/sustainability/esg/social/human-capital2/",
+  "collected_at": "2026-11-14",
+  "dummy": false,
+  "global_offices_list": [
+    "韓国",
+    "台湾",
+    "ベトナム",
+    "タイ"
+  ],
+  "items": {
+    "foreign_staff_ratio": {
+      "score": 5,
+      "basis": "外国人従業員は9,111人（31.4%、2025年度）",
+      "source_url": "https://www.lycorp.co.jp/ja/sustainability/esg/data/",
+      "unconfirmed": false,
+      "finding": "外国人従業員は2025年度に9,111人（31.4%）、2024年度は3,705人（16.9%）。従業員数は2025年度32,175人。範囲は「LINEヤフー単体」と明記された項目以外は主要子会社の集計（連結の明記なし）。"
+    },
+    "foreign_manager_ratio": {
+      "score": 4,
+      "basis": "管理職の外国人比率27.2%（2025年度）。昇進基準の公開は未確認のため4",
+      "source_url": "https://www.lycorp.co.jp/ja/sustainability/esg/data/",
+      "unconfirmed": false,
+      "finding": "管理職の外国人は2025年度に1,295人（27.2%）、2024年度は932人（18.6%）。2025年度から算出定義が変わり単純比較は不可と注記。"
+    },
+    "evaluation_system": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（評価制度や国籍による差に関する記述は見つからず）"
+    },
+    "english_selection": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（新卒採用ページに英語選考の記載なし。職種はエンジニア、ビジネスコンサルタント、プロダクトプランナーで、職種ごとに選考が異なる）"
+    },
+    "required_japanese": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "multilingual_docs": {
+      "score": 4,
+      "basis": "社内の翻訳ツールで日英韓を自動翻訳。全社向けメッセージ・全社イベントは日英韓で同時に翻訳・通訳",
+      "source_url": "https://www.lycorp.co.jp/ja/sustainability/esg/social/human-capital2/",
+      "unconfirmed": false,
+      "finding": "社内の文章翻訳ツールで日本語・英語・韓国語を自動翻訳。英語・韓国語の通訳翻訳の専門チームがあり、全社員向けのメッセージや全社イベントは日英韓で同時に翻訳・通訳が提供される。"
+    },
+    "visa_support": {
+      "score": 4,
+      "basis": "外国籍社員向けの専門チームが、家族の呼び寄せを含むビザ手続きを支援。永住権の支援・実績の公開は未確認",
+      "source_url": "https://www.lycorp.co.jp/ja/sustainability/esg/social/human-capital2/",
+      "unconfirmed": false,
+      "finding": "外国籍社員向けの専門サポートチームが、ビザ手続き（海外から呼び寄せる子どもや家族のビザを含む）を支援。永住権の支援や実績の公開は未確認。"
+    },
+    "living_support": {
+      "score": 3,
+      "basis": "食堂が食材情報を表示し、宗教上の食の制限がある人が選べる。住居探しの支援は未確認",
+      "source_url": "https://www.lycorp.co.jp/ja/sustainability/esg/social/human-capital2/",
+      "unconfirmed": false,
+      "finding": "住居探しの支援は未確認。紀尾井町・赤坂オフィスの食堂は食材情報を表示し、宗教上の食の制限がある人が選べる。"
+    },
+    "community_erg": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "culture_religion": {
+      "score": 5,
+      "basis": "宗教・宗派を問わない祈祷室を設置し、食堂は食材情報を表示（複数の配慮を提供）",
+      "source_url": "https://www.lycorp.co.jp/ja/sustainability/esg/social/human-capital2/",
+      "unconfirmed": false,
+      "finding": "紀尾井町・赤坂オフィスに、宗教や宗派を問わず使える祈祷室を設置。食堂は食材情報を表示。"
+    },
+    "home_leave": {
+      "score": 2,
+      "basis": "有給休暇のみ確認できた（取得率76.1%）。帰国休暇は未確認",
+      "source_url": "https://www.lycorp.co.jp/ja/sustainability/esg/data/",
+      "unconfirmed": false,
+      "finding": "未確認（有給休暇取得率は2025年度76.1%。帰国休暇の記載なし）"
+    },
+    "global_offices": {
+      "score": 3,
+      "basis": "「主な拠点」として韓国・台湾・ベトナム・タイの4か国",
+      "source_url": "https://www.lycorp.co.jp/ja/company/global/",
+      "unconfirmed": false,
+      "finding": "公式サイトの海外拠点の地図に、韓国、台湾、ベトナム、タイが「主な拠点」として表示される（日本を除く）。"
+    },
+    "global_review_score": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "foreigner_reviews": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    }
+  },
+  "axis_facts": [
+    {
+      "fact": "従業員数は2025年度32,175人。平均年齢37.7歳、平均勤続年数6.9年（いずれも2025年度）。",
+      "source_url": "https://www.lycorp.co.jp/ja/sustainability/esg/data/"
+    },
+    {
+      "fact": "退職率は2025年度10.3%（自己都合9.9%）、2024年度は7.2%。有給休暇取得率は2025年度76.1%。",
+      "source_url": "https://www.lycorp.co.jp/ja/sustainability/esg/data/"
+    },
+    {
+      "fact": "2028年卒の新卒エントリーは2026年10月14日に開始。職種はエンジニア、ビジネスコンサルタント、プロダクトプランナーで、「年次に関わらず」挑戦でき、能力に応じて役割を任される。",
+      "source_url": "https://www.lycorp.co.jp/ja/recruit/newgrads/"
+    },
+    {
+      "fact": "業務上必要な人に、英語・韓国語・日本語の語学講座があり、全額会社負担で受講できる。",
+      "source_url": "https://speakerdeck.com/player/f6cdbcfaeb464755889a0cebe9da37c2"
+    },
+    {
+      "fact": "海外の主な拠点は韓国、台湾、ベトナム、タイ。北米拠点は公式の拠点ページに表示されない。",
+      "source_url": "https://www.lycorp.co.jp/ja/company/global/"
+    },
+    {
+      "fact": "事業の中心はインターネットサービス（LINE、Yahoo! JAPANなどのIT・ネットサービス）。事業は主にエンジニアやサービス企画の仕事。",
+      "source_url": "https://www.lycorp.co.jp/ja/recruit/newgrads/"
+    }
+  ],
+  "sources": [
+    "https://www.lycorp.co.jp/ja/sustainability/esg/social/human-capital2/"
+  ]
+}

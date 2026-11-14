@@ -1,0 +1,131 @@
+{
+  "id": "deloitte_tohmatsu_consulting",
+  "name": "デロイト トーマツ コンサルティング",
+  "industry": "コンサルティング",
+  "profile": "デロイト トーマツ グループの経営コンサルティング会社。新卒は実力主義で、職位ごとに基本給が固定され年2回の賞与がある（外部サイトの推定）。公式ページから、外国籍比率・英語選考・ビザ支援は確認できなかった。",
+  "profile_url": "https://www.deloitte.com/jp/ja/careers.html",
+  "collected_at": "2026-11-14",
+  "dummy": false,
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "foreign_manager_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "evaluation_system": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "外部サイトの推定: 基本給は職位ごとに固定、賞与は個人・会社の業績で差が大きい。入社初年度から成果で差が出る実力主義で、Up or Outの風潮は薄い（2022年7月時点）。国籍による差は未確認。"
+    },
+    "english_selection": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "required_japanese": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "multilingual_docs": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "visa_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "living_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "community_erg": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "culture_religion": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "home_leave": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "global_offices": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "global_review_score": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "foreigner_reviews": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    }
+  },
+  "axis_facts": [
+    {
+      "fact": "外部サイトの推定: 初任給は大学卒で年俸530万円、院卒540万円（2022年度時点）。",
+      "source_url": "https://gaishishukatsu.com/company/12/salary"
+    },
+    {
+      "fact": "外部サイトの推定: 役職別の年収は、ビジネスアナリスト500〜600万円、コンサルタント600〜800万円、シニアコンサルタント900〜1,100万円、マネージャー1,300〜1,500万円。",
+      "source_url": "https://gaishishukatsu.com/company/12/salary"
+    },
+    {
+      "fact": "外部サイトの推定: 同じランクで上位数%の評価を得れば、シニアコンサルタントでも総年収1,000万円超になりうる。OJTに加えOFF-JT研修も充実。",
+      "source_url": "https://gaishishukatsu.com/company/12/salary"
+    },
+    {
+      "fact": "事業の中心は経営コンサルティング。採用サイトに「新卒・定期採用」と人材開発資料（Talent Development）へのリンクがある。",
+      "source_url": "https://www.deloitte.com/jp/ja/careers.html"
+    }
+  ],
+  "sources": [
+    "https://www.deloitte.com/jp/ja/careers.html"
+  ]
+}

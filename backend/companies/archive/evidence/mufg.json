@@ -1,0 +1,34 @@
+{
+  "id": "mufg",
+  "name": "三菱UFJフィナンシャル・グループ",
+  "industry": "金融（銀行・信託・証券）",
+  "profile": "国内大手の金融グループ。主要国内6社の従業員の99.41%が日本国籍（FY2025）、管理職は99.88%が日本国籍。三菱UFJ銀行の新卒は留学生専用枠がなく国籍不問で、プロフェッショナル職「グローバル」は日本語・英語ともネイティブレベルが応募資格。",
+  "profile_url": "https://www.saiyo.bk.mufg.jp/recruit/info.html",
+  "collected_at": "2026-11-14",
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {"finding": "国内主要6社（三菱UFJ銀行、信託銀行、モルガン・スタンレー証券、ニコス、アコム、アセットマネジメント）の従業員の99.41%が日本国籍。外国籍は約0.6%（アジア0.55%、米国0.02%、欧州0.01%）。FY2025、国内従業員が対象。", "source_url": "https://www.mufg.jp/dam/csr/report/esgdata/2026.pdf"},
+    "foreign_manager_ratio": {"finding": "同6社の管理職の99.88%が日本国籍（アジア0.08%、米国0.03%、欧州0.02%）。FY2025、国内が対象。取締役の外国籍の表はあるが数値は読み取れず。", "source_url": "https://www.mufg.jp/dam/csr/report/esgdata/2026.pdf"},
+    "evaluation_system": {"finding": "未確認", "source_url": ""},
+    "english_selection": {"finding": "英語だけで選考できるルートは未確認。海外留学中でもエントリー可で、選考はオンラインと対面の併用（対面が必要な場合あり）。", "source_url": "https://www.saiyo.bk.mufg.jp/qa/"},
+    "required_japanese": {"finding": "「グローバル」職は日本語・英語ともネイティブレベルが応募資格。語学力だけで評価が決まることはないと記載。外国籍は全職種で応募可、留学生専用の採用枠はなし。", "source_url": "https://www.saiyo.bk.mufg.jp/qa/"},
+    "multilingual_docs": {"finding": "未確認", "source_url": ""},
+    "visa_support": {"finding": "未確認（採用FAQにビザ・在留資格のQ&Aはなし）", "source_url": "https://www.saiyo.bk.mufg.jp/qa/"},
+    "living_support": {"finding": "未確認", "source_url": ""},
+    "community_erg": {"finding": "未確認", "source_url": ""},
+    "culture_religion": {"finding": "未確認", "source_url": ""},
+    "home_leave": {"finding": "未確認（休日は土日祝・年末年始のみ記載、休暇制度の詳細はなし）", "source_url": "https://www.saiyo.bk.mufg.jp/recruit/info.html"},
+    "global_offices": {"finding": "未確認（国名の一覧は取得できず）。勤務地区分「全国グローバル」では国内外への転居を伴う異動がある。", "source_url": "https://www.saiyo.bk.mufg.jp/recruit/info.html"},
+    "global_review_score": {"finding": "未確認（Glassdoorのページは取得できず。検索結果の抜粋では約3.5/5と表示されたが、ページ未取得のため参考値）", "source_url": ""},
+    "foreigner_reviews": {"finding": "未確認", "source_url": ""}
+  },
+  "axis_facts": [
+    {"fact": "三菱UFJ銀行の2028年度募集の初任給は、大卒30万円、修士31万円、博士33万円（シニアライフプラン支援金1万円を含む）。", "source_url": "https://www.saiyo.bk.mufg.jp/recruit/info.html"},
+    {"fact": "プロフェッショナル職は9コース（オープン、グローバル、カスタマーサービス、トレードビジネス、フィナンシャル・エンジニアリング、戦略財務、システム・デジタル、ウェルスマネジメント、グローバル・マーケッツ）。", "source_url": "https://www.saiyo.bk.mufg.jp/recruit/info.html"},
+    {"fact": "勤務地区分は3種類。Ⅰ全国グローバル（本人の同意なく国内外へ異動）、Ⅱ国内ブロック・本部、Ⅲ転居を伴う異動なし。区分は原則年1回変更できる。", "source_url": "https://www.saiyo.bk.mufg.jp/recruit/info.html"},
+    {"fact": "入社直後に集合研修を行い、その後OJTを経て配属される。", "source_url": "https://www.saiyo.bk.mufg.jp/recruit/info.html"},
+    {"fact": "オープンコースは法人、リテール、国際、投資銀行、市場、システム・デジタル、会計などの幅広い金融業務が対象。入社後に異動や社内公募の機会がある。", "source_url": "https://www.saiyo.bk.mufg.jp/recruit/info.html"},
+    {"fact": "国内で新たに採用された従業員のうち日本国籍は97.25%、アジア国籍は2.64%（FY2025、6社）。新規採用では外国籍の割合がやや高い。", "source_url": "https://www.mufg.jp/dam/csr/report/esgdata/2026.pdf"},
+    {"fact": "海外拠点の従業員の地域別配分の表がESGデータブックにあるが、列の対応が読み取れないため数値は記載しない。事業の中心は銀行・信託・証券などの金融。", "source_url": "https://www.mufg.jp/dam/csr/report/esgdata/2026.pdf"}
+  ]
+}

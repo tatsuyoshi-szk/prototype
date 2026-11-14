@@ -1,0 +1,35 @@
+{
+  "id": "toyota",
+  "name": "トヨタ自動車",
+  "industry": "自動車",
+  "profile": "自動車メーカー。採用は事務職・技術職・業務職など。海外大学の学部・修士在籍者も応募でき、海外大学生向けの説明会・キャンパスビジット・カジュアル面談がある。外国籍社員の比率や英語選考、ビザ支援は今回の公式ページで確認できなかった。",
+  "profile_url": "https://recruit.toyota/saiyo/global/",
+  "collected_at": "2026-11-14",
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {"finding": "未確認（開いたページに外国籍社員の割合の記載なし）", "source_url": ""},
+    "foreign_manager_ratio": {"finding": "未確認（開いたDEIページは行動計画のみで、外国人役員・管理職の記載なし）", "source_url": "https://global.toyota/jp/sustainability/esg/employees/diversity-and-inclusion/"},
+    "evaluation_system": {"finding": "未確認（評価制度や国籍差についての記載なし）", "source_url": ""},
+    "english_selection": {"finding": "未確認（海外大学生向けに説明会・キャンパスビジット・カジュアル面談はあるが、英語での選考についての言及なし）", "source_url": "https://recruit.toyota/saiyo/global/"},
+    "required_japanese": {"finding": "未確認（日本語要件の言及なし）", "source_url": "https://recruit.toyota/saiyo/global/"},
+    "multilingual_docs": {"finding": "未確認", "source_url": ""},
+    "visa_support": {"finding": "未確認（ビザ・在留資格に関する記載なし）", "source_url": "https://recruit.toyota/saiyo/info/"},
+    "living_support": {"finding": "福利厚生として寮・社宅、持家補助、選択型福利厚生制度などがある（一般社員向け。外国人向けの住居探し支援は記載なし）。", "source_url": "https://recruit.toyota/saiyo/info/"},
+    "community_erg": {"finding": "未確認", "source_url": ""},
+    "culture_religion": {"finding": "未確認", "source_url": ""},
+    "home_leave": {"finding": "未確認（年間休日121日、年次有給休暇と特別休暇、フレックス制度はあるが、帰国目的の長期休暇・連続休暇の記載なし。2026年度）", "source_url": "https://recruit.toyota/saiyo/info/"},
+    "global_offices": {"finding": "未確認（国名の一覧は確認できず。勤務地に海外事業所を含むとの記載のみ）", "source_url": "https://recruit.toyota/saiyo/info/"},
+    "global_review_score": {"finding": "未確認", "source_url": ""},
+    "foreigner_reviews": {"finding": "未確認", "source_url": ""}
+  },
+  "axis_facts": [
+    {"fact": "初任給（2026年度実績）は事務職・技術職の総合職で学部卒27万5000円、修士修了30万円。", "source_url": "https://recruit.toyota/saiyo/info/"},
+    {"fact": "業務職（一般職）の初任給は大学卒21万円（2026年度実績）。", "source_url": "https://recruit.toyota/saiyo/info/"},
+    {"fact": "年間休日121日（2026年度）。時間外労働は月平均20時間で、フレックス制度がある。", "source_url": "https://recruit.toyota/saiyo/info/"},
+    {"fact": "勤務地は豊田本社・東京本社・名古屋オフィス・東富士研究所・各工場などの国内事業所と海外事業所。入社後に変わる可能性がある。", "source_url": "https://recruit.toyota/saiyo/info/"},
+    {"fact": "新卒の募集は事務系・技術系（総合職）と業務職（一般職）。生産関係職（技能職）は別サイトで新卒採用している。", "source_url": "https://global.toyota/jp/careers/index.html"},
+    {"fact": "海外事業体採用は現地法人が採用し、勤務も海外が原則。", "source_url": "https://global.toyota/jp/careers/index.html"},
+    {"fact": "海外大学の学部・修士在籍者は2028年9月までの卒業・修了見込みまで応募でき、学部・学科は問わない。", "source_url": "https://recruit.toyota/saiyo/global/"},
+    {"fact": "寮・社宅、スポーツ施設、保養所、持株会、財形貯蓄などの福利厚生がある。", "source_url": "https://recruit.toyota/saiyo/info/"}
+  ]
+}

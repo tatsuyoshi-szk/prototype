@@ -1,0 +1,135 @@
+{
+  "id": "itochu",
+  "name": "伊藤忠商事",
+  "industry": "総合商社",
+  "profile": "繊維・機械・金属・エネルギー・食料・生活資材・情報金融など幅広い事業の総合商社。CSRレポート2025は国内7拠点・海外87拠点を対象とし、総合職は入社8年以内に海外派遣するローテーション指針がある。外国籍比率は未確認。",
+  "profile_url": "https://www.itochu.co.jp/en/csr/pdf/25fulle02-03.pdf",
+  "collected_at": "2026-11-14",
+  "dummy": false,
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（外国籍社員の割合は開示を確認できず）。参考: 2022年3月期の連結従業員115,124人、単体4,170人（検索結果の抜粋、本文未取得）。"
+    },
+    "foreign_manager_ratio": {
+      "score": 3,
+      "basis": "管理職の海外ブロック採用社員が約780人（年次不明）。外国籍の管理職の比率は未確認",
+      "source_url": "https://www.itochu.co.jp/en/csr/society/development/index.html",
+      "unconfirmed": false,
+      "finding": "管理職の海外ブロック採用社員は約780人（年次不明）。約130人が本社で勤務した経験を持つ。外国籍の管理職比率そのものは未確認。"
+    },
+    "evaluation_system": {
+      "score": 4,
+      "basis": "世界共通の等級制度（IGC）で、国籍を問わず配置・昇進・育成を行うと記載。国籍による差の指摘は確認できず",
+      "source_url": "https://www.itochu.co.jp/en/csr/society/development/index.html",
+      "unconfirmed": false,
+      "finding": "世界共通の等級制度ITOCHU Global Classification（IGC）で、国籍を問わず配置・昇進・育成を行うと記載。国籍による差の指摘や給与基準の公開は未確認。"
+    },
+    "english_selection": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（検索結果の抜粋に「海外大学向けの選考」ルートがあるとの記載があるが、公式ページは404で本文を取得できず）"
+    },
+    "required_japanese": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "multilingual_docs": {
+      "score": 2,
+      "basis": "CSRレポート・年次報告書に英語版がある（対外文書のみ）",
+      "source_url": "https://www.itochu.co.jp/en/csr/pdf/25fulle02-03.pdf",
+      "unconfirmed": false,
+      "finding": "未確認（CSRレポート・年次報告書は英語版あり＝対外文書）"
+    },
+    "visa_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "living_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "community_erg": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "culture_religion": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "home_leave": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "global_offices": {
+      "score": 5,
+      "basis": "CSRレポート2025の対象は海外87拠点。国名の一覧は未取得（11か国以上と判断）",
+      "source_url": "https://www.itochu.co.jp/en/csr/pdf/25fulle02-03.pdf",
+      "unconfirmed": false,
+      "finding": "CSRレポート2025の対象は国内7拠点・海外87拠点。国名の一覧は取得できず。2025年秋のGlobal Development Programには20か国から参加。"
+    },
+    "global_review_score": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "foreigner_reviews": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    }
+  },
+  "axis_facts": [
+    {
+      "fact": "総合職は入社8年以内に海外派遣するのが原則。2025年度の派遣率は86%（目標80%以上）。",
+      "source_url": "https://www.itochu.co.jp/en/csr/society/development/index.html"
+    },
+    {
+      "fact": "2025年度の人材育成費は27億円、1人あたり約66.4万円。人材開発プログラムの累計参加は53,811人。",
+      "source_url": "https://www.itochu.co.jp/en/csr/society/development/index.html"
+    },
+    {
+      "fact": "朝型勤務制度を導入。2016年9月に早朝セミナーを開始し、2025年度は2回で計1,135人が参加。",
+      "source_url": "https://www.itochu.co.jp/en/csr/society/development/index.html"
+    },
+    {
+      "fact": "2018年度に海外派遣対象743人のうち637人が派遣経験あり。",
+      "source_url": "https://www.itochu.co.jp/en/csr/society/development/index.html"
+    },
+    {
+      "fact": "CSRレポート2025の対象は国内7拠点・海外87拠点。事業は総合商社（商社・トレーディングと事業投資）。",
+      "source_url": "https://www.itochu.co.jp/en/csr/pdf/25fulle02-03.pdf"
+    }
+  ],
+  "sources": [
+    "https://www.itochu.co.jp/en/csr/pdf/25fulle02-03.pdf"
+  ]
+}

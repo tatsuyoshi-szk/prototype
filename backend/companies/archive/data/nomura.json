@@ -1,0 +1,135 @@
+{
+  "id": "nomura",
+  "name": "野村ホールディングス",
+  "industry": "証券・投資銀行",
+  "profile": "証券・投資銀行グループ。従業員は約27,000人で日本約15,000人、海外約12,000人、国籍は90超、約30の国・地域に展開（野村公式の2025年3月記事）。公式の採用・人事ページは403で開けず、新卒の外国人向け条件や制度は未確認。",
+  "profile_url": "http://plus.nomuraholdings.com/en/latest/20250310-IWD-DEI-interview.html",
+  "collected_at": "2026-11-14",
+  "dummy": false,
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（外国籍比率は不明。従業員は約27,000人で国内約15,000人・海外約12,000人、国籍は90超。2025年記事）"
+    },
+    "foreign_manager_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "evaluation_system": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "english_selection": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "required_japanese": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "multilingual_docs": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "visa_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "living_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "community_erg": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（DEI記事に従業員ネットワーク・ERGの言及なし）"
+    },
+    "culture_religion": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "home_leave": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "global_offices": {
+      "score": 5,
+      "basis": "約30の国・地域にネットワークがある（2025年3月の公式記事）",
+      "source_url": "http://plus.nomuraholdings.com/en/latest/20250310-IWD-DEI-interview.html",
+      "unconfirmed": false,
+      "finding": "約30の国・地域にネットワークがある（2025年3月の公式記事）。国名の一覧は未確認。"
+    },
+    "global_review_score": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "foreigner_reviews": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    }
+  },
+  "axis_facts": [
+    {
+      "fact": "従業員は27,000人超で、日本約15,000人、海外約12,000人。2008年のリーマン・ブラザーズ買収前は日本約80%・海外約20%だったが、現在は約半々。",
+      "source_url": "http://plus.nomuraholdings.com/en/latest/20250310-IWD-DEI-interview.html"
+    },
+    {
+      "fact": "従業員の国籍は90超、グローバルネットワークは約30の国・地域（2025年）。",
+      "source_url": "http://plus.nomuraholdings.com/en/latest/20250310-IWD-DEI-interview.html"
+    },
+    {
+      "fact": "日本での中途採用に積極的になっている。",
+      "source_url": "http://plus.nomuraholdings.com/en/latest/20250310-IWD-DEI-interview.html"
+    },
+    {
+      "fact": "DEI部門があり、2023年に経済産業省・東証の「なでしこ銘柄」に選定された。",
+      "source_url": "http://plus.nomuraholdings.com/en/latest/20250310-IWD-DEI-interview.html"
+    },
+    {
+      "fact": "野村證券の採用サイトには、新卒採用の中に海外学生向け（Overseas Students）の案内ページがある（検索結果で確認、本文は未取得）。",
+      "source_url": "http://plus.nomuraholdings.com/en/latest/20250310-IWD-DEI-interview.html"
+    }
+  ],
+  "sources": [
+    "http://plus.nomuraholdings.com/en/latest/20250310-IWD-DEI-interview.html"
+  ]
+}

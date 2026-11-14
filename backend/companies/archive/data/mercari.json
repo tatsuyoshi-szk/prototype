@@ -1,0 +1,143 @@
+{
+  "id": "mercari",
+  "name": "メルカリ",
+  "industry": "インターネット・フリマアプリ",
+  "profile": "フリマアプリ「メルカリ」とMerpay等を運営。外国籍社員は2026年6月期で32.0%、東京オフィスに52国籍、エンジニアの57.7%が外国籍。日本語・英語を併用し、海外からの入社者に渡航・ビザ・移転費用を支援。",
+  "profile_url": "https://about.mercari.com/en/sustainability/esg/esgdata",
+  "collected_at": "2026-11-14",
+  "dummy": false,
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {
+      "score": 5,
+      "basis": "外国籍社員の割合は32.0%（2026年6月期、連結従業員2,065人）",
+      "source_url": "https://about.mercari.com/en/sustainability/esg/esgdata",
+      "unconfirmed": false,
+      "finding": "外国籍社員の割合は、2023年6月期25.7%、2024年6月期29.4%、2025年6月期29.7%、2026年6月期32.0%（連結従業員2,065人）。"
+    },
+    "foreign_manager_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（管理職の外国籍比率は非開示。エンジニア職の外国籍比率は2026年6月期57.7%。女性管理職25.2%、取締役の女性58.3%）"
+    },
+    "evaluation_system": {
+      "score": 4,
+      "basis": "背景を問わず競争力のある報酬を目指すと記載。国籍による差の指摘は確認できず",
+      "source_url": "https://about.mercari.com/en/sustainability/materiality5",
+      "unconfirmed": false,
+      "finding": "CHROメッセージに、背景を問わず競争力のある報酬を目指すと記載。国籍による差の指摘・評価基準の公開は確認できず。"
+    },
+    "english_selection": {
+      "score": 3,
+      "basis": "面接は英語・日本語・その混合で受けられる。完全に英語の選考ルートは未確認",
+      "source_url": "https://careers.mercari.com/en/faq",
+      "unconfirmed": false,
+      "finding": "面接は英語、日本語、またはその混合で可能（採用FAQ）。完全英語での新卒選考の可否は未確認。"
+    },
+    "required_japanese": {
+      "score": 4,
+      "basis": "公式に共通言語はなく日本語と英語を併用。必要な言語レベルは職種による（日本語を必須とする記載なし）",
+      "source_url": "https://careers.mercari.com/en/faq",
+      "unconfirmed": false,
+      "finding": "公式に共通言語はなく日本語と英語を併用。必要な日本語・英語のレベルは職種による（採用FAQ）。"
+    },
+    "multilingual_docs": {
+      "score": 4,
+      "basis": "通訳・翻訳の専任チームと、英日翻訳のAIアシスタントがある",
+      "source_url": "https://careers.mercari.com/work-in-japan",
+      "unconfirmed": false,
+      "finding": "日本語・英語の語学プログラムと、通訳・翻訳の専任チームがある（採用FAQ）。英日翻訳ができるAIアシスタント「Hisashi」を提供。"
+    },
+    "visa_support": {
+      "score": 4,
+      "basis": "海外からの入社者にビザ取得支援つきの移転パッケージ（パートナー・18歳以下の扶養家族も対象）。永住権支援は未確認",
+      "source_url": "https://careers.mercari.com/work-in-japan",
+      "unconfirmed": false,
+      "finding": "海外から来る人にビザの取得支援を含む移転パッケージを提供。パートナー・18歳以下の扶養家族も対象で、同性婚・事実婚のビザ支援もある。永住権支援は未確認。"
+    },
+    "living_support": {
+      "score": 4,
+      "basis": "航空券・荷物の輸送・最初の1か月の仮住まい・引越し手当・住民登録や銀行口座などの立ち上げ支援",
+      "source_url": "https://careers.mercari.com/work-in-japan",
+      "unconfirmed": false,
+      "finding": "日本行き片道航空券、荷物の輸送費、最初の1か月の仮住まい、引越し手当、住民登録・銀行口座・携帯契約の立ち上げ支援。食事（宗教対応）は未確認。"
+    },
+    "community_erg": {
+      "score": 3,
+      "basis": "公式なERGは未確認。Slackに日本に来た人向けのコミュニティがある（非公式）",
+      "source_url": "https://careers.mercari.com/work-in-japan",
+      "unconfirmed": false,
+      "finding": "公式なERGの記載は未確認。Slackに、日本に来た人向けの #jp-welcome-to-japan と、日本語学習の #z-nihongo というコミュニティがある。"
+    },
+    "culture_religion": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（祈祷室・ハラール等は採用FAQで言及なし）"
+    },
+    "home_leave": {
+      "score": 2,
+      "basis": "年次有給休暇（入社時10日付与）のみ確認できた。帰国向けの長期休暇は未確認",
+      "source_url": "https://careers.mercari.com/en/faq",
+      "unconfirmed": false,
+      "finding": "年次有給休暇は入社時10日付与、取得率85.0%（2023年6月時点）、祝日約15日。海外からのリモート勤務は原則不可（業務上必要な場合は期間限定で可）。帰国向け長期休暇制度は未確認。"
+    },
+    "global_offices": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（海外拠点の国名一覧は取得できず）。東京オフィスには2026年6月期に52国籍が在籍。"
+    },
+    "global_review_score": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（Glassdoorは403で取得不可）"
+    },
+    "foreigner_reviews": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    }
+  },
+  "axis_facts": [
+    {
+      "fact": "平均年収は2026年6月期12,325,035円、平均年齢37.2歳（2023年6月期は10,357,750円）。",
+      "source_url": "https://about.mercari.com/en/sustainability/esg/esgdata"
+    },
+    {
+      "fact": "連結従業員は2026年6月期2,065人。エンジニア職は全体の42.2%。",
+      "source_url": "https://about.mercari.com/en/sustainability/esg/esgdata"
+    },
+    {
+      "fact": "2018年10月に外国籍の新卒が大量入社（インドの大学で採用）。2018年時点では日本の社員の外国籍は10%だった。",
+      "source_url": "https://careers.mercari.com/en/mercan/articles/44080"
+    },
+    {
+      "fact": "新卒の入社後研修は約1か月。エンジニアは「DevDojo」、非エンジニアは個別プログラムを受ける。インターン参加者はそのチームに配属される可能性が高い。",
+      "source_url": "https://careers.mercari.com/en/faq"
+    },
+    {
+      "fact": "男性の育児休業取得率は2026年6月期86.4%、平均取得日数123.2日。",
+      "source_url": "https://about.mercari.com/en/sustainability/esg/esgdata"
+    },
+    {
+      "fact": "週休2日。年次有給休暇は入社時10日付与。",
+      "source_url": "https://careers.mercari.com/en/faq"
+    },
+    {
+      "fact": "事業はIT（マーケットプレイス・決済）。社員のエンジニア比率が高く、エンジニア組織の約60%が外国籍と記載（CHRO）。",
+      "source_url": "https://about.mercari.com/en/sustainability/materiality5"
+    }
+  ],
+  "sources": [
+    "https://about.mercari.com/en/sustainability/esg/esgdata"
+  ]
+}

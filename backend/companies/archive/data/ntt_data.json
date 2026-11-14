@@ -1,0 +1,173 @@
+{
+  "id": "ntt_data",
+  "name": "NTTデータグループ",
+  "industry": "IT・システムインテグレーション",
+  "profile": "NTTグループのITサービス企業。連結従業員は約197,800人（2025年3月末）、70以上の国で顧客に対応。Global Top Employer 2025を33の国・地域で認定。国内の新卒採用では毎年数カ国の外国籍社員を採用し、国籍を問わない方針。外国人向け支援制度は確認できず。",
+  "profile_url": "https://nttdata.com/global/en/about-us/profile",
+  "collected_at": "2026-11-14",
+  "dummy": false,
+  "global_offices_list": [
+    "インド",
+    "オーストラリア",
+    "シンガポール",
+    "中国",
+    "日本",
+    "マレーシア",
+    "インドネシア",
+    "フィリピン",
+    "タイ",
+    "ベトナム",
+    "台湾",
+    "アルゼンチン",
+    "コロンビア",
+    "チリ",
+    "ブラジル",
+    "ペルー",
+    "アメリカ",
+    "カナダ",
+    "メキシコ",
+    "イギリス",
+    "イタリア",
+    "ギリシャ",
+    "スペイン",
+    "デンマーク",
+    "ドイツ",
+    "トルコ",
+    "ベルギー",
+    "ポーランド",
+    "ポルトガル",
+    "ルーマニア",
+    "スイス",
+    "南アフリカ",
+    "モロッコ"
+  ],
+  "items": {
+    "foreign_staff_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（グループ全体の外国籍比率は見つからず）。国内の新卒採用では「毎年数カ国の外国籍社員を採用」と記載。"
+    },
+    "foreign_manager_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "evaluation_system": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（国籍による処遇差の記述は見つからず。採用では国籍・性別・年齢・学歴を問わず、適性・意欲・能力を重視する方針と記載）"
+    },
+    "english_selection": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（子会社NTTデータ グローバル・サービスの新卒は、書類選考のあと面接3回以上。英語での選考の記載はなし）"
+    },
+    "required_japanese": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "multilingual_docs": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "visa_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "living_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "community_erg": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "culture_religion": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "home_leave": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "global_offices": {
+      "score": 5,
+      "basis": "Global Top Employer 2025の認定が33の国・地域。70以上の国で顧客に対応",
+      "source_url": "https://www.nttdata.com/global/ja/news/topics/2025/011600",
+      "unconfirmed": false,
+      "finding": "Global Top Employer 2025の認定は33の国・地域（アジア太平洋11、南米5、北米3、欧州12、アフリカ2）。ただし拠点の全一覧ではなく認定対象の国・地域。会社概要では70以上の国で顧客に対応。"
+    },
+    "global_review_score": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（Glassdoorのページは取得できず。検索結果の抜粋では約3.7/5・約19,700件と表示されたが、ページ未取得のため参考値）"
+    },
+    "foreigner_reviews": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    }
+  },
+  "axis_facts": [
+    {
+      "fact": "連結従業員は約197,800人（2025年3月31日）、連結売上高は4兆6,387億円（2025年3月期）。70以上の国で顧客に対応。",
+      "source_url": "https://nttdata.com/global/en/about-us/profile"
+    },
+    {
+      "fact": "事業の中心はコンサルティング、業界別ソリューション、BPO、ITモダナイゼーション、運用サービス。",
+      "source_url": "https://nttdata.com/global/en/about-us/profile"
+    },
+    {
+      "fact": "2024年度に国内で新卒697人、経験者587人を採用。世界全体では3.7万人以上を採用。",
+      "source_url": "https://www.nttdata.com/jp/ja/sustainability/employee/recruit/"
+    },
+    {
+      "fact": "日本、米国、スペイン、イタリア、インドの大学と連携して新卒人材を確保している。100以上の教育機関から採用。",
+      "source_url": "https://www.nttdata.com/jp/ja/sustainability/employee/recruit/"
+    },
+    {
+      "fact": "Global Top Employer 2025を取得（2025年1月）。2026年卒の就活生が選ぶランキングで総合3位、IT業界では16年連続1位（楽天みん就）。",
+      "source_url": "https://www.nttdata.com/jp/ja/sustainability/employee/recruit/"
+    },
+    {
+      "fact": "グループ会社NTTデータ グローバル・サービスは、IT分野、特にグローバルビジネスに関心のある学士・修士の卒業年度の人を新卒募集。選考は書類のあと面接3回以上。",
+      "source_url": "https://gs.jp.nttdata.com/recruiting/"
+    }
+  ],
+  "sources": [
+    "https://nttdata.com/global/en/about-us/profile"
+  ]
+}

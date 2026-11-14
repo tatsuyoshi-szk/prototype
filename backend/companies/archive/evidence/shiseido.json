@@ -1,0 +1,33 @@
+{
+  "id": "shiseido",
+  "name": "資生堂",
+  "industry": "化粧品",
+  "profile": "化粧品メーカー。国内の外国籍社員は385人（構成比2.3%、2025年）。2018年から国内でも英語公用語化を進め、汐留オフィスに祈祷室を設置。外国人の管理職登用に特段の目標は置かず、国内グループ管理職の外国人は約2%（2026年1月）。",
+  "profile_url": "https://corp.shiseido.com/jp/sustainability/labor/diversity.html",
+  "collected_at": "2026-11-14",
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {"finding": "国内の外国籍社員は385人、構成比2.3%（2025年、国内）。2021年443人1.9%、2024年390人2.1%。", "source_url": "https://corp.shiseido.com/jp/sustainability/performance/social/"},
+    "foreign_manager_ratio": {"finding": "国内グループの管理職のうち外国人は約2%（2026年1月時点）。外国人の管理職登用の数値目標はない。グループ全体の国籍別管理職比率は米国13.4%、フランス11.8%、中国9.4%（2025年）。", "source_url": "https://corp.shiseido.com/jp/sustainability/labor/diversity.html"},
+    "evaluation_system": {"finding": "外国人や中途採用者は他の社員と比べて中核人材登用の機会に差がないと捉えている。国籍による評価差の指摘は見つからず、評価制度の国籍別データや基準の公開も未確認。", "source_url": "https://corp.shiseido.com/jp/sustainability/labor/diversity.html"},
+    "english_selection": {"finding": "未確認（新卒の英語選考の記載を確認できず）", "source_url": ""},
+    "required_japanese": {"finding": "未確認", "source_url": ""},
+    "multilingual_docs": {"finding": "2018年から国内でも英語公用語化を進めている。英語のみで業務が回るかは未確認。", "source_url": "https://corp.shiseido.com/jp/sustainability/labor/diversity.html"},
+    "visa_support": {"finding": "未確認（外国籍人材の採用では在留資格などの入国管理制度を遵守すると記載。申請支援の内容は記載なし）", "source_url": "https://corp.shiseido.com/jp/sustainability/labor/diversity.html"},
+    "living_support": {"finding": "未確認", "source_url": ""},
+    "community_erg": {"finding": "ERGはLGBTQ+や障がいのある社員との対話を起点とする活動に限られ、国籍を軸にしたERG・外国籍コミュニティの記述はなし。", "source_url": "https://corp.shiseido.com/jp/sustainability/labor/diversity.html"},
+    "culture_religion": {"finding": "信仰の多様性に配慮して汐留オフィスに祈祷室を設置。資生堂倫理行動基準で多様性の尊重・差別の禁止を明記。2025年に国内グループ向けDiversity Weekを3回開催し延べ2,430人が参加（国籍に特化した研修の記述はなし）。", "source_url": "https://corp.shiseido.com/jp/sustainability/labor/diversity.html"},
+    "home_leave": {"finding": "未確認（有給休暇取得率は国内資生堂グループ86.4%（2025年）。帰国目的の制度の記載なし）", "source_url": "https://corp.shiseido.com/jp/sustainability/performance/social/"},
+    "global_offices": {"finding": "未確認", "source_url": ""},
+    "global_review_score": {"finding": "未確認", "source_url": ""},
+    "foreigner_reviews": {"finding": "未確認", "source_url": ""}
+  },
+  "axis_facts": [
+    {"fact": "国内資生堂グループの平均勤続年数は14.7年（2025年）。", "source_url": "https://corp.shiseido.com/jp/sustainability/performance/social/"},
+    {"fact": "国内グループの合計離職率は7.5%、自己都合離職率は6.8%（2025年）。", "source_url": "https://corp.shiseido.com/jp/sustainability/performance/social/"},
+    {"fact": "社員一人あたりの年間平均教育研修時間は34.5時間（2025年、グループ全体、FTEあたり）。", "source_url": "https://corp.shiseido.com/jp/sustainability/performance/social/"},
+    {"fact": "有給休暇取得率は株式会社資生堂84.5%、国内資生堂グループ86.4%（2025年）。", "source_url": "https://corp.shiseido.com/jp/sustainability/performance/social/"},
+    {"fact": "国内グループの管理職のうち中途採用者は約36%（2026年1月時点）。", "source_url": "https://corp.shiseido.com/jp/sustainability/labor/diversity.html"},
+    {"fact": "グループの社員の国籍は日本56.2%、中国19.0%、米国4.2%、フランス3.6%（2025年、上位4か国）。", "source_url": "https://corp.shiseido.com/jp/sustainability/performance/social/"}
+  ]
+}

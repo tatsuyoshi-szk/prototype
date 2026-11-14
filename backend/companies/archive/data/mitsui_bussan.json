@@ -1,0 +1,147 @@
+{
+  "id": "mitsui_bussan",
+  "name": "三井物産",
+  "industry": "総合商社",
+  "profile": "総合商社。単体5,333人・連結55,463人（2026年3月末）。62の国と地域に119拠点（海外108）。新卒は海外の大学の学位でも応募でき、国籍・宗教などは問わない採用方針。外国籍社員比率やビザ・生活支援は公開ページで確認できず。",
+  "profile_url": "https://www.mitsui.com/jp/ja/company/outline/profile/index.html",
+  "collected_at": "2026-11-14",
+  "dummy": false,
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（人事データに外国籍の内訳は見つからず。単体5,333人、連結55,463人、2026年3月末）"
+    },
+    "foreign_manager_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（女性管理職比率は12.0%、取締役の女性比率は29.4%とあるが、外国籍の数値はなし）"
+    },
+    "evaluation_system": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（国籍による差の記述は見つからず）。採用選考では国籍・性別・年齢・出身大学・宗教・人種等を問わず、人物本位で公正に行うと記載。"
+    },
+    "english_selection": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "英語での選考ルートは未確認。応募資格には、海外の大学・大学院の学位を2028年9月末までに取得見込みの人（既卒可）も含まれる。"
+    },
+    "required_japanese": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "multilingual_docs": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "visa_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "living_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "community_erg": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "culture_religion": {
+      "score": 3,
+      "basis": "採用方針で国籍・宗教・人種等を問わないと明記し、面接担当者に公正な選考のための研修を実施。祈祷室等は未確認",
+      "source_url": "https://www.mitsui.com/jp/ja/company/outline/human_resource_management/diversity_inclusion/recruitment/index.html",
+      "unconfirmed": false,
+      "finding": "採用方針で「国籍・性別・年齢・出身大学・宗教・人種等は問わない」と明記。面接担当者には公正な選考のためのトレーニングを実施。祈祷室などは未確認。"
+    },
+    "home_leave": {
+      "score": 2,
+      "basis": "年次有給休暇の取得率70.3%のみ確認できた。連続休暇・帰国休暇は未確認",
+      "source_url": "https://www.mitsui.com/jp/ja/company/outline/human_resource_management/performance_data/",
+      "unconfirmed": false,
+      "finding": "年次有給休暇の取得率は70.3%（2026年3月期、目標70%）。連続休暇や帰国休暇の制度は未確認。"
+    },
+    "global_offices": {
+      "score": 5,
+      "basis": "62の国と地域に119拠点（海外108、2026年3月末、会社概要）",
+      "source_url": "https://www.mitsui.com/jp/ja/company/outline/profile/index.html",
+      "unconfirmed": false,
+      "finding": "62の国と地域に119拠点（国内11、海外108＝海外店20・現地法人88、公式の会社概要）。国名の一覧は取得できず。"
+    },
+    "global_review_score": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（Glassdoorのページは取得できず。検索結果の抜粋では約3.7/5・389件と表示されたが、ページ未取得のため参考値）"
+    },
+    "foreigner_reviews": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    }
+  },
+  "axis_facts": [
+    {
+      "fact": "2027年4月入社予定の初任給は、Global職が学卒35万円・院卒38.5万円、Regional職が学卒34万円・院卒37.5万円。",
+      "source_url": "https://career.mitsui.com/recruit/recruit/"
+    },
+    {
+      "fact": "勤務地はGlobal（全国各地および海外）とRegional（原則として採用地と同一地域）から選べ、定期的に転換できる。",
+      "source_url": "https://career.mitsui.com/recruit/recruit/"
+    },
+    {
+      "fact": "総合職（単体）の平均年収は2,058.9万円（2026年3月期、前年比+3.1%）、平均年齢42.0歳。",
+      "source_url": "https://www.mitsui.com/jp/ja/company/outline/human_resource_management/performance_data/"
+    },
+    {
+      "fact": "管理職への内部登用率は80.5%、キャリア採用比率は14.5%（2022年3月期の9.2%から上昇）。",
+      "source_url": "https://www.mitsui.com/jp/ja/company/outline/human_resource_management/performance_data/"
+    },
+    {
+      "fact": "離職率は4.51%（自己都合1.11%）、月平均残業時間は28.4時間、エンゲージメントは75%（2026年3月期）。",
+      "source_url": "https://www.mitsui.com/jp/ja/company/outline/human_resource_management/performance_data/"
+    },
+    {
+      "fact": "事業領域は金属・資源、鉄鋼製品、エネルギー、モビリティ・デジタル・インフラ、化学品、食料、流通、ウェルネス、ICT、コーポレートディベロップメント。",
+      "source_url": "https://www.mitsui.com/jp/ja/company/outline/profile/index.html"
+    },
+    {
+      "fact": "連結子会社・関連会社など446社のグループ（国内連結72、海外連結206）。事業投資や経営人材として現場に出る機会が多い総合商社。",
+      "source_url": "https://www.mitsui.com/jp/ja/company/outline/profile/index.html"
+    },
+    {
+      "fact": "62の国と地域に119拠点を持ち、北米を含む海外赴任の機会がある。",
+      "source_url": "https://www.mitsui.com/jp/ja/company/outline/profile/index.html"
+    }
+  ],
+  "sources": [
+    "https://www.mitsui.com/jp/ja/company/outline/profile/index.html"
+  ]
+}

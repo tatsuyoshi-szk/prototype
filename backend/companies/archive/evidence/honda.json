@@ -1,0 +1,35 @@
+{
+  "id": "honda",
+  "name": "本田技研工業（ホンダ）",
+  "industry": "自動車",
+  "profile": "二輪・四輪・パワープロダクツ等を世界展開。ESGレポート2025では連結従業員は約19.3万人で、日本は約6.2万人、残りは海外。人材方針に国籍を問わない旨があるが、外国籍比率や英語選考の公開情報は確認できなかった。",
+  "profile_url": "https://global.honda/en/sustainability/cq_img/report/pdf/2025/honda-SR-2025-en-all.pdf",
+  "collected_at": "2026-11-14",
+  "global_offices_list": ["日本", "北米", "南米", "欧州・アフリカ・中東", "アジア・オセアニア（41拠点・13か国）", "中国"],
+  "items": {
+    "foreign_staff_ratio": {"finding": "未確認（外国籍社員の割合は開示を確認できず。参考: 連結従業員は2025年3月期に日本61,935人・北米50,539人・アジア大洋州50,175人など、海外従業員が過半）", "source_url": "https://global.honda/en/sustainability/cq_img/report/pdf/2025/honda-SR-2025-en-all.pdf"},
+    "foreign_manager_ratio": {"finding": "外国籍管理職の数・割合は数値の開示なし。欧州では本社の外国籍管理職比率を追跡・報告するとあるが数値なし。他国へ駐在する非日本人は2024年度41人（アジア・オセアニア）、2025年1月時点51人（同地域、前年比24%増）。海外子会社では管理職の現地化を進め現地化率は年々向上と記載。", "source_url": "https://global.honda/en/diversity/global/region/"},
+    "evaluation_system": {"finding": "ESGレポート2025は人種・国籍等を問わず機会を持つことを方針に記載。評価制度の対象者割合は日本100%、北米・南米・アジア等も約95〜100%（2025年3月期）。国籍による差の指摘や給与基準の公開は確認できず、口コミは未取得。", "source_url": "https://global.honda/en/sustainability/cq_img/report/pdf/2025/honda-SR-2025-en-all.pdf"},
+    "english_selection": {"finding": "未確認（公式の留学生向け・英語選考の記載を取得できず）", "source_url": ""},
+    "required_japanese": {"finding": "未確認（日本語レベルの記載を取得できず）", "source_url": ""},
+    "multilingual_docs": {"finding": "ESGレポート2025の英語版（PDF）が公開されている（対外文書）。社内ツール・規程の英語対応は未確認。", "source_url": "https://global.honda/en/sustainability/cq_img/report/pdf/2025/honda-SR-2025-en-all.pdf"},
+    "visa_support": {"finding": "未確認", "source_url": ""},
+    "living_support": {"finding": "未確認（社宅・生活支援の記載を取得できず）", "source_url": ""},
+    "community_erg": {"finding": "未確認（外国人向けERGの記載なし。LGBTQ+向けの取り組みはあり、PRIDE指標2025でゴールド受賞と2025年11月14日付で掲載）", "source_url": "https://global.honda/jp/diversity/"},
+    "culture_religion": {"finding": "ダイバーシティ方針に人種・国籍・文化等を問わず等しく機会をもつと記載。人権e-learningを全従業員に実施（2025年3月期、日本55,650人・海外駐在2,017人受講）。祈祷室・宗教食は記載を確認できず。", "source_url": "https://global.honda/en/sustainability/cq_img/report/pdf/2025/honda-SR-2025-en-all.pdf"},
+    "home_leave": {"finding": "未確認", "source_url": ""},
+    "global_offices": {"finding": "ESGレポートは日本・北米・南米・欧州/アフリカ/中東・アジア大洋州・中国の6地域で従業員数を開示。アジア・オセアニアは13か国41拠点。国名の完全な一覧は未取得。", "source_url": "https://global.honda/en/diversity/global/region/"},
+    "global_review_score": {"finding": "未確認（Glassdoor/Indeedは403で取得不可）", "source_url": ""},
+    "foreigner_reviews": {"finding": "未確認", "source_url": ""}
+  },
+  "axis_facts": [
+    {"fact": "学士卒の初任給は月給270,000円（2025年3月期。2023年3月期228,000円、2024年3月期262,300円と上昇）。", "source_url": "https://global.honda/en/sustainability/cq_img/report/pdf/2025/honda-SR-2025-en-all.pdf"},
+    {"fact": "本田技研工業（単体）の平均勤続年数の記載あり（2025年3月期の表。約21年台）。", "source_url": "https://global.honda/en/sustainability/cq_img/report/pdf/2025/honda-SR-2025-en-all.pdf"},
+    {"fact": "連結従業員は2025年3月期に日本61,935人、北米50,539人、南米17,220人、欧州等2,985人、アジア大洋州50,175人、中国10,198人。北米は約5万人の最大の海外拠点。", "source_url": "https://global.honda/en/sustainability/cq_img/report/pdf/2025/honda-SR-2025-en-all.pdf"},
+    {"fact": "海外駐在者向けに事前研修・異文化研修を実施。人権e-learningの受講者は海外駐在者2,017人。", "source_url": "https://global.honda/en/sustainability/cq_img/report/pdf/2025/honda-SR-2025-en-all.pdf"},
+    {"fact": "グローバルリーダー育成プログラム（GLP）があり、GLP-Explorationの非日本人参加者は392人、Succession Readinessは132%（2025年3月31日時点）。", "source_url": "https://global.honda/en/sustainability/cq_img/report/pdf/2025/honda-SR-2025-en-all.pdf"},
+    {"fact": "海外子会社で管理職の現地化のため、トレーニー制度、次世代育成プログラム、後継者計画を実施している。", "source_url": "https://global.honda/en/sustainability/cq_img/report/pdf/2025/honda-SR-2025-en-all.pdf"},
+    {"fact": "事業の中心は二輪・四輪・パワープロダクツの製造・販売。交通安全活動は43の国と地域で実施。", "source_url": "https://global.honda/en/sustainability/cq_img/report/pdf/2025/honda-SR-2025-en-all.pdf"},
+    {"fact": "新卒は事務系・技術系の総合職に分かれる。募集要項の詳細は未取得。（大学の学内告知で、募集サイトhonda-recruit.jpから応募と記載。検索結果の抜粋のみ）", "source_url": ""}
+  ]
+}

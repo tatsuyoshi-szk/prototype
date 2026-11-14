@@ -1,0 +1,123 @@
+{
+  "id": "panasonic",
+  "name": "パナソニック ホールディングス",
+  "industry": "電機・電子",
+  "profile": "家電・空調・車載・B2Bソリューション等を世界展開する電機大手。新卒採用に英語・中国語で受けられる「G100コース」があるとFAQに記載（検索結果の抜粋で確認）。公式サイトは自動取得が403で本文を開けなかった。",
+  "profile_url": "https://recruit.jpn.panasonic.com/newgrads/faq/faq_en/",
+  "collected_at": "2026-11-14",
+  "dummy": false,
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（社会データ集PDFは403で取得不可）"
+    },
+    "foreign_manager_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "検索結果の抜粋によると、執行役員のうち女性・日本以外の国籍・キャリア入社者を合わせた多様性比率が2026年4月時点で55%（外国籍のみの数値ではない）。ページ本体は未取得。"
+    },
+    "evaluation_system": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "english_selection": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "検索結果の抜粋によると、新卒FAQに「選考は原則日本語だが、英語または中国語で受けたい人向けにG100コースがある」「国籍を問わず応募可」「海外大学からの応募可、面接はオンライン」とある（FAQの例示日付は2020〜2022年で古い可能性。ページ本体は403で未取得）。"
+    },
+    "required_japanese": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（日本語レベルの明記は確認できず。G100コースは英語・中国語で選考可）"
+    },
+    "multilingual_docs": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（古い雑誌記事の抜粋で「社内規定などの情報を数か国語で掲載」とあるが年代不明・ページ未取得）"
+    },
+    "visa_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "living_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "community_erg": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（古い雑誌記事の抜粋で外国人社員同士のネットワークがあるとの記載。年代は10年以上前と推測・ページ未取得）"
+    },
+    "culture_religion": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "home_leave": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "global_offices": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（国名の一覧を取得できず）。グローバル採用セミナー（2004年開始、年3回）で海外子会社の採用担当と面接できるとの記載（検索結果の抜粋）。"
+    },
+    "global_review_score": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "foreigner_reviews": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    }
+  },
+  "axis_facts": [
+    {
+      "fact": "（検索結果の抜粋）2025年度の国内採用は2,060人で、女性比率28.8%（社会データ集）。ページ本体は403で未取得。",
+      "source_url": "https://holdings.panasonic/jp/corporate/sustainability/pdf/sdb2026j-social-data.pdf"
+    },
+    {
+      "fact": "（検索結果の抜粋）海外子会社での就職を希望する留学生向けに、年3回（7月・10月・1月）のGlobal Recruiting Seminarを開催。",
+      "source_url": "https://holdings.panasonic/global/corporate/careers"
+    }
+  ],
+  "sources": [
+    "https://recruit.jpn.panasonic.com/newgrads/faq/faq_en/"
+  ]
+}

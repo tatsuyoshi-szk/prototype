@@ -1,0 +1,32 @@
+{
+  "id": "deloitte_tohmatsu_consulting",
+  "name": "デロイト トーマツ コンサルティング",
+  "industry": "コンサルティング",
+  "profile": "デロイト トーマツ グループの経営コンサルティング会社。新卒は実力主義で、職位ごとに基本給が固定され年2回の賞与がある（外部サイトの推定）。公式ページから、外国籍比率・英語選考・ビザ支援は確認できなかった。",
+  "profile_url": "https://www.deloitte.com/jp/ja/careers.html",
+  "collected_at": "2026-11-14",
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {"finding": "未確認", "source_url": ""},
+    "foreign_manager_ratio": {"finding": "未確認", "source_url": ""},
+    "evaluation_system": {"finding": "外部サイトの推定: 基本給は職位ごとに固定、賞与は個人・会社の業績で差が大きい。入社初年度から成果で差が出る実力主義で、Up or Outの風潮は薄い（2022年7月時点）。国籍による差は未確認。", "source_url": "https://gaishishukatsu.com/company/12/salary"},
+    "english_selection": {"finding": "未確認", "source_url": ""},
+    "required_japanese": {"finding": "未確認", "source_url": ""},
+    "multilingual_docs": {"finding": "未確認", "source_url": ""},
+    "visa_support": {"finding": "未確認", "source_url": ""},
+    "living_support": {"finding": "未確認", "source_url": ""},
+    "community_erg": {"finding": "未確認", "source_url": ""},
+    "culture_religion": {"finding": "未確認", "source_url": ""},
+    "home_leave": {"finding": "未確認", "source_url": ""},
+    "global_offices": {"finding": "未確認", "source_url": ""},
+    "global_review_score": {"finding": "未確認", "source_url": ""},
+    "foreigner_reviews": {"finding": "未確認", "source_url": ""}
+  },
+  "axis_facts": [
+    {"fact": "外部サイトの推定: 初任給は大学卒で年俸530万円、院卒540万円（2022年度時点）。", "source_url": "https://gaishishukatsu.com/company/12/salary"},
+    {"fact": "外部サイトの推定: 役職別の年収は、ビジネスアナリスト500〜600万円、コンサルタント600〜800万円、シニアコンサルタント900〜1,100万円、マネージャー1,300〜1,500万円。", "source_url": "https://gaishishukatsu.com/company/12/salary"},
+    {"fact": "外部サイトの推定: 同じランクで上位数%の評価を得れば、シニアコンサルタントでも総年収1,000万円超になりうる。OJTに加えOFF-JT研修も充実。", "source_url": "https://gaishishukatsu.com/company/12/salary"},
+    {"fact": "事業の中心は経営コンサルティング。採用サイトに「新卒・定期採用」と人材開発資料（Talent Development）へのリンクがある。", "source_url": "https://www.deloitte.com/jp/ja/careers.html"},
+    {"fact": "（検索結果の抜粋）2028年入社の新卒はSummer Job選考と本選考の2ルートで、Winter Jobは実施しない。公式ページ本文は未取得。", "source_url": ""}
+  ]
+}

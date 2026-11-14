@@ -1,0 +1,32 @@
+{
+  "id": "sony",
+  "name": "ソニーグループ",
+  "industry": "電機・エンタメ・金融",
+  "profile": "電機・ゲーム・音楽・映画・金融などを手がける。新卒の募集要項ページでは初任給、年間休日126日、フレックス（コアタイムなし）、年功でなく役割・実績による給与改定が確認できた。留学生向け情報や英語選考の記載、外国籍比率は今回確認できなかった。",
+  "profile_url": "https://www.sony.co.jp/recruit/newgrads/",
+  "collected_at": "2026-11-14",
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {"finding": "未確認", "source_url": ""},
+    "foreign_manager_ratio": {"finding": "未確認", "source_url": ""},
+    "evaluation_system": {"finding": "給与改定は「年功ではなく個人の役割・実績に応じ改定」とされる。国籍による差の指摘や基準公開は確認できず。", "source_url": "https://www.sony.co.jp/recruit/newgrads/"},
+    "english_selection": {"finding": "未確認（新卒ページに英語での応募・選考の記載なし。英語版へのリンクはある）", "source_url": "https://www.sony.co.jp/recruit/newgrads/"},
+    "required_japanese": {"finding": "未確認", "source_url": ""},
+    "multilingual_docs": {"finding": "未確認", "source_url": ""},
+    "visa_support": {"finding": "未確認（ビザの記載なし）", "source_url": "https://www.sony.co.jp/recruit/newgrads/"},
+    "living_support": {"finding": "未確認", "source_url": ""},
+    "community_erg": {"finding": "未確認", "source_url": ""},
+    "culture_religion": {"finding": "未確認", "source_url": ""},
+    "home_leave": {"finding": "未確認（年間休日126日、両立支援制度Symphony Planでボランティア・留学・配偶者の海外赴任同行などに対応。帰国目的の制度は記載なし）", "source_url": "https://www.sony.co.jp/recruit/newgrads/"},
+    "global_offices": {"finding": "未確認", "source_url": ""},
+    "global_review_score": {"finding": "未確認", "source_url": ""},
+    "foreigner_reviews": {"finding": "未確認", "source_url": ""}
+  },
+  "axis_facts": [
+    {"fact": "初任給（2026年度・月給）は大学卒333,000円〜、修士了363,000円〜、博士了383,000円〜。", "source_url": "https://www.sony.co.jp/recruit/newgrads/"},
+    {"fact": "勤務時間は7時間45分で、フレックスタイム制（コアタイムなし）。年間休日126日、完全週休2日制。", "source_url": "https://www.sony.co.jp/recruit/newgrads/"},
+    {"fact": "給与改定は年功ではなく個人の役割・実績に応じて行う。", "source_url": "https://www.sony.co.jp/recruit/newgrads/"},
+    {"fact": "両立支援制度Symphony Planが、ボランティア、留学、配偶者の海外赴任への同行などに対応する。", "source_url": "https://www.sony.co.jp/recruit/newgrads/"},
+    {"fact": "試用期間は3か月。全学部・全学科が募集対象（2027年3月卒見込み向け）。", "source_url": "https://www.sony.co.jp/recruit/newgrads/"}
+  ]
+}

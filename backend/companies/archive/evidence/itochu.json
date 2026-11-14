@@ -1,0 +1,32 @@
+{
+  "id": "itochu",
+  "name": "伊藤忠商事",
+  "industry": "総合商社",
+  "profile": "繊維・機械・金属・エネルギー・食料・生活資材・情報金融など幅広い事業の総合商社。CSRレポート2025は国内7拠点・海外87拠点を対象とし、総合職は入社8年以内に海外派遣するローテーション指針がある。外国籍比率は未確認。",
+  "profile_url": "https://www.itochu.co.jp/en/csr/pdf/25fulle02-03.pdf",
+  "collected_at": "2026-11-14",
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {"finding": "未確認（外国籍社員の割合は開示を確認できず）。参考: 2022年3月期の連結従業員115,124人、単体4,170人（検索結果の抜粋、本文未取得）。", "source_url": ""},
+    "foreign_manager_ratio": {"finding": "管理職の海外ブロック採用社員は約780人（年次不明）。約130人が本社で勤務した経験を持つ。外国籍の管理職比率そのものは未確認。", "source_url": "https://www.itochu.co.jp/en/csr/society/development/index.html"},
+    "evaluation_system": {"finding": "世界共通の等級制度ITOCHU Global Classification（IGC）で、国籍を問わず配置・昇進・育成を行うと記載。国籍による差の指摘や給与基準の公開は未確認。", "source_url": "https://www.itochu.co.jp/en/csr/society/development/index.html"},
+    "english_selection": {"finding": "未確認（検索結果の抜粋に「海外大学向けの選考」ルートがあるとの記載があるが、公式ページは404で本文を取得できず）", "source_url": ""},
+    "required_japanese": {"finding": "未確認", "source_url": ""},
+    "multilingual_docs": {"finding": "未確認（CSRレポート・年次報告書は英語版あり＝対外文書）", "source_url": "https://www.itochu.co.jp/en/csr/pdf/25fulle02-03.pdf"},
+    "visa_support": {"finding": "未確認", "source_url": ""},
+    "living_support": {"finding": "未確認", "source_url": ""},
+    "community_erg": {"finding": "未確認", "source_url": ""},
+    "culture_religion": {"finding": "未確認", "source_url": ""},
+    "home_leave": {"finding": "未確認", "source_url": ""},
+    "global_offices": {"finding": "CSRレポート2025の対象は国内7拠点・海外87拠点。国名の一覧は取得できず。2025年秋のGlobal Development Programには20か国から参加。", "source_url": "https://www.itochu.co.jp/en/csr/pdf/25fulle02-03.pdf"},
+    "global_review_score": {"finding": "未確認", "source_url": ""},
+    "foreigner_reviews": {"finding": "未確認", "source_url": ""}
+  },
+  "axis_facts": [
+    {"fact": "総合職は入社8年以内に海外派遣するのが原則。2025年度の派遣率は86%（目標80%以上）。", "source_url": "https://www.itochu.co.jp/en/csr/society/development/index.html"},
+    {"fact": "2025年度の人材育成費は27億円、1人あたり約66.4万円。人材開発プログラムの累計参加は53,811人。", "source_url": "https://www.itochu.co.jp/en/csr/society/development/index.html"},
+    {"fact": "朝型勤務制度を導入。2016年9月に早朝セミナーを開始し、2025年度は2回で計1,135人が参加。", "source_url": "https://www.itochu.co.jp/en/csr/society/development/index.html"},
+    {"fact": "2018年度に海外派遣対象743人のうち637人が派遣経験あり。", "source_url": "https://www.itochu.co.jp/en/csr/society/development/index.html"},
+    {"fact": "CSRレポート2025の対象は国内7拠点・海外87拠点。事業は総合商社（商社・トレーディングと事業投資）。", "source_url": "https://www.itochu.co.jp/en/csr/pdf/25fulle02-03.pdf"}
+  ]
+}

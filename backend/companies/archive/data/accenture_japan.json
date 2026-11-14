@@ -1,0 +1,147 @@
+{
+  "id": "accenture_japan",
+  "name": "アクセンチュア（日本法人）",
+  "industry": "コンサルティング・IT",
+  "profile": "コンサルティング・ITサービス。日本の社員数は約29,000人（2026年3月、採用案内）。全社で49か国に社員。新卒2028年卒は5職種で想定年収663万〜754万円。国籍による制約はないと記載。ビザや外国人向け支援、日本法人の外国籍比率は確認できず。",
+  "profile_url": "https://www.accenture.com/content/dam/accenture/final/accenture-com/document-2/Accenture-Recruiting-Brochure.pdf",
+  "collected_at": "2026-11-14",
+  "dummy": false,
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（日本法人の外国籍比率は見つからず。全社では49か国で社員が働くとのみ記載）"
+    },
+    "foreign_manager_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "evaluation_system": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "国籍差の指摘は確認できず。評価は前年と比べた個人の成長を重視し、年齢・在籍年数・他者との比較ではないと記載。キャリア相談役の「ピープルリード」を自分で選べる。"
+    },
+    "english_selection": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（新卒の英語選考の有無は公式ページで確認できず）。経験者採用ページには、職種により英語はビジネスレベルが必要だが、全職種で入社時に必須ではないとある。"
+    },
+    "required_japanese": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（日本語要件の記載なし）。経験者採用ページには、性別・国籍・年齢などの制約は一切設けないとある。"
+    },
+    "multilingual_docs": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "世界中のプロジェクト事例を検索できる社内データベース（ナレッジエクスチェンジ）があり、海外のプロジェクト担当者にチャットやメールで連絡できる。英語での業務運用や規程の英日併記は未確認。"
+    },
+    "visa_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "living_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "community_erg": {
+      "score": 4,
+      "basis": "全社の公式な従業員ネットワークがある（ジェンダー130以上、Pride90以上、人種・民族も）。日本の外国人向けは未確認",
+      "source_url": "https://accenture.com/jp-ja/company-diversity",
+      "unconfirmed": false,
+      "finding": "全社で従業員ネットワークがあり、ジェンダー関連は130以上（35か国以上）、Pride関連は90以上（45か国以上）、障害関連は30か国以上、神経多様性は20か国。人種・民族のネットワークも列挙されるが、日本の外国人向けネットワークは未確認。"
+    },
+    "culture_religion": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（地域の重点分野の一つとして「Faith」が挙がるのみ。祈祷室・宗教対応食は記載なし）"
+    },
+    "home_leave": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（フレックス、在宅勤務、短日短時間勤務、2022年8月導入のロケーションフレキシビリティ制度はあるが、帰国休暇の記載なし）"
+    },
+    "global_offices": {
+      "score": 5,
+      "basis": "社員が49か国で働いていると記載（国名の一覧は未取得。11か国以上と判断）",
+      "source_url": "https://accenture.com/jp-ja/company-diversity",
+      "unconfirmed": false,
+      "finding": "未確認（国名の一覧は取得できず）。社員は49か国で働き生活しているとの記載。社内のキャリア市場で国内外のポジションを検索できる。"
+    },
+    "global_review_score": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（Glassdoor・Indeedのページは取得できず）"
+    },
+    "foreigner_reviews": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    }
+  },
+  "axis_facts": [
+    {
+      "fact": "2028年卒の想定年収（賞与・手当込み、2026年8月時点の見込み）は、ストラテジーコンサルタント・AI&データアーキテクトが754万円、ビジネスコンサルタント・エンジニア・クリエイティブが663万円。",
+      "source_url": "https://www.accenture.com/jp-ja/careers/life-at-accenture/entry-level"
+    },
+    {
+      "fact": "基本給は年額550.9万円（ストラテジーコンサルタント・AI&データアーキテクト）または480万円（その他3職種）。",
+      "source_url": "https://www.accenture.com/jp-ja/careers/life-at-accenture/entry-level"
+    },
+    {
+      "fact": "2028年卒の新卒職種は、ストラテジーコンサルタント（東京）、ビジネスコンサルタント、エンジニア、AI&データアーキテクト、クリエイティブ。勤務地は北海道から福岡まで複数。",
+      "source_url": "https://www.accenture.com/jp-ja/careers/life-at-accenture/entry-level"
+    },
+    {
+      "fact": "日本の社員数は約29,000人（2026年3月時点、採用案内の記載）。",
+      "source_url": "https://www.accenture.com/content/dam/accenture/final/accenture-com/document-2/Accenture-Recruiting-Brochure.pdf"
+    },
+    {
+      "fact": "オンライン研修は24,000コース以上。社内キャリアマーケットで2024年度に日本の1,100人が希望の役割へ異動した。",
+      "source_url": "https://www.accenture.com/jp-ja/blogs/japan-careers-blog/why-accenture"
+    },
+    {
+      "fact": "海外研修プログラムがある。社内の職種公募は国内外のポジションが対象。",
+      "source_url": "https://www.accenture.com/jp-ja/blogs/japan-careers-blog/why-accenture"
+    },
+    {
+      "fact": "入社条件として全国勤務が挙げられている（勤務地の制限は応募時に相談）。",
+      "source_url": "https://www.accenture.com/jp-ja/careers/explore-careers/area-of-interest/journey-to-accenture"
+    },
+    {
+      "fact": "社内の合言葉は「Think Straight, Talk Straight」で、立場に関係なく率直に意見を言う文化。",
+      "source_url": "https://www.accenture.com/jp-ja/blogs/japan-careers-blog/why-accenture"
+    }
+  ],
+  "sources": [
+    "https://www.accenture.com/content/dam/accenture/final/accenture-com/document-2/Accenture-Recruiting-Brochure.pdf"
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "id": "nissan",
+  "name": "日産自動車",
+  "industry": "自動車",
+  "profile": "横浜に本社を置く自動車メーカー。2026年3月末の従業員数は120,079名で、100以上の国籍の従業員が在籍し、生産拠点は12市場23拠点。外国籍比率や外国人向け支援制度は、今回確認できた公開ページでは見つからなかった。",
+  "profile_url": "https://www.nissan-global.com/JP/COMPANY/OVERVIEW/",
+  "collected_at": "2026-11-14",
+  "dummy": false,
+  "global_offices_list": [
+    "アメリカ",
+    "カナダ",
+    "メキシコ",
+    "ブラジル",
+    "アルゼンチン",
+    "チリ",
+    "コロンビア",
+    "ペルー",
+    "英国",
+    "ドイツ",
+    "フランス",
+    "イタリア",
+    "スペイン",
+    "ロシア",
+    "トルコ",
+    "インド",
+    "インドネシア",
+    "オーストラリア",
+    "韓国",
+    "シンガポール",
+    "タイ",
+    "台湾",
+    "中国",
+    "日本",
+    "ニュージーランド",
+    "フィリピン",
+    "ベトナム",
+    "香港",
+    "マレーシア",
+    "南アフリカ",
+    "エジプト",
+    "サウジアラビア",
+    "UAE",
+    "モロッコ",
+    "ほか多数（公式サイトのマーケット一覧は北米・中南米、欧州、アジア・大洋州、中東・アフリカの約100市場）"
+  ],
+  "items": {
+    "foreign_staff_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（外国籍社員の比率は見つからず。2026年3月時点で従業員は100以上の国籍にわたると記載）"
+    },
+    "foreign_manager_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（外国籍の管理職・役員の人数や割合は見つからず。グローバルの女性管理職比率は15.5%、2026年3月時点）"
+    },
+    "evaluation_system": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（制度や国籍差に関する記述は見つからず。DEIの考え方を制度やポリシーに反映していると記載）"
+    },
+    "english_selection": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "required_japanese": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "multilingual_docs": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "visa_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "living_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "community_erg": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "culture_religion": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（多様で公平なインクルーシブな職場を目指すという方針の記載のみ。祈祷室・宗教対応食の記述は見つからず）"
+    },
+    "home_leave": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "global_offices": {
+      "score": 5,
+      "basis": "公式サイトのマーケット一覧に約100の国・地域、生産拠点は12市場23拠点（2026年3月時点）",
+      "source_url": "https://www.nissan-global.com/JP/COMPANY/BRANDS/NISSAN/",
+      "unconfirmed": false,
+      "finding": "公式サイトのマーケット一覧に、北米・中南米、欧州、アジア・大洋州、中東・アフリカの約100の国・地域が載る（販売市場の一覧。拠点の数ではない）。生産拠点は12市場23拠点（2026年3月時点）。"
+    },
+    "global_review_score": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（Glassdoorのページは取得できず。検索結果の抜粋では約3.8/5・約1,840件と表示されたが、ページ未取得のため参考値）"
+    },
+    "foreigner_reviews": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    }
+  },
+  "axis_facts": [
+    {
+      "fact": "従業員数は120,079名（2026年3月31日現在）。グローバルで100以上の国籍の従業員が働く。",
+      "source_url": "https://www.nissan-global.com/JP/COMPANY/OVERVIEW/"
+    },
+    {
+      "fact": "生産拠点は12市場23拠点、グローバル販売台数は3,151千台（2026年3月期時点の概要ページ）。製造業で現場・ものづくりに近い。",
+      "source_url": "https://www.nissan-global.com/JP/COMPANY/OVERVIEW/"
+    },
+    {
+      "fact": "サステナビリティデータブック2025によると、連結従業員数は2024年度に132,790人、単体（日産自動車）は24,413人。",
+      "source_url": "https://www.nissan-global.com/JP/SUSTAINABILITY/LIBRARY/SR/2025/ASSETS/PDF/DB25_J_P157-160.pdf"
+    },
+    {
+      "fact": "グローバルの女性管理職比率は15.5%（2026年3月時点）。",
+      "source_url": "https://www.nissan-global.com/JP/SUSTAINABILITY/SOCIAL/DIVERSITY/"
+    },
+    {
+      "fact": "公式サイトのマーケット一覧には、北米・中南米、欧州、アジア・大洋州、中東・アフリカの約100の国・地域が並び、北米（アメリカ、カナダ、メキシコ）を含む。",
+      "source_url": "https://www.nissan-global.com/JP/COMPANY/BRANDS/NISSAN/"
+    },
+    {
+      "fact": "電動化・自動運転/運転支援・コネクテッドなどの技術分野を持つ（公式サイトのメニュー構成から）。事業の中心は自動車の開発・製造・販売。",
+      "source_url": "https://www.nissan-global.com/JP/COMPANY/OVERVIEW/"
+    }
+  ],
+  "sources": [
+    "https://www.nissan-global.com/JP/COMPANY/OVERVIEW/"
+  ]
+}

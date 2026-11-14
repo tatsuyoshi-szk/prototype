@@ -1,0 +1,33 @@
+{
+  "id": "hitachi",
+  "name": "日立製作所",
+  "industry": "総合電機・社会イノベーション・IT",
+  "profile": "デジタル（Lumada）、グリーンエナジー、コネクティブインダストリーズを柱とする。2024年版統合報告書では海外従業員比率58%、役員・執行役の外国籍比率25%。海外在住の留学生向けグローバル採用があり、面接はオンライン。",
+  "profile_url": "https://www-hitachi-com.itdweb.ext.hitachi.co.jp/IR-e/library/integrated/2024/ar2024e_06.pdf",
+  "collected_at": "2026-11-14",
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {"finding": "外国籍比率は未確認。参考: 統合報告書2024の海外従業員比率は58%（国籍ではなく勤務地ベース。グループ全体）。", "source_url": "https://www-hitachi-com.itdweb.ext.hitachi.co.jp/IR-e/library/integrated/2024/ar2024e_06.pdf"},
+    "foreign_manager_ratio": {"finding": "役員・執行役に占める外国籍の比率は25%（2024年6月時点。統合報告書2024）。管理職の外国籍比率は未確認。", "source_url": "https://www-hitachi-com.itdweb.ext.hitachi.co.jp/IR-e/library/integrated/2024/ar2024e_06.pdf"},
+    "evaluation_system": {"finding": "未確認（統合報告書に「成長マインドを支える報酬制度」の項目はあるが、国籍による差の記載は取得できず）", "source_url": "https://www-hitachi-com.itdweb.ext.hitachi.co.jp/IR-e/library/integrated/2024/ar2024e_06.pdf"},
+    "english_selection": {"finding": "海外在住の学生向けグローバル採用で、面接はオンライン。個別選考またはBoston Career Forum等のイベント経由の2ルート。英語で選考できるとの明記は確認できず。", "source_url": "https://www.hitachi.co.jp/recruit/en/international_students/select/index.html"},
+    "required_japanese": {"finding": "未確認（日本語要件はページに記載なし）", "source_url": "https://www.hitachi.co.jp/recruit/en/international_students/select/index.html"},
+    "multilingual_docs": {"finding": "グローバル人財担当の社員が日本語・英語の両方の資料を作成していると紹介されている。社内システム・規程の英語対応は未確認。", "source_url": "https://www.hitachi.co.jp/recruit/en/international_students/voice/03/index.html"},
+    "visa_support": {"finding": "未確認（選考ページに記載なし）", "source_url": ""},
+    "living_support": {"finding": "未確認", "source_url": ""},
+    "community_erg": {"finding": "未確認", "source_url": ""},
+    "culture_religion": {"finding": "未確認", "source_url": ""},
+    "home_leave": {"finding": "未確認", "source_url": ""},
+    "global_offices": {"finding": "未確認（国名の一覧は取得できず）。統合報告書2024に海外の地域統括会社があると記載。", "source_url": "https://www-hitachi-com.itdweb.ext.hitachi.co.jp/IR-e/library/integrated/2024/ar2024e_06.pdf"},
+    "global_review_score": {"finding": "未確認（Indeedは403で取得不可）", "source_url": ""},
+    "foreigner_reviews": {"finding": "未確認", "source_url": ""}
+  },
+  "axis_facts": [
+    {"fact": "海外在住の留学生の採用に人数枠はなく、毎年採用している。応募・オンラインテストの締切は毎月15日と末日で、最終締切は2027年1月31日。", "source_url": "https://www.hitachi.co.jp/recruit/en/international_students/select/index.html"},
+    {"fact": "留学生の報酬制度は他の新卒と同じ。入社は4月（前年10月〜3月卒）と10月（4〜9月卒）の2つ。", "source_url": "https://www.hitachi.co.jp/recruit/en/international_students/select/index.html"},
+    {"fact": "統合報告書2024で、役員・執行役の女性比率12%、外国籍比率25%、デジタル人財95,000人、エンゲージメントスコア68.6、海外従業員比率58%。", "source_url": "https://www-hitachi-com.itdweb.ext.hitachi.co.jp/IR-e/library/integrated/2024/ar2024e_06.pdf"},
+    {"fact": "統合報告書2024で、グローバル資産比率70%、R&D投資2,901億円、スタートアップ投資は累計6億ドル。", "source_url": "https://www-hitachi-com.itdweb.ext.hitachi.co.jp/IR-e/library/integrated/2024/ar2024e_06.pdf"},
+    {"fact": "統合報告書2023の表で、日立製作所の女性管理職比率は2022年度13.0%（グループ）。日立グループ従業員は2022年度322,525人、うち日立製作所28,672人（検索結果の抜粋より）。", "source_url": "https://www.hitachi.com/IR-e/library/integrated/online/2023/ar2023e_19_03.pdf"},
+    {"fact": "事業の中心はIT・デジタル（Lumada）、エネルギー、インダストリー・モビリティ。海外に地域統括会社を置く。", "source_url": "https://www-hitachi-com.itdweb.ext.hitachi.co.jp/IR-e/library/integrated/2024/ar2024e_06.pdf"}
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "id": "rakuten",
+  "name": "楽天グループ",
+  "industry": "インターネットサービス・フィンテック・通信",
+  "profile": "EC・フィンテック・モバイル等を展開。社内公用語は英語で、グループの約20%、エンジニア部門の約50%が外国籍。従業員は100を超える国・地域出身。祈祷室、宗教に配慮した食事、異文化ネットワークがある（公式FAQ・DEIページ）。",
+  "profile_url": "https://corp.rakuten.co.jp/sustainability/employees/diversity/",
+  "collected_at": "2026-11-14",
+  "dummy": false,
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {
+      "score": 5,
+      "basis": "グループ全体の約20%、エンジニア部門の約50%が外国籍（新卒FAQ。時点の記載なし）",
+      "source_url": "https://global.rakuten.com/corp/careers/graduates/faq/",
+      "unconfirmed": false,
+      "finding": "楽天グループ全体の約20%、エンジニア部門の約50%が外国籍（新卒FAQ、時点記載なし）。国籍数は100超（2025年12月31日時点、グループ）。"
+    },
+    "foreign_manager_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（DEIページに外国人管理職の記載なし。管理職の男女比グラフのみ）"
+    },
+    "evaluation_system": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（評価は年2回と記載。国籍差や基準公開は確認できず）"
+    },
+    "english_selection": {
+      "score": 3,
+      "basis": "TOEICスコアなしで応募でき、面接の言語の変更を希望できる。完全に英語の選考ルートは未記載",
+      "source_url": "https://global.rakuten.com/corp/careers/graduates/faq/",
+      "unconfirmed": false,
+      "finding": "TOEICスコアなしで応募でき、選考はTOEICだけで決めない。英語力確認が必要な場合のみTOEIC受験を求めることがある。面接で使う言語の変更を希望できる。完全に英語で選考が完結するかは未記載。"
+    },
+    "required_japanese": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（FAQに日本語要件の記載なし）"
+    },
+    "multilingual_docs": {
+      "score": 4,
+      "basis": "英語が社内公用語で、公式会議は英語・英語資料で行う（部署により使用度合いは異なる）",
+      "source_url": "https://global.rakuten.com/corp/careers/graduates/faq/",
+      "unconfirmed": false,
+      "finding": "英語が社内公用語で、公式会議は英語・英語資料で行う。使用度合いは部署で異なる。"
+    },
+    "visa_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（ビザ支援の記載なし）"
+    },
+    "living_support": {
+      "score": 3,
+      "basis": "条件つきの社員寮があり、本社のカフェテリアは文化・宗教など異なるニーズに配慮したメニューを提供",
+      "source_url": "https://corp.rakuten.co.jp/sustainability/employees/diversity/",
+      "unconfirmed": false,
+      "finding": "条件つきで社員寮がある。本社カフェテリアは文化・宗教など異なるニーズに配慮した幅広いメニューを毎日無料で提供。外国人向けの住居探し支援は未確認。"
+    },
+    "community_erg": {
+      "score": 4,
+      "basis": "異文化ネットワークなど、公式な従業員ネットワークがある。参加人数・活動実績の公開は未確認",
+      "source_url": "https://corp.rakuten.co.jp/sustainability/employees/diversity/",
+      "unconfirmed": false,
+      "finding": "従業員ネットワークがあり、異文化ネットワーク（異文化コミュニケーション促進、バーチャルツアー開催）、ファミリーエンパワーメント、LGBT+ネットワークがある。参加人数は未確認。"
+    },
+    "culture_religion": {
+      "score": 5,
+      "basis": "宗教・宗派を問わない祈祷室（足洗い場つき）と、宗教等に配慮した食事を提供。ラマダンの知識共有も実施",
+      "source_url": "https://corp.rakuten.co.jp/sustainability/employees/diversity/",
+      "unconfirmed": false,
+      "finding": "本社に宗教・宗派を問わず使える祈祷室（足洗い場つき）がある。食事は動物性食品の有無を案内し、宗教等に配慮したメニューを提供。ラマダンの知識共有も実施。ハラール対応の明記はなし。"
+    },
+    "home_leave": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "global_offices": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（国名一覧は確認できず。東京本社のほか国内外の拠点への異動が可能との記載のみ）"
+    },
+    "global_review_score": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "foreigner_reviews": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    }
+  },
+  "axis_facts": [
+    {
+      "fact": "社内公用語は英語。公式会議は英語で進行する。",
+      "source_url": "https://global.rakuten.com/corp/careers/graduates/faq/"
+    },
+    {
+      "fact": "グループの約20%、エンジニア部門の約50%が外国籍。",
+      "source_url": "https://global.rakuten.com/corp/careers/graduates/faq/"
+    },
+    {
+      "fact": "従業員は100を超える国・地域の出身（2025年12月31日時点）。楽天モバイルでも60以上の国・地域。",
+      "source_url": "https://corp.rakuten.co.jp/sustainability/employees/diversity/"
+    },
+    {
+      "fact": "東京本社のほか国内外の拠点への異動が可能。",
+      "source_url": "https://global.rakuten.com/corp/careers/graduates/faq/"
+    },
+    {
+      "fact": "給与は年2回の評価で決まる。",
+      "source_url": "https://global.rakuten.com/corp/careers/graduates/faq/"
+    },
+    {
+      "fact": "新卒には新入社員研修、エンジニア向けテック研修、キャリア開発の研修プログラムがある。",
+      "source_url": "https://corp.rakuten.co.jp/careers/graduates/"
+    },
+    {
+      "fact": "条件つきで社員寮がある。",
+      "source_url": "https://global.rakuten.com/corp/careers/graduates/faq/"
+    }
+  ],
+  "sources": [
+    "https://corp.rakuten.co.jp/sustainability/employees/diversity/"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "mitsubishi_corp",
+  "name": "三菱商事",
+  "industry": "総合商社",
+  "profile": "総合商社。公式サイトの多くが取得できず（403）、外部の募集情報ページで海外大学正規留学生向け採用（2028年度入社、国籍不問、11月にボストンで対面面接）を確認。初任給は学士卒35万円、修士卒38.5万円（2026年度実績）。",
+  "profile_url": "https://gaishishukatsu.com/recruiting_info/view/15179",
+  "collected_at": "2026-11-14",
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {"finding": "未確認", "source_url": ""},
+    "foreign_manager_ratio": {"finding": "未確認（公式資料が取得できず確認できなかった）", "source_url": ""},
+    "evaluation_system": {"finding": "未確認", "source_url": ""},
+    "english_selection": {"finding": "未確認（選考言語の記載なし。海外大学正規留学生選考として11月にボストンで対面面接がある）", "source_url": "https://gaishishukatsu.com/recruiting_info/view/15179"},
+    "required_japanese": {"finding": "未確認（日本語要件の記載なし。国籍・性別・大学・学部・学科は問わないとの記載のみ）", "source_url": "https://gaishishukatsu.com/recruiting_info/view/15179"},
+    "multilingual_docs": {"finding": "未確認", "source_url": ""},
+    "visa_support": {"finding": "未確認", "source_url": ""},
+    "living_support": {"finding": "未確認", "source_url": ""},
+    "community_erg": {"finding": "未確認", "source_url": ""},
+    "culture_religion": {"finding": "未確認", "source_url": ""},
+    "home_leave": {"finding": "未確認", "source_url": ""},
+    "global_offices": {"finding": "未確認", "source_url": ""},
+    "global_review_score": {"finding": "未確認", "source_url": ""},
+    "foreigner_reviews": {"finding": "未確認", "source_url": ""}
+  },
+  "axis_facts": [
+    {"fact": "初任給（2026年度実績）は総合職の学士卒350,000円、修士卒385,000円。", "source_url": "https://gaishishukatsu.com/recruiting_info/view/15179"},
+    {"fact": "勤務地は原則として本店（東京）ほか首都圏。入社後は国内・海外の拠点や事業会社への配属もあり得る。", "source_url": "https://gaishishukatsu.com/recruiting_info/view/15179"},
+    {"fact": "海外大学正規留学生の採用選考（2028年度入社）は、海外の四年制大学・大学院で2028年7月末までに学位取得見込みの人が対象。交換留学生は対象外。", "source_url": "https://gaishishukatsu.com/recruiting_info/view/15179"},
+    {"fact": "2028年度入社の海外大学正規留学生選考に本エントリーすると、同年度の国内採用選考とは併願できない。", "source_url": "https://gaishishukatsu.com/recruiting_info/view/15179"}
+  ]
+}

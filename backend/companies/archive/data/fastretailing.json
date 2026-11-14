@@ -1,0 +1,153 @@
+{
+  "id": "fastretailing",
+  "name": "ファーストリテイリング（ユニクロ）",
+  "industry": "アパレル小売",
+  "profile": "ユニクロ・GUなどを展開。海外ユニクロは25の国・地域に1,744店（2026年8月末）。新卒FAQは外国籍で不利になることは一切ないと明記し、英語は選考基準でなく、就労ビザが必要な人は個別に相談して選考を進める。",
+  "profile_url": "https://www.fastretailing.com/employment/ja/fastretailing/jp/graduate/recruit/company.html",
+  "collected_at": "2026-11-14",
+  "dummy": false,
+  "global_offices_list": [
+    "中国",
+    "香港",
+    "台湾",
+    "韓国",
+    "米国"
+  ],
+  "items": {
+    "foreign_staff_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（外国籍社員の割合の記載なし）"
+    },
+    "foreign_manager_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "evaluation_system": {
+      "score": 4,
+      "basis": "評価・登用は属性によらず個人の能力に基づくと明記し、国・地域による偏りを防ぐ共通の評価分布ガイドラインがある。国籍による差の指摘は確認できず",
+      "source_url": "https://www.fastretailing.com/jp/sustainability/employee/training.html",
+      "unconfirmed": false,
+      "finding": "評価・登用は「その人の属性によらず個人の能力に基づく」とされ、国・地域や所属による偏りを防ぐ共通の評価分布ガイドラインを導入。評価・登用は半年ごと、グレードの飛び級を含む抜擢を行う。国籍別データは未確認。"
+    },
+    "english_selection": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "選考で英語が判断基準になることはない（入社後のキャリアでは必要）。英語で選考を行うかは未記載。"
+    },
+    "required_japanese": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（日本語要件の記載なし）"
+    },
+    "multilingual_docs": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "visa_support": {
+      "score": 2,
+      "basis": "就労ビザが必要な人は個別に相談しながら選考を進める（申請の代行・費用負担の記載はなし）",
+      "source_url": "https://www.fastretailing.com/employment/ja/fastretailing/jp/graduate/recruit/faq.html",
+      "unconfirmed": false,
+      "finding": "就労ビザの要否を確認し、必要な人には別途相談しながら選考を進める（申請代行・費用負担の記載はなし）。"
+    },
+    "living_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "community_erg": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "culture_religion": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "home_leave": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "global_offices": {
+      "score": 5,
+      "basis": "海外ユニクロは25の国・地域に1,744店（2026年8月末）",
+      "source_url": "https://www.fastretailing.com/employment/ja/fastretailing/jp/graduate/recruit/company.html",
+      "unconfirmed": false,
+      "finding": "海外ユニクロは25の国・地域（2026年8月末、海外1,744店）、GUは4の国・地域（中国、台湾、香港、米国、41店）。ユニクロ25か国の国名一覧は開いたページに表示されず未確認。"
+    },
+    "global_review_score": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "foreigner_reviews": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    }
+  },
+  "axis_facts": [
+    {
+      "fact": "「外国籍で不利になることは一切ありません」と新卒FAQに明記。",
+      "source_url": "https://www.fastretailing.com/employment/ja/fastretailing/jp/graduate/recruit/faq.html"
+    },
+    {
+      "fact": "ユニクロの店舗は国内782店、海外1,744店（2026年8月末）。GUは国内440店、海外41店。",
+      "source_url": "https://www.fastretailing.com/employment/ja/fastretailing/jp/graduate/recruit/company.html"
+    },
+    {
+      "fact": "評価・登用は半年ごとで、グレードの飛び級を含む大胆な抜擢を行う。",
+      "source_url": "https://www.fastretailing.com/jp/sustainability/employee/training.html"
+    },
+    {
+      "fact": "グローバルジョブローテーションにより、事業や国を超えた成長機会を与える。海外の優秀人材は入社後に日本へ育成派遣される。",
+      "source_url": "https://www.fastretailing.com/jp/sustainability/employee/training.html"
+    },
+    {
+      "fact": "社内公募制度「キャリアチャレンジプログラム」をグループ・グローバルに拡大している。",
+      "source_url": "https://www.fastretailing.com/jp/sustainability/employee/training.html"
+    },
+    {
+      "fact": "販売員から店長、さらに経営人材へ進むキャリアパスがある。店長と本部社員が参加するFRコンベンションには約8,000人が参加する。",
+      "source_url": "https://www.fastretailing.com/jp/sustainability/employee/training.html"
+    },
+    {
+      "fact": "社内人材育成機関FR-MICが、経営者人材の発掘・教育・抜擢や現場教育の強化を担う。",
+      "source_url": "https://www.fastretailing.com/jp/sustainability/employee/training.html"
+    },
+    {
+      "fact": "従業員数（2026年8月末）はユニクロ29,340名、GU14,922名、プラステ458名、リンク・セオリー・ジャパン887名。本社所在地は山口県山口市、本部は東京・赤坂と有明。",
+      "source_url": "https://www.fastretailing.com/employment/ja/fastretailing/jp/graduate/recruit/company.html"
+    }
+  ],
+  "sources": [
+    "https://www.fastretailing.com/employment/ja/fastretailing/jp/graduate/recruit/company.html"
+  ]
+}

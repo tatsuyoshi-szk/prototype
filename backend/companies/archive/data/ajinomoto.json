@@ -1,0 +1,135 @@
+{
+  "id": "ajinomoto",
+  "name": "味の素",
+  "industry": "食品・バイオ・ファインケミカル",
+  "profile": "調味料・冷凍食品・アミノ酸等の食品・バイオ企業。2027年4月入社の新卒総合職はグローバル型の勤務地で、国内外への転勤の可能性があり、社宅の入居権がある。外国籍比率や留学生向けの情報は公式ページで確認できなかった。",
+  "profile_url": "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html",
+  "collected_at": "2026-11-14",
+  "dummy": false,
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（ASVレポート2025のPDFは文字を抽出できず）"
+    },
+    "foreign_manager_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "evaluation_system": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "english_selection": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（留学生向けの英語選考は確認できず）"
+    },
+    "required_japanese": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "multilingual_docs": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（ASVレポートの英語版の有無は取得ページで確認できず）"
+    },
+    "visa_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "living_support": {
+      "score": 2,
+      "basis": "一般社員向けの社宅入居権のみ。外国人向けの支援は未確認",
+      "source_url": "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html",
+      "unconfirmed": false,
+      "finding": "社宅への入居権がある（本人名義の持ち家が一定圏内にある場合は対象外）。寮の記載なし。外国人向けの住居探し支援は未確認。"
+    },
+    "community_erg": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "culture_religion": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（サステナビリティのトップページに人権・人財戦略の項目はあるが、宗教対応の記載は取得できず）"
+    },
+    "home_leave": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "global_offices": {
+      "score": 2,
+      "basis": "国内外の拠点への転勤ありと記載。国数は未確認のため、確認できた範囲の下限で採点",
+      "source_url": "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html",
+      "unconfirmed": false,
+      "finding": "未確認（国名の一覧を取得できず）。募集要項に国内外の拠点への転勤の可能性ありと記載。"
+    },
+    "global_review_score": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "foreigner_reviews": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    }
+  },
+  "axis_facts": [
+    {
+      "fact": "2027年卒向け募集要項で、勤務地はグローバル型（勤務地の限定なし）、国内外へ転勤の可能性がある。",
+      "source_url": "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html"
+    },
+    {
+      "fact": "社宅への入居権がある。各職種のエントリーは併願可能。",
+      "source_url": "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html"
+    },
+    {
+      "fact": "（検索結果の抜粋）2026年4月時点の初任給は修士303,000円、学士291,000円、高専264,000円。採用予定は約30〜40人（公式ページ本文では確認できなかった）。",
+      "source_url": "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html"
+    },
+    {
+      "fact": "職種は、R&D・エンジニアリング、生産、Sales/Business、財務・経理、法務、デジタル・情報システムに分かれる。",
+      "source_url": "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html"
+    },
+    {
+      "fact": "IRライブラリにASVレポート2025（統合報告書）、サステナビリティレポート、Fact Bookがある。数値は未取得。",
+      "source_url": "https://www.ajinomoto.co.jp/company/jp/ir/library/annual.html"
+    }
+  ],
+  "sources": [
+    "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "ajinomoto",
+  "name": "味の素",
+  "industry": "食品・バイオ・ファインケミカル",
+  "profile": "調味料・冷凍食品・アミノ酸等の食品・バイオ企業。2027年4月入社の新卒総合職はグローバル型の勤務地で、国内外への転勤の可能性があり、社宅の入居権がある。外国籍比率や留学生向けの情報は公式ページで確認できなかった。",
+  "profile_url": "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html",
+  "collected_at": "2026-11-14",
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {"finding": "未確認（ASVレポート2025のPDFは文字を抽出できず）", "source_url": ""},
+    "foreign_manager_ratio": {"finding": "未確認", "source_url": ""},
+    "evaluation_system": {"finding": "未確認", "source_url": ""},
+    "english_selection": {"finding": "未確認（留学生向けの英語選考は確認できず）", "source_url": ""},
+    "required_japanese": {"finding": "未確認", "source_url": ""},
+    "multilingual_docs": {"finding": "未確認（ASVレポートの英語版の有無は取得ページで確認できず）", "source_url": ""},
+    "visa_support": {"finding": "未確認", "source_url": ""},
+    "living_support": {"finding": "社宅への入居権がある（本人名義の持ち家が一定圏内にある場合は対象外）。寮の記載なし。外国人向けの住居探し支援は未確認。", "source_url": "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html"},
+    "community_erg": {"finding": "未確認", "source_url": ""},
+    "culture_religion": {"finding": "未確認（サステナビリティのトップページに人権・人財戦略の項目はあるが、宗教対応の記載は取得できず）", "source_url": "https://www.ajinomoto.co.jp/company/jp/sustainability/"},
+    "home_leave": {"finding": "未確認", "source_url": ""},
+    "global_offices": {"finding": "未確認（国名の一覧を取得できず）。募集要項に国内外の拠点への転勤の可能性ありと記載。", "source_url": "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html"},
+    "global_review_score": {"finding": "未確認", "source_url": ""},
+    "foreigner_reviews": {"finding": "未確認", "source_url": ""}
+  },
+  "axis_facts": [
+    {"fact": "2027年卒向け募集要項で、勤務地はグローバル型（勤務地の限定なし）、国内外へ転勤の可能性がある。", "source_url": "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html"},
+    {"fact": "社宅への入居権がある。各職種のエントリーは併願可能。", "source_url": "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html"},
+    {"fact": "（検索結果の抜粋）2026年4月時点の初任給は修士303,000円、学士291,000円、高専264,000円。採用予定は約30〜40人（公式ページ本文では確認できなかった）。", "source_url": "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html"},
+    {"fact": "職種は、R&D・エンジニアリング、生産、Sales/Business、財務・経理、法務、デジタル・情報システムに分かれる。", "source_url": "https://www.ajinomoto.co.jp/company/jp/recruit/fresh/recruit/requirements.html"},
+    {"fact": "IRライブラリにASVレポート2025（統合報告書）、サステナビリティレポート、Fact Bookがある。数値は未取得。", "source_url": "https://www.ajinomoto.co.jp/company/jp/ir/library/annual.html"}
+  ]
+}

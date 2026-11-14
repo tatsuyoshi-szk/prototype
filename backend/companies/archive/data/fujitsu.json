@@ -1,0 +1,135 @@
+{
+  "id": "fujitsu",
+  "name": "富士通",
+  "industry": "IT・コンサルティング",
+  "profile": "ITサービス大手。2026年度入社の新卒からジョブ型採用・通年採用に移行し、学歴別の初任給を廃止。採用広報記事では毎年新卒内定者の約1割が海外出身で、約5万人が海外で働くとされる。公式のダイバーシティページは取得できず（429エラー）、外国籍比率などは未確認。",
+  "profile_url": "https://www.businessinsider.jp/article/2506-fujitsu-new-recruitment-style/",
+  "collected_at": "2026-11-14",
+  "dummy": false,
+  "global_offices_list": [],
+  "items": {
+    "foreign_staff_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（全社の外国籍比率は見つからず。採用広報記事では、毎年新卒内定者の約1割が海外出身とある）"
+    },
+    "foreign_manager_ratio": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "evaluation_system": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "ジョブ型の人事制度を2020年から役員、さらに一般社員へ拡大。2026年度入社の新卒から学歴別の一律初任給を廃止し、ジョブと等級で処遇する。国籍による差の指摘や口コミは確認できず。"
+    },
+    "english_selection": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（新卒選考の英語対応は見つからず。2026年入社から新卒一括採用を廃止し通年採用へ）"
+    },
+    "required_japanese": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "N1/N2などの明記は未確認。内定者の声として「まず日本語のスキルを早めに伸ばすことが大切」「Webテストの日本語の文法問題に苦労した」とある。"
+    },
+    "multilingual_docs": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（海外出身の内定者が、日本語と英語の両方が使える職場環境と語る程度の記述のみ）"
+    },
+    "visa_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（採用広報記事にビザの記述はなし）"
+    },
+    "living_support": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "community_erg": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "culture_religion": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "home_leave": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    },
+    "global_offices": {
+      "score": 2,
+      "basis": "約5万人が海外で働くと記載。国数は未確認のため、確認できた範囲の下限で採点",
+      "source_url": "https://real.fujitsu-group.recruiting.jp.fujitsu.com/n/n7368847b07f7?gs=868a4b036e37",
+      "unconfirmed": false,
+      "finding": "未確認（国名の一覧は取得できず）。海外出身内定者向けの採用広報記事のタイトルに「約5万人が海外で働く」とある。"
+    },
+    "global_review_score": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認（Glassdoorのページは取得できず。検索結果の抜粋では約3.6/5・約6,800件と表示されたが、ページ未取得のため参考値）"
+    },
+    "foreigner_reviews": {
+      "score": 1,
+      "basis": "公開情報から確認できなかったため、基準どおり1点",
+      "source_url": "",
+      "unconfirmed": true,
+      "finding": "未確認"
+    }
+  },
+  "axis_facts": [
+    {
+      "fact": "新卒に対しても職種限定のジョブ型採用を適用し、新卒一括採用をやめる。2026年度入社の新卒から、学歴を問わず、必要に応じて通年で採用する。",
+      "source_url": "https://www.businessinsider.jp/article/2506-fujitsu-new-recruitment-style/"
+    },
+    {
+      "fact": "学歴別の一律初任給（従来は大卒30万円）を廃止し、仕事内容と等級に応じた処遇にする。新しい金額は記事中に記載なし。",
+      "source_url": "https://www.businessinsider.jp/article/2506-fujitsu-new-recruitment-style/"
+    },
+    {
+      "fact": "社内公募制度では、4年間で約2.7万件の応募があり、約1万人が異動した。若手でも社内で職種を変えやすい。",
+      "source_url": "https://www.businessinsider.jp/article/2506-fujitsu-new-recruitment-style/"
+    },
+    {
+      "fact": "新卒内定者のおよそ1割が毎年海外出身者。内定者は研修などのサポートが充実していることを入社の決め手に挙げた。",
+      "source_url": "https://real.fujitsu-group.recruiting.jp.fujitsu.com/n/n7368847b07f7?gs=868a4b036e37"
+    },
+    {
+      "fact": "採用広報記事のタイトルによると、富士通は約5万人が海外で働く。事業の中心はITサービス。",
+      "source_url": "https://real.fujitsu-group.recruiting.jp.fujitsu.com/n/n7368847b07f7?gs=868a4b036e37"
+    }
+  ],
+  "sources": [
+    "https://www.businessinsider.jp/article/2506-fujitsu-new-recruitment-style/"
+  ]
+}
