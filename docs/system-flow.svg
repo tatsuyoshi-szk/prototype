@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2800" height="2440" viewBox="0 0 2800 2440">
+<title>外国人留学生向け AI就活相談：利用の流れ</title>
+<desc>相談から就活軸の発見、優先順位の設定、企業との相性評価、候補企業の比較までの利用フロー。</desc>
+<rect width="2800" height="2440" fill="#F4F7FB"/>
+<text x="70.0" y="76.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="29" font-weight="700">外国人留学生向け  AI就活相談</text>
+<text x="70.0" y="173.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="67" font-weight="700">対話から、根拠のある企業提案まで。</text>
+<text x="70.0" y="239.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="33" font-weight="400">一人ひとりの就活軸と希望条件をもとに、自己理解から企業比較までを支援</text>
+<rect x="70" y="300" width="500" height="180" rx="20" fill="white" stroke="#DCE4EF" stroke-width="2"/>
+<text x="95.0" y="340.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="24" font-weight="700">01</text>
+<text x="95.0" y="393.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="36" font-weight="700">相談する</text>
+<text x="95.0" y="444.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">経験・希望を話す</text>
+<polyline points="575,390 602,390" fill="none" stroke="#315ED1" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="602.0,390.0 586.7,397.4 586.7,382.6" fill="#315ED1"/>
+<rect x="610" y="300" width="500" height="180" rx="20" fill="white" stroke="#DCE4EF" stroke-width="2"/>
+<text x="635.0" y="340.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="24" font-weight="700">02</text>
+<text x="635.0" y="394.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="36" font-weight="700">就活軸を確認</text>
+<text x="635.0" y="444.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">大切にしたいことを整理</text>
+<polyline points="1115,390 1142,390" fill="none" stroke="#315ED1" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1142.0,390.0 1126.7,397.4 1126.7,382.6" fill="#315ED1"/>
+<rect x="1150" y="300" width="500" height="180" rx="20" fill="white" stroke="#DCE4EF" stroke-width="2"/>
+<text x="1175.0" y="340.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="24" font-weight="700">03</text>
+<text x="1175.0" y="393.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="36" font-weight="700">重要度を回答</text>
+<text x="1175.0" y="444.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">優先順位と譲れない条件</text>
+<polyline points="1655,390 1682,390" fill="none" stroke="#315ED1" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1682.0,390.0 1666.7,397.4 1666.7,382.6" fill="#315ED1"/>
+<rect x="1690" y="300" width="500" height="180" rx="20" fill="white" stroke="#DCE4EF" stroke-width="2"/>
+<text x="1715.0" y="340.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="24" font-weight="700">04</text>
+<text x="1715.0" y="394.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="36" font-weight="700">企業を探す</text>
+<text x="1715.0" y="444.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">情報を調べ、相性を評価</text>
+<polyline points="2195,390 2222,390" fill="none" stroke="#315ED1" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="2222.0,390.0 2206.7,397.4 2206.7,382.6" fill="#315ED1"/>
+<rect x="2230" y="300" width="500" height="180" rx="20" fill="white" stroke="#DCE4EF" stroke-width="2"/>
+<text x="2255.0" y="340.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="24" font-weight="700">05</text>
+<text x="2255.0" y="394.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="36" font-weight="700">候補を比較する</text>
+<text x="2255.0" y="444.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">提案理由と出典を確認</text>
+<text x="70.0" y="533.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="24" font-weight="400">利用の流れ ↑     ／     提案につながる仕組み ↓</text>
+<rect x="70" y="565" width="760" height="1490" rx="24" fill="white" stroke="#DCE4EF" stroke-width="2"/>
+<text x="102.0" y="614.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="24" font-weight="700">01  希望を理解する</text>
+<text x="102.0" y="668.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="38" font-weight="700">相談とアンケート</text>
+<text x="102.0" y="714.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="25" font-weight="400">対話と回答から、本人の価値観・希望条件を整理</text>
+<rect x="880" y="565" width="1050" height="1490" rx="24" fill="white" stroke="#DCE4EF" stroke-width="2"/>
+<text x="912.0" y="613.0" fill="#087F80" font-family="Meiryo, sans-serif" font-size="24" font-weight="700">02  企業との相性を確かめる</text>
+<text x="912.0" y="668.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="38" font-weight="700">企業の調査と評価</text>
+<text x="912.0" y="716.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="25" font-weight="400">15社を目標に、根拠を確かめながら候補を探索</text>
+<rect x="1980" y="565" width="750" height="1490" rx="24" fill="white" stroke="#DCE4EF" stroke-width="2"/>
+<text x="2012.0" y="613.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="24" font-weight="700">03  比較・検討につなげる</text>
+<text x="2012.0" y="670.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="38" font-weight="700">企業ランキングと提案理由</text>
+<text x="2012.0" y="714.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="25" font-weight="400">相性の良さと、その理由をあわせて見せる</text>
+<rect x="110" y="760" width="680" height="205" rx="20" fill="white" stroke="#315ED1" stroke-width="2"/>
+<text x="138.0" y="801.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="23" font-weight="700">日本語・英語で相談</text>
+<text x="138.0" y="846.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="33" font-weight="700">AIとの対話で希望を深掘り</text>
+<text x="138.0" y="893.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">学生が経験・希望・不安を自分の言葉で話す</text>
+<text x="138.0" y="934.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">AIが質問を重ね、価値観や働き方を整理</text>
+<polyline points="450,965 450,1015" fill="none" stroke="#315ED1" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="450.0,1015.0 442.6,999.7 457.4,999.7" fill="#315ED1"/>
+<rect x="110" y="1015" width="680" height="155" rx="20" fill="white" stroke="#315ED1" stroke-width="2"/>
+<text x="138.0" y="1065.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="33" font-weight="700">個人の就活軸を見つけ、確認</text>
+<text x="138.0" y="1112.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="28" font-weight="400">本人が大切にしたいことを言語化する</text>
+<polyline points="450,1170 450,1220" fill="none" stroke="#315ED1" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="450.0,1220.0 442.6,1204.7 457.4,1204.7" fill="#315ED1"/>
+<rect x="110" y="1220" width="680" height="245" rx="20" fill="white" stroke="#315ED1" stroke-width="2"/>
+<text x="138.0" y="1262.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="23" font-weight="700">会社選びで何を大事にするか</text>
+<text x="138.0" y="1306.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="33" font-weight="700">共通14項目＋個人軸を回答</text>
+<text x="138.0" y="1351.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">会社選びの各項目に重要度を1〜5で回答</text>
+<text x="138.0" y="1391.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">「譲れない」条件も指定できる</text>
+<text x="138.0" y="1432.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">企業のグローバル度などと個人の希望を評価</text>
+<polyline points="450,1465 450,1520" fill="none" stroke="#315ED1" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="450.0,1520.0 442.6,1504.7 457.4,1504.7" fill="#315ED1"/>
+<rect x="110" y="1520" width="680" height="210" rx="20" fill="white" stroke="#315ED1" stroke-width="2"/>
+<text x="138.0" y="1561.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="23" font-weight="700">アンケート送信後に企業探しを開始</text>
+<text x="138.0" y="1606.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="33" font-weight="700">本人に合う企業を探す準備</text>
+<text x="138.0" y="1653.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">何をどれだけ重視するかを、回答から整理</text>
+<text x="138.0" y="1693.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">就活軸と譲れない条件を企業選びに反映</text>
+<text x="115.0" y="1807.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="27" font-weight="700">相談で見つけた軸を、企業選びにつなげる。</text>
+<text x="115.0" y="1863.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">会話・アンケート・結果は同じ流れで確認。</text>
+<text x="115.0" y="1911.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">途中で離れても、続きから利用できる。</text>
+<polyline points="790,1650 855,1650 855,850 920,850" fill="none" stroke="#087F80" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="920.0,850.0 904.7,857.4 904.7,842.6" fill="#087F80"/>
+<rect x="920" y="760" width="970" height="220" rx="20" fill="white" stroke="#087F80" stroke-width="2"/>
+<text x="948.0" y="811.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="34" font-weight="700">蓄積した企業情報から候補を選ぶ</text>
+<text x="948.0" y="858.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="28" font-weight="400">公開情報をもとに、希望条件に合う企業を探す</text>
+<text x="948.0" y="900.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="28" font-weight="400">譲れない条件について、裏付けとなる情報を確認</text>
+<text x="948.0" y="941.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="28" font-weight="400">個人の就活軸との相性を考慮し、候補を選定</text>
+<polyline points="1405,980 1405,1040" fill="none" stroke="#087F80" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1405.0,1040.0 1397.6,1024.7 1412.4,1024.7" fill="#087F80"/>
+<rect x="920" y="1040" width="970" height="230" rx="20" fill="white" stroke="#087F80" stroke-width="2"/>
+<text x="948.0" y="1082.0" fill="#087F80" font-family="Meiryo, sans-serif" font-size="23" font-weight="700">希望条件と企業情報を照らし合わせる</text>
+<text x="948.0" y="1127.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="34" font-weight="700">共通項目と個人の就活軸を評価</text>
+<text x="948.0" y="1173.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">共通14項目と個人軸の相性を、それぞれ1〜5で評価</text>
+<text x="948.0" y="1213.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">確認できた事実と出典に基づいて判断する</text>
+<text x="948.0" y="1253.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">譲れない条件は、4以上の評価と根拠があることが必要</text>
+<polyline points="1405,1270 1405,1320" fill="none" stroke="#087F80" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1405.0,1320.0 1397.6,1304.7 1412.4,1304.7" fill="#087F80"/>
+<polygon points="1405,1320 1730,1420 1405,1520 1080,1420" fill="#EAF6F5" stroke="#087F80" stroke-width="3"/>
+<text x="1281.0" y="1407.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="31" font-weight="700">条件に合う企業が</text>
+<text x="1281.0" y="1455.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="31" font-weight="700">目標数に達した？</text>
+<polyline points="1405,1520 1405,1590" fill="none" stroke="#A86A13" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1405.0,1590.0 1397.6,1574.7 1412.4,1574.7" fill="#A86A13"/>
+<rect x="1160" y="1538" width="490" height="37" rx="0" fill="white" stroke="white" stroke-width="2"/>
+<text x="1213.0" y="1561.0" fill="#A86A13" font-family="Meiryo, sans-serif" font-size="24" font-weight="700">不足していれば、追加で候補を探す</text>
+<rect x="960" y="1590" width="890" height="140" rx="20" fill="white" stroke="#A86A13" stroke-width="2"/>
+<text x="988.0" y="1639.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="31" font-weight="700">就活軸と希望条件から新たな企業を選ぶ</text>
+<text x="988.0" y="1684.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">すでに調べた企業との重複を避けて、候補を広げる</text>
+<polyline points="1405,1730 1405,1780" fill="none" stroke="#A86A13" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1405.0,1780.0 1397.6,1764.7 1412.4,1764.7" fill="#A86A13"/>
+<rect x="960" y="1780" width="890" height="190" rx="20" fill="white" stroke="#A86A13" stroke-width="2"/>
+<text x="988.0" y="1829.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="32" font-weight="700">Webで企業を調査し、評価へ戻る</text>
+<text x="988.0" y="1876.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">企業ごとに公開情報を調べ、事実と出典を集める</text>
+<text x="988.0" y="1916.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">新たに得た情報も使い、希望との相性を評価する</text>
+<polyline points="960,1875 902,1875 902,1155 920,1155" fill="none" stroke="#A86A13" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="920.0,1155.0 904.7,1162.4 904.7,1147.6" fill="#A86A13"/>
+<text x="1060.0" y="2021.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="25" font-weight="400">追加調査後に候補を確定し、条件未達の点も明示。</text>
+<polyline points="1730,1420 1952,1420 1952,865 2020,865" fill="none" stroke="#087F80" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="2020.0,865.0 2004.7,872.4 2004.7,857.6" fill="#087F80"/>
+<rect x="1748" y="1333" width="176" height="70" rx="0" fill="white" stroke="white" stroke-width="2"/>
+<text x="1775.5" y="1356.0" fill="#087F80" font-family="Meiryo, sans-serif" font-size="25" font-weight="700">目標達成／</text>
+<text x="1788.0" y="1395.0" fill="#087F80" font-family="Meiryo, sans-serif" font-size="25" font-weight="700">調査完了</text>
+<rect x="2020" y="760" width="670" height="250" rx="20" fill="white" stroke="#315ED1" stroke-width="2"/>
+<text x="2048.0" y="810.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="33" font-weight="700">比較する企業候補を確定</text>
+<text x="2048.0" y="855.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">条件を満たす企業を優先して選ぶ</text>
+<text x="2048.0" y="896.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">候補が不足するときは、近い企業も含める</text>
+<text x="2048.0" y="935.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">その場合、満たしていない条件を明示</text>
+<text x="2048.0" y="976.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">本人の重要度と企業ごとの評価をまとめる</text>
+<polyline points="2355,1010 2355,1060" fill="none" stroke="#315ED1" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="2355.0,1060.0 2347.6,1044.7 2362.4,1044.7" fill="#315ED1"/>
+<rect x="2020" y="1060" width="670" height="355" rx="20" fill="white" stroke="#315ED1" stroke-width="2"/>
+<text x="2048.0" y="1101.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="23" font-weight="700">相性を100点満点の総合点に</text>
+<text x="2048.0" y="1145.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="32" font-weight="700">本人との相性で順位をつける</text>
+<text x="2048.0" y="1192.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">① 譲れない条件を満たす企業が先</text>
+<text x="2048.0" y="1233.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">② 条件未達が少ない企業を優先</text>
+<text x="2048.0" y="1274.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">③ 根拠が少ない企業は順位を下げる</text>
+<text x="2048.0" y="1315.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">④ 同じ条件の中で総合点が高い順</text>
+<text x="2048.0" y="1355.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="27" font-weight="400">根拠のある評価と本人の重要度で計算</text>
+<polyline points="2355,1415 2355,1475" fill="none" stroke="#315ED1" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="2355.0,1475.0 2347.6,1459.7 2362.4,1459.7" fill="#315ED1"/>
+<rect x="2020" y="1475" width="670" height="265" rx="20" fill="white" stroke="#315ED1" stroke-width="2"/>
+<text x="2048.0" y="1518.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="23" font-weight="700">企業ランキングと提案理由</text>
+<text x="2048.0" y="1559.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="31" font-weight="700">上位5社と、ほかの候補を表示</text>
+<text x="2048.0" y="1605.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">合う点・気になる点と、その根拠を示す</text>
+<text x="2048.0" y="1644.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">条件の充足状況と未達の理由も見せる</text>
+<text x="2048.0" y="1685.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">出典をたどり、本人が比較・検討できる</text>
+<rect x="2020" y="1805" width="670" height="168" rx="20" fill="#EEF3FD" stroke="#D8E2FA" stroke-width="2"/>
+<text x="2048.0" y="1858.0" fill="#315ED1" font-family="Meiryo, sans-serif" font-size="29" font-weight="700">調査中も、進み具合がわかる</text>
+<text x="2048.0" y="1911.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">企業の選定・調査・評価の進捗を表示。</text>
+<text x="2048.0" y="1954.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">完了すると、そのまま結果を確認できる。</text>
+<text x="70.0" y="2136.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="30" font-weight="700">この仕組みで支援できること</text>
+<rect x="70" y="2172" width="860" height="175" rx="20" fill="white" stroke="#DCE4EF" stroke-width="2"/>
+<text x="98.0" y="2222.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="29" font-weight="700">一人ひとりに合わせた提案</text>
+<text x="98.0" y="2269.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">本人の価値観・重要度・譲れない条件を、</text>
+<text x="98.0" y="2315.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">企業候補の選定と順位づけに反映。</text>
+<rect x="970" y="2172" width="860" height="175" rx="20" fill="white" stroke="#DCE4EF" stroke-width="2"/>
+<text x="998.0" y="2222.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="29" font-weight="700">根拠を確認できる企業比較</text>
+<text x="998.0" y="2270.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">相性の点数だけでなく、提案理由と出典を表示。</text>
+<text x="998.0" y="2315.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">確認できない情報や条件未達も、見える形に。</text>
+<rect x="1870" y="2172" width="860" height="175" rx="20" fill="white" stroke="#DCE4EF" stroke-width="2"/>
+<text x="1898.0" y="2222.0" fill="#182B47" font-family="Meiryo, sans-serif" font-size="29" font-weight="700">相談から企業選びまでを一貫して支援</text>
+<text x="1898.0" y="2270.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">対話で深めた自己理解を、具体的な企業提案へ。</text>
+<text x="1898.0" y="2315.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="26" font-weight="400">本人が納得して検討するための材料を示す。</text>
+<text x="70.0" y="2405.0" fill="#52647C" font-family="Meiryo, sans-serif" font-size="23" font-weight="400">※ 企業の評価・提案は確認できた公開情報に基づきます。情報の充実度によって、評価や順位は変わります。</text>
+</svg>

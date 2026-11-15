@@ -30,7 +30,7 @@ CACHE_DIR = ROOT / "cache"            # 調べた企業の結果の保存先（�
 CACHE_DAYS = 90                       # この日数を過ぎたら、調べ直す
 RUBRIC_PATH = ROOT / "companies" / "rubric.yaml"
 
-MAIN_MODEL = "claude-opus-5-5"        # 企業の選定と採点（メインエージェント）
+MAIN_MODEL = "claude-sonnet-5-5"      # 企業の選定と採点（メインエージェント）
 SUB_MODEL = "claude-sonnet-5-5"       # Webでの調査（サブエージェント）
 FALLBACK_BETA = "server-side-fallback-2026-07-01"
 SUB_EFFORT = "medium"                 # サブエージェントの考える量（low だと、調べずに終えてしまった）
@@ -71,14 +71,18 @@ def _is_http(u) -> bool:
 
 # ---------------------------------------------------------------- 共通：構造化出力
 
-def structured(client, model: str, prompt: str, schema: dict, effort: str = "medium", max_tokens: int = 16000) -> dict:
-    """JSONスキーマに合う出力を1回で受け取る（メインエージェント用。Webは使わない）。"""
+def structured(client, model: str, prompt: str, schema: dict, effort: str = "medium", max_tokens: int = 16000,
+               cache_prefix: str | None = None) -> dict:
+    """JSONスキーマに合う出力を1回で受け取る（メインエージェント用。Webは使わない）。
+    cache_prefix：毎回ほぼ同じ、長い前半（プロンプトキャッシュに載せる）。prompt は、その後ろの、毎回変わる部分。"""
+    content = ([{"type": "text", "text": cache_prefix, "cache_control": {"type": "ephemeral"}}, {"type": "text", "text": prompt}]
+               if cache_prefix else prompt)
     kwargs = {"betas": [FALLBACK_BETA], "fallbacks": "default"}
     for attempt in range(2):
         try:
             resp = client.beta.messages.create(
                 model=model, max_tokens=max_tokens,
-                messages=[{"role": "user", "content": prompt}],
+                messages=[{"role": "user", "content": content}],
                 output_config={"effort": effort, "format": {"type": "json_schema", "schema": schema}},
                 **kwargs)
             break
@@ -238,35 +242,46 @@ def meets_must(ev: dict, must_ids: list[str]) -> bool:
 
 
 def pick_from_db(axes: list[str], pool: list[dict], n: int, conditions: list[str], client,
-                 model: str = MAIN_MODEL) -> list[dict]:
-    """データベースで条件に合った企業が n 社より多いとき、就活軸に合う n 社を選ぶ。"""
+                 model: str = MAIN_MODEL, catalog: list[dict] | None = None) -> list[dict]:
+    """データベースで条件に合った企業（pool）が n 社より多いとき、就活軸に合う n 社を選ぶ。
+
+    catalog：データベース全体。一覧（番号つき）は、毎回ほぼ同じ全体を前半に置いて、プロンプトキャッシュに載せる。
+    絞り込みの結果（選べる番号）と、就活軸・条件は、毎回変わるので、後半に置く。"""
     if len(pool) <= n:
         return list(pool)
     nl = chr(10)
-    listing = nl.join(f"{i}. {c['name']}（{c.get('industry', '')}）{(c.get('profile') or '')[:60]}" for i, c in enumerate(pool))
-    cond = ("\n\n# 譲れない条件\n" + nl.join(f"- {c}" for c in conditions)) if conditions else ""
-    axes_text = nl.join(f"- {a}" for a in axes)
-    prompt = f"""日本で就職活動をしている外国人留学生（新卒）の「就活軸」を渡します。
-下の企業の一覧（番号つき）から、この留学生に合いそうな企業を {n} 社選び、番号を返してください。
-就活軸のそれぞれに合う企業が含まれるようにする。同じ業界は、多くても4社まで。一覧にない番号は返さない。
-
-# 就活軸
-{axes_text}{cond}
+    catalog = catalog or pool
+    index = {c["name"]: i for i, c in enumerate(catalog)}
+    eligible = [index[c["name"]] for c in pool if c["name"] in index]
+    listing = nl.join(f"{i}. {c['name']}（{c.get('industry', '')}）{(c.get('profile') or '')[:60]}" for i, c in enumerate(catalog))
+    prefix = f"""日本で就職活動をしている外国人留学生（新卒）に合いそうな企業を、下の企業の一覧（番号つき）から選びます。
 
 # 企業の一覧
 {listing}"""
+    cond = ("\n\n# 譲れない条件\n" + nl.join(f"- {c}" for c in conditions)) if conditions else ""
+    axes_text = nl.join(f"- {a}" for a in axes)
+    prompt = f"""# 就活軸
+{axes_text}{cond}
+
+# 選べる番号
+{", ".join(str(i) for i in eligible)}
+
+上の一覧のうち、「選べる番号」の中から、この留学生に合いそうな企業を {n} 社選び、番号を返してください。
+就活軸のそれぞれに合う企業が含まれるようにする。同じ業界は、多くても4社まで。「選べる番号」にない番号は返さない。"""
     schema = {"type": "object", "properties": {"picks": {"type": "array", "items": {"type": "integer"}}},
               "required": ["picks"], "additionalProperties": False}
-    data = structured(client, model, prompt, schema, effort="low", max_tokens=2000)
+    data = structured(client, model, prompt, schema, effort="low", max_tokens=2000, cache_prefix=prefix)
+    ok = set(eligible)
     seen, out = set(), []
     for i in data["picks"]:
-        if isinstance(i, int) and 0 <= i < len(pool) and i not in seen:
+        if isinstance(i, int) and i in ok and i not in seen:
             seen.add(i)
-            out.append(pool[i])
-    for i, c in enumerate(pool):          # 足りないぶんは、一覧の順で補う
+            out.append(catalog[i])
+    taken = {c["name"] for c in out}
+    for c in pool:          # 足りないぶんは、一覧の順で補う
         if len(out) >= n:
             break
-        if i not in seen:
+        if c["name"] not in taken:
             out.append(c)
     return out[:n]
 
@@ -633,7 +648,7 @@ def run_research(axes: list[str], client=None, progress=None, *, main_model: str
         need = n_companies - len(results)
         if need <= 0 or not pool_db:
             break
-        picks = pick_from_db(axes, pool_db, need, conditions, client, main_model)
+        picks = pick_from_db(axes, pool_db, need, conditions, client, main_model, catalog=db_all)
         taken = {e["name"] for e in picks}
         pool_db = [e for e in pool_db if e["name"] not in taken]
         take(picks)

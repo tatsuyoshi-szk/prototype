@@ -11,3 +11,4 @@ tests/e2e/fixtures.json
 tests/e2e/shots*/
 tests/e2e/*.png
 tools/measure_result.json
+tests/e2e/videos/

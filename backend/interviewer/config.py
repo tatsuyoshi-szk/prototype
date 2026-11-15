@@ -1,7 +1,7 @@
 """インタビューAIの設定。必要に応じて、ここだけ書き換える。"""
 
-# 使うモデル（Claude Opus 5.5）
-MODEL = "claude-opus-5-5"
+# 使うモデル（Claude Sonnet 5.5）
+MODEL = "claude-sonnet-5-5"
 
 # 思考の深さ: low / medium / high / xhigh / max
 EFFORT_CHAT = "medium"    # 毎ターンの質問

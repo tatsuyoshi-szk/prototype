@@ -218,6 +218,7 @@ class InterviewSession:
             max_tokens=config.MAX_TOKENS,
             system=self.system_prompt,
             messages=messages,
+            cache_control={"type": "ephemeral"},      # プロンプトキャッシュ：指示文と、これまでの会話の先頭部分を、次のターンで安く読む
             output_config={"effort": effort, "format": {"type": "json_schema", "schema": schema}},
             **kwargs,
         )

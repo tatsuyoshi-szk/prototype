@@ -281,6 +281,7 @@ def make_handler(store: Store, ranker, researcher):
 
     class Handler(BaseHTTPRequestHandler):
         server_version = "prottype"
+        protocol_version = "HTTP/1.1"      # 1.0 のままだと、応答のあと、すぐ接続を閉じる。ブラウザが次の要求を送っていると、接続が切れて（RST）、画面が真っ白になることがあった
 
         # --- 共通
         def _send(self, body: str | bytes, status: int = 200, ctype: str = "text/html; charset=utf-8", headers=None):
@@ -494,10 +495,14 @@ def make_handler(store: Store, ranker, researcher):
     return Handler
 
 
+class _Server(ThreadingHTTPServer):
+    request_queue_size = 128      # 既定は5。ブラウザが最初に何本も同時につなぐと、あふれて接続が切れ、画面が真っ白になることがあった
+
+
 def make_server(host: str = "127.0.0.1", port: int = 8000, session_factory=InterviewSession,
                 ranker=default_ranker, researcher=default_researcher, persist_dir: Path | None = None) -> ThreadingHTTPServer:
     store = Store(session_factory, persist_dir)
-    server = ThreadingHTTPServer((host, port), make_handler(store, ranker, researcher))
+    server = _Server((host, port), make_handler(store, ranker, researcher))
     server.daemon_threads = True
     server.store = store
     return server
