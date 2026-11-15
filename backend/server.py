@@ -246,7 +246,27 @@ def friendly_error(exc: Exception) -> tuple[int, str]:
 
 # ---------------------------------------------------------------- HTTP
 
-def make_handler(store: Store, ranker, researcher):
+
+# ---------------------------------------------------------------- 公開（デモ）モード：誰でもアクセスできる（招待コードも、利用回数の上限もない）
+
+LOCAL_ORIGIN_RE = re.compile(r"^http://(localhost|127\.0\.0\.1)(:\d+)?$")      # 各自のPCで動かす画面（npm run dev）の接続元
+
+
+class Access:
+    """公開モード（enabled）のとき、別のPCからの接続を、招待コードも利用回数の上限もなく許す。
+    公開モードでなければ（既定）、このPC（127.0.0.1）の画面からだけ使える。"""
+
+    def __init__(self, enabled: bool = False, extra_origins=()):
+        self.enabled = enabled
+        self.extra_origins = set(extra_origins)
+
+    def origin_ok(self, origin: str, host: str) -> bool:
+        return (origin in (f"http://{host}", f"https://{host}") or bool(LOCAL_ORIGIN_RE.match(origin))
+                or origin in self.extra_origins)
+
+
+def make_handler(store: Store, ranker, researcher, access: Access | None = None):
+    access = access or Access()
     def start_research(entry: dict) -> None:
         """調査を裏のスレッドで始める（すでに動いている・終わっているときは何もしない）。"""
         r = entry["research"]
@@ -290,6 +310,10 @@ def make_handler(store: Store, ranker, researcher):
             self.send_header("Content-Type", ctype)
             self.send_header("Content-Length", str(len(data)))
             self.send_header("Cache-Control", "no-store")
+            cors = getattr(self, "_cors_origin", None)
+            if cors:          # 別の場所で動いている画面（各自のPCの npm run dev）が、この応答を読めるようにする
+                self.send_header("Access-Control-Allow-Origin", cors)
+                self.send_header("Vary", "Origin")
             for k, v in (headers or {}).items():
                 self.send_header(k, v)
             self.end_headers()
@@ -301,17 +325,28 @@ def make_handler(store: Store, ranker, researcher):
         def _redirect(self, where: str):
             self._send("", 302, headers={"Location": where})
 
-        def _local_only(self) -> bool:
-            """別のサイトから、このサーバー（＝APIの料金）を使われないよう、Host と Origin を確かめる。"""
+        def _local_only(self, preflight: bool = False) -> bool:
+            """別のサイトから、このサーバー（＝APIの料金）を使われないよう、Host と Origin を確かめる。
+            既定：このPC（127.0.0.1）の画面からだけ。
+            公開モード：どの Host からでも使える（招待コードは要らない）。画面の接続元（Origin）は、同じアドレス・各自のPCの localhost・
+            ALLOWED_ORIGINS に書いた場所だけ。別のPCの画面から呼べるよう、CORS の応答を返す。"""
+            self._cors_origin = None
             port = self.server.server_address[1]
             host = self.headers.get("Host", "")
-            if host not in (f"127.0.0.1:{port}", f"localhost:{port}"):
-                self._send("forbidden", 403, "text/plain; charset=utf-8")
-                return False
             origin = self.headers.get("Origin")
-            if origin and origin != f"http://{host}" and origin not in DEV_ORIGINS:
-                self._send("forbidden", 403, "text/plain; charset=utf-8")
-                return False
+            if not access.enabled:
+                if host not in (f"127.0.0.1:{port}", f"localhost:{port}"):
+                    self._send("forbidden", 403, "text/plain; charset=utf-8")
+                    return False
+                if origin and origin != f"http://{host}" and origin not in DEV_ORIGINS:
+                    self._send("forbidden", 403, "text/plain; charset=utf-8")
+                    return False
+                return True
+            if origin:
+                if not access.origin_ok(origin, host):
+                    self._send("forbidden", 403, "text/plain; charset=utf-8")
+                    return False
+                self._cors_origin = origin
             return True
 
         def _read_body(self) -> bytes | None:
@@ -327,6 +362,20 @@ def make_handler(store: Store, ranker, researcher):
 
         def log_message(self, fmt, *args):   # アクセスログは出さない
             pass
+
+        # --- OPTIONS（ブラウザが、別の場所からの呼び出しの前に送る、確認の問い合わせ）
+        def do_OPTIONS(self):
+            if not self._local_only(preflight=True):
+                return
+            self.send_response(204)
+            if self._cors_origin:
+                self.send_header("Access-Control-Allow-Origin", self._cors_origin)
+                self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+                self.send_header("Access-Control-Allow-Headers", "Content-Type")
+                self.send_header("Access-Control-Max-Age", "600")
+                self.send_header("Vary", "Origin")
+            self.send_header("Content-Length", "0")
+            self.end_headers()
 
         # --- GET
         def do_GET(self):
@@ -500,9 +549,10 @@ class _Server(ThreadingHTTPServer):
 
 
 def make_server(host: str = "127.0.0.1", port: int = 8000, session_factory=InterviewSession,
-                ranker=default_ranker, researcher=default_researcher, persist_dir: Path | None = None) -> ThreadingHTTPServer:
+                ranker=default_ranker, researcher=default_researcher, persist_dir: Path | None = None,
+                access: Access | None = None) -> ThreadingHTTPServer:
     store = Store(session_factory, persist_dir)
-    server = _Server((host, port), make_handler(store, ranker, researcher))
+    server = _Server((host, port), make_handler(store, ranker, researcher, access))
     server.daemon_threads = True
     server.store = store
     return server
@@ -513,11 +563,16 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser(description="就活相談チャットボット（ローカル）")
     ap.add_argument("--port", type=int, default=8000)
+    ap.add_argument("--public", action="store_true", help="公開モード（環境変数 PUBLIC_MODE=1 でもよい）：トンネルなどで公開した URL から、誰でも使える")
     args = ap.parse_args()
 
     check_api_key()
-    server = make_server("127.0.0.1", args.port, persist_dir=DATA_DIR / "sessions")
+    public = args.public or os.environ.get("PUBLIC_MODE", "").strip().lower() in ("1", "true", "yes", "on")
+    access = Access(public, extra_origins=[o.strip() for o in os.environ.get("ALLOWED_ORIGINS", "").split(",") if o.strip()])
+    server = make_server("127.0.0.1", args.port, persist_dir=DATA_DIR / "sessions", access=access)
     url = f"http://127.0.0.1:{server.server_address[1]}/"
+    if access.enabled:
+        print("公開モード：誰でも使えます（招待コードも、利用回数の上限もありません）。トンネルなどで公開した URL からも使えます")
     print(f"APIサーバーを起動しました: {url}\n（画面は frontend で `npm run dev` → http://127.0.0.1:5173/ 。"
           "止めるときは Ctrl+C。会話は data/sessions/ に保存され、再起動しても続きから開けます）")
     try:

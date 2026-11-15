@@ -1,11 +1,14 @@
 // バックエンド（JSON API）を呼ぶ。失敗したときは、画面に出してよい文言を持った Error を投げる。
 import { STRINGS, getCurrentLang } from './i18n.jsx'
 
-async function call(path, options) {
+// 別のPC（デモ用）のバックエンドを使うときは、frontend/.env.local に VITE_API_BASE を書く（.env.example を参照）
+const BASE = (import.meta.env.VITE_API_BASE || '').replace(/\/$/, '')
+
+async function call(path, options = {}) {
   const t = STRINGS[getCurrentLang()]
   let res
   try {
-    res = await fetch(path, options)
+    res = await fetch(BASE + path, options)
   } catch {
     throw new Error(t.serverUnreachable)
   }

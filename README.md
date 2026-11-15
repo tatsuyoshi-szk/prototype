@@ -47,6 +47,35 @@ npm run dev
 - 別の環境では、`pip install -r backend/requirements.txt`（anthropic と pyyaml）。Node.js が必要。
 - `--port 8080` でバックエンドのポートを変えられる（その場合は `frontend/vite.config.js` の中継先も直す）。
 
+## 2b. デモ：ほかの人のPCから使う（バックエンドは主催者のPC、画面は各自のPC）
+**招待コードも、利用回数の上限もない。アドレスを知っている人は、誰でも、何回でも使える。費用は、すべて主催者のAPIキーにかかる**（1会話で、約$0.7〜$3）。
+使いすぎが心配なら、Anthropic のコンソールで、APIキーのある組織の月の利用上限（支出の上限）を設定しておく。
+
+**主催者（バックエンドのPC）**
+1. バックエンドを、公開モードで起動する（上の「2. 起動する」の①に、`--public` を付ける）。
+   ```powershell
+   cd c:\d\JDSC\prototype\backend
+   ..\..\.venv\Scripts\python server.py --public
+   ```
+   「公開モード：誰でも使えます」と表示される。環境変数で、設定を変えられる（`.env` に書いてもよい。**このファイルは、GitHubに上げない**）。
+   ```
+   ALLOWED_ORIGINS=                          # 各自のPCの画面（localhost の画面）は、書かなくても許可される。ほかの場所の画面を許すときだけ、カンマ区切りで書く
+   PUBLIC_MODE=1                             # --public の代わりに、環境変数でもよい
+   ```
+2. トンネルで、外から届くアドレスを作る（例：Cloudflare の `cloudflared tunnel --url http://127.0.0.1:8000`）。表示された `https://〇〇.trycloudflare.com` が、バックエンドのアドレス。起動のたびに変わることが多い。
+3. アドレスを、参加者に伝える。終わったら、トンネルを止める（アドレスが使えなくなる）。PCは、動かし続ける。
+
+**参加者（各自のPC）**
+```powershell
+git clone https://github.com/tatsuyoshi-szk/prototype.git     # 非公開。招待が必要
+cd prototype/frontend
+copy .env.example .env.local     # .env.local を開いて、アドレスを書く
+npm install
+npm run dev                      # → http://127.0.0.1:5173/ を開く
+```
+- `--public` を付けない間（既定）は、バックエンドは、このPCの画面からしか使えない。
+- 接続元の画面（Origin）は、バックエンドと同じアドレス、各自のPCの localhost、`ALLOWED_ORIGINS` の場所だけ。ほかのサイトの画面からは、使えない。
+
 ## 3. API（バックエンド）
 | | | |
 |---|---|---|
