@@ -118,18 +118,22 @@ def check_api_key() -> None:
 # ---------------------------------------------------------------- セッション
 
 class Store:
-    """会話（セッション）をメモリ上に持つ。サーバーを止めると消える。"""
+    """会話（セッション）を持つ。persist_dir があれば、変わるたびにファイルへ保存し、サーバーを再起動しても復元する。"""
 
-    def __init__(self, factory):
+    def __init__(self, factory, persist_dir: Path | None = None):
         self.factory = factory
+        self.persist_dir = persist_dir
         self._items: dict[str, dict] = {}
         self._lock = threading.Lock()
 
+    def _new_entry(self, session, sid: str) -> dict:
+        return {"sid": sid, "session": session, "lock": threading.Lock(), "saved": False,
+                "result": None, "ranking": None, "path": None,
+                "research": {"state": "idle", "stage": "", "detail": "", "data": None, "error": "", "t0": 0.0}}
+
     def create(self) -> tuple[str, dict]:
         sid = secrets.token_urlsafe(16)
-        entry = {"session": self.factory(), "lock": threading.Lock(), "saved": False,
-                 "result": None, "ranking": None, "path": None,
-                 "research": {"state": "idle", "stage": "", "detail": "", "data": None, "error": "", "t0": 0.0}}
+        entry = self._new_entry(self.factory(), sid)
         with self._lock:
             self._items[sid] = entry
         return sid, entry
@@ -138,7 +142,46 @@ class Store:
         if not sid or not SID_RE.match(sid):
             return None
         with self._lock:
-            return self._items.get(sid)
+            entry = self._items.get(sid)
+            if entry is None:
+                entry = self._load(sid)
+                if entry is not None:
+                    self._items[sid] = entry
+            return entry
+
+    # --- ファイルへの保存・復元（調査の途中経過は保存しない。調べ直しは cache があるので速い）
+    def save(self, entry: dict) -> None:
+        session = entry["session"]
+        if self.persist_dir is None or not hasattr(session, "to_dict"):
+            return
+        r = entry["research"]
+        payload = {"session": session.to_dict(), "saved": entry["saved"], "result": entry["result"],
+                   "ranking": entry["ranking"], "path": str(entry["path"]) if entry["path"] else None,
+                   "research_data": r["data"] if r["state"] == "done" else None}
+        try:
+            self.persist_dir.mkdir(parents=True, exist_ok=True)
+            path = self.persist_dir / f"{entry['sid']}.json"
+            tmp = path.with_suffix(f".{os.getpid()}.{threading.get_ident()}.tmp")
+            tmp.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+            os.replace(tmp, path)
+        except (OSError, TypeError, ValueError):
+            traceback.print_exc()      # 保存に失敗しても、会話は続ける
+
+    def _load(self, sid: str) -> dict | None:
+        restore = getattr(self.factory, "from_dict", None)
+        if self.persist_dir is None or restore is None:
+            return None
+        path = self.persist_dir / f"{sid}.json"
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            entry = self._new_entry(restore(payload["session"]), sid)
+            entry.update(saved=bool(payload["saved"]), result=payload["result"], ranking=payload["ranking"],
+                         path=Path(payload["path"]) if payload.get("path") else None)
+            if payload.get("research_data"):
+                entry["research"].update(state="done", data=payload["research_data"])
+            return entry
+        except (OSError, ValueError, KeyError, TypeError):
+            return None
 
 
 def add_ranking(path: Path | None, ranking: dict, research: dict | None = None) -> None:
@@ -152,11 +195,11 @@ def add_ranking(path: Path | None, ranking: dict, research: dict | None = None) 
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
-def default_researcher(axes: list[str], progress, lang: str = "ja") -> dict:
+def default_researcher(axes: list[str], progress, lang: str = "ja", must: list[dict] | None = None) -> dict:
     """企業を選び、サブエージェント（Web）で調べ、採点する。ユーザーが使うたびに行う。"""
     from pipeline import PipelineError, run_research   # 使うときに読み込む（テストでは差し替える）
     try:
-        return run_research(axes, progress=progress, lang=lang)
+        return run_research(axes, progress=progress, lang=lang, must=must)
     except PipelineError as exc:
         raise RankingFailed(str(exc)) from exc
 
@@ -212,14 +255,23 @@ def make_handler(store: Store, ranker, researcher):
         r.update(state="running", stage="select", detail="準備しています", error="", t0=time.time())
         axes = list(entry["session"].axes)
         lang = lang_of(entry)
+        result = entry["result"] or {}
+        qs = result.get("questions") or []
+        axis_qids = [q["id"] for q in qs if q["source"] == "job_axis"]
+        job_axes = result.get("job_axes") or axes
+        names = {q["id"]: q["name"] for q in qs}
+        must = [{"qid": m, "axis": axis_qids.index(m) if m in axis_qids else None,
+                 "label": job_axes[axis_qids.index(m)] if m in axis_qids and axis_qids.index(m) < len(job_axes) else names.get(m, m)}
+                for m in (result.get("must_have") or [])]      # 譲れない条件（企業の絞り込みに使う）
 
         def progress(stage: str, detail: str = ""):
             r["stage"], r["detail"] = stage, detail
 
         def work():
             try:
-                r["data"] = researcher(axes, progress, lang=lang)
+                r["data"] = researcher(axes, progress, lang=lang, must=must)
                 r["state"] = "done"
+                store.save(entry)
             except Exception as exc:   # noqa: BLE001  詳細はコンソールへ
                 traceback.print_exc()
                 _, text = friendly_error(exc)
@@ -364,8 +416,7 @@ def make_handler(store: Store, ranker, researcher):
                     traceback.print_exc()
                     status, text = friendly_error(exc)
                     return self._json({"error": tr(text, detect_lang(message)), "session_id": sid}, status)
-            if turn.finished:      # 軸が決まったので、アンケートに答えているあいだに、企業の調査を裏で始める
-                start_research(entry)
+                store.save(entry)
             self._json({"session_id": sid, "kind": turn.kind, "message": turn.message, "lang": lang_of(entry),
                         "finished": turn.finished, "axes": turn.axes})
 
@@ -400,6 +451,8 @@ def make_handler(store: Store, ranker, researcher):
                 result = make_result(survey, answers, must)
                 path = save_result(sid, entry, result)
                 entry.update(saved=True, result=result, path=path)
+                start_research(entry)      # 譲れない条件が決まったので、ここから企業を集める
+                store.save(entry)
             print(f"回答を保存しました: {path}")
             self._json({"ok": True})
 
@@ -435,14 +488,15 @@ def make_handler(store: Store, ranker, researcher):
                     text = tr({MSG_FAIL: MSG_RANK, MSG_BUSY: MSG_RANK_BUSY}.get(text, text), lang_of(entry))
                     return self._json({"state": "error", "error": text}, status)
                 add_ranking(entry["path"], entry["ranking"], r["data"])
+                store.save(entry)
             self._json({"state": "done", "ranking": entry["ranking"]})
 
     return Handler
 
 
 def make_server(host: str = "127.0.0.1", port: int = 8000, session_factory=InterviewSession,
-                ranker=default_ranker, researcher=default_researcher) -> ThreadingHTTPServer:
-    store = Store(session_factory)
+                ranker=default_ranker, researcher=default_researcher, persist_dir: Path | None = None) -> ThreadingHTTPServer:
+    store = Store(session_factory, persist_dir)
     server = ThreadingHTTPServer((host, port), make_handler(store, ranker, researcher))
     server.daemon_threads = True
     server.store = store
@@ -457,10 +511,10 @@ def main():
     args = ap.parse_args()
 
     check_api_key()
-    server = make_server("127.0.0.1", args.port)
+    server = make_server("127.0.0.1", args.port, persist_dir=DATA_DIR / "sessions")
     url = f"http://127.0.0.1:{server.server_address[1]}/"
     print(f"APIサーバーを起動しました: {url}\n（画面は frontend で `npm run dev` → http://127.0.0.1:5173/ 。"
-          "止めるときは Ctrl+C。会話の途中の状態は、止めると消えます）")
+          "止めるときは Ctrl+C。会話は data/sessions/ に保存され、再起動しても続きから開けます）")
     try:
         server.serve_forever()
     except KeyboardInterrupt:

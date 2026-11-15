@@ -1,9 +1,9 @@
 """企業のスコア計算とランキング。
 
-  総合点 = Σ（アンケートの重み × 0〜1の点数）× 100
+  総合点 = Σ（アンケートの重み × 0〜1の点数）÷ Σ（重み）× 100   ※合計は、根拠のある項目だけ。根拠のない項目は、重みから外す
 
 - 共通項目14個：企業のデータ（companies/data/*.json）に、採点基準（companies/rubric.yaml = グローバル度_評価指標_new.csv）で
-  つけた 1〜5点が入っている。それを (点数−1)÷4 で 0〜1 にする。言及・根拠が見つからなかった項目は、基準どおり低い点（多くは1点）。
+  つけた 1〜5点が入っている。それを (点数−1)÷4 で 0〜1 にする。言及・根拠が見つからなかった項目は、データでは基準どおり低い点（多くは1点）だが、総合点の計算では重みから外す（下を参照）。
 - 個人軸：AI（Sonnet 5.5）が、企業の事実（紹介文・海外拠点・axis_facts。出典URLつき）を読んで、各企業×各軸を 1〜5 で判定し、
   根拠にした事実の番号を返す（1回の呼び出し。Webは使わない）。AIに送るのは、軸の名前と企業の事実だけ。会話の内容は送らない。
 - 「合うところ」「気になるところ」は、AIに書かせず、計算結果（点数と重み）と、データに入っている根拠・出典URLから作る。
@@ -28,6 +28,7 @@ MODEL = "claude-sonnet-5-5"
 FALLBACK_BETA = "server-side-fallback-2026-07-01"
 TOP_N = 5
 MUST_MIN = 0.75                          # 「譲れない」項目は、4点以上（0.75以上）で、根拠があることが必要
+MIN_KNOWN = 4                            # 根拠のある項目（重み>0）がこれ未満の企業は、「情報不足」として、順位の最後に回す
 STRENGTH_MIN, CONCERN_MAX = 0.6, 0.4     # 「合うところ」は 0.6 以上、「気になるところ」は 0.4 以下の項目から選ぶ
 
 
@@ -191,7 +192,7 @@ def rank(axes: list[str], result: dict, top_n: int = TOP_N, client=None, model: 
     rows = []
     for c in companies:
         facts = company_facts(c)
-        contribs, total = [], 0.0
+        contribs = []
         for q in questions:
             w = float(weights.get(q["id"], 0.0))
             if q["source"] == "job_axis":
@@ -216,12 +217,16 @@ def rank(axes: list[str], result: dict, top_n: int = TOP_N, client=None, model: 
                 s, unknown, display, url, basis = (info["score"], info["unknown"], info["display"],
                                                    info["url"], info["basis"])
                 label = q["name"]
-            total += w * s
             contribs.append({"qid": q["id"], "label": label, "weight": w, "score": s, "unknown": unknown, "display": display,
                              "url": url, "basis": basis, "is_axis": q["source"] == "job_axis"})
 
         # 「合うところ」「気になるところ」は、根拠のある項目から選ぶ
         # 譲れない条件：満たさない項目の一覧（根拠がない項目も「満たさない」）
+        # 根拠のない項目は、重みから外す：根拠のある項目だけで、重みを割り直す
+        known_all = [x for x in contribs if not x["unknown"] and x["weight"] > 0]
+        known_w = sum(x["weight"] for x in known_all)
+        total = sum(x["weight"] * x["score"] for x in known_all) / known_w if known_w > 0 else 0.0
+        low_evidence = len(known_all) < MIN_KNOWN
         by_qid = {x["qid"]: x for x in contribs}
         failed = []
         for qid in must:
@@ -243,12 +248,13 @@ def rank(axes: list[str], result: dict, top_n: int = TOP_N, client=None, model: 
             "id": c["id"], "name": c["name"], "industry": c.get("industry", ""),
             "name_en": c.get("name_en", ""), "industry_en": c.get("industry_en", ""),
             "score": round(total * 100, 1),
+            "known_count": len(known_all), "low_evidence": low_evidence,
             "strengths": [fmt(x) for x in strengths], "concerns": [fmt(x) for x in concerns],
             "unknown_count": sum(1 for x in contribs if x["unknown"] and not x["is_axis"]),
             "sources": [u for u in [c.get("profile_url", "")] + list(c.get("sources") or []) if u][:3],
             "profile": c.get("profile", ""), "failed": failed,
         })
-    rows.sort(key=lambda r: r["score"], reverse=True)
+    rows.sort(key=lambda r: (not r["low_evidence"], r["score"]), reverse=True)      # 情報不足の企業は、点が高くても最後
     excluded = [{"name": r["name"], "name_en": r["name_en"], "failed": r["failed"]} for r in rows if r["failed"]]
     rows = [r for r in rows if not r["failed"]]          # 譲れない条件を、すべて満たした企業だけを順位づけする
     for i, r in enumerate(rows, 1):
@@ -257,7 +263,8 @@ def rank(axes: list[str], result: dict, top_n: int = TOP_N, client=None, model: 
     return {
         "dummy": all(c.get("dummy") for c in companies),     # ダミーデータだけで計算したか
         "top": rows[:top_n],
-        "others": [{"rank": r["rank"], "name": r["name"], "name_en": r["name_en"], "score": r["score"]} for r in rows[top_n:]],
+        "others": [{"rank": r["rank"], "name": r["name"], "name_en": r["name_en"], "score": r["score"],
+                    "low_evidence": r["low_evidence"]} for r in rows[top_n:]],
         "companies_count": len(companies),
         "axes": job_axes, "lang": lang,
         "screening": {"labels": must_labels, "total": len(companies),
@@ -271,7 +278,8 @@ def format_text(ranking: dict) -> str:
     when = "ダミーデータ" if ranking.get("dummy") else f"データ取得日: {ranking['collected_from']}〜{ranking['collected_to']}"
     lines = [f"対象 {ranking['companies_count']}社 / 就活軸: {'、'.join(ranking['axes'])} / {when}", ""]
     for r in ranking["top"]:
-        lines.append(f"{r['rank']}位  {r['name']}  {r['score']}点  （{r['industry']}）  根拠なし {r['unknown_count']}項目")
+        lines.append(f"{r['rank']}位  {r['name']}  {r['score']}点  （{r['industry']}）  根拠なし {r['unknown_count']}項目"
+                     + ("  ※情報不足" if r["low_evidence"] else ""))
         lines += [f"    ○ {x['label']}（{x['detail']}）" for x in r["strengths"]]
         lines += [f"    △ {x['label']}（{x['detail']}）" for x in r["concerns"]]
     if ranking["others"]:

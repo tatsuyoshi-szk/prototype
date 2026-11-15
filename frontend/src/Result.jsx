@@ -43,6 +43,8 @@ function Card({ c }) {
         <div className="pt"><span className="pt-n">{c.score}</span><span className="pt-u">/100</span></div>
       </div>
       <div className="bar" role="img" aria-label={t.barAria(c.score)}><span style={{ width: `${Math.min(100, c.score)}%` }} /></div>
+      {c.low_evidence && <div className="lowev">{t.lowEvidence}</div>}
+      <div className="compare">{t.knownCount(c.known_count)}</div>
       {c.strengths.length > 0 && (
         <>
           <div className="good"><span className="mark" aria-hidden="true">✓</span>{t.good} <span className="en">{t.goodEn}</span></div>

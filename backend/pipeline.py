@@ -6,8 +6,9 @@
   3. メインエージェントが、集まった事実だけをもとに、採点基準（companies/rubric.yaml）で共通14項目を採点し、
      個人の軸にどのくらい合うかも1〜5で判定する（根拠の文章と出典URLつき）
 
-重み付けと順位づけ（ranking.rank）は、アンケートの回答が来たあとに、この結果を使って行う。
-研究（1〜3）は軸だけで決まるので、会話が終わった時点で、アンケートに答えているあいだに裏で始める。
+重み付けと順位づけ（ranking.rank）は、この結果を使って行う。
+調査（1〜3）は、アンケートが終わってから始める。「譲れない条件」で、先に保存したデータベース（cache/）の企業を絞り込み、
+15社に足りないぶんだけを、Webから集める（run_research）。
 """
 from __future__ import annotations
 
@@ -96,8 +97,10 @@ def structured(client, model: str, prompt: str, schema: dict, effort: str = "med
 # ---------------------------------------------------------------- 1. 企業を選ぶ（メイン）
 
 def select_companies(axes: list[str], client, model: str = MAIN_MODEL, n: int = N_COMPANIES,
-                     avoid: list[str] | None = None) -> list[dict]:
+                     avoid: list[str] | None = None, conditions: list[str] | None = None) -> list[dict]:
     avoid_text = ("\n\n# 選ばない企業（すでに調査済み）\n" + "、".join(avoid)) if avoid else ""
+    if conditions:
+        avoid_text += "\n\n# 譲れない条件（必ず満たす企業を選ぶ）\n" + chr(10).join(f"- {c}" for c in conditions)
     axes_text = chr(10).join(f"- {a}" for a in axes)
     prompt = f"""日本で就職活動をしている外国人留学生（新卒）の「就活軸」を渡します。
 この留学生に合いそうな、**実在する**日本の企業（日本法人・外資系の日本法人を含む）を {n} 社選んでください。
@@ -180,6 +183,92 @@ def save_cached(ev: dict) -> None:
     with _cache_lock:
         tmp.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
         os.replace(tmp, path)          # 書き込み途中のファイルを、読まれないようにする
+
+
+def list_cached(today: date | None = None) -> list[dict]:
+    """保存してあるデータベース（cache/）の、期限内の企業を、すべて返す（企業ごとの調査結果）。"""
+    out = []
+    for path in sorted(CACHE_DIR.glob("*.json")) if CACHE_DIR.exists() else []:
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            saved, ev = date.fromisoformat(data["collected_at"]), data["evidence"]
+            if not isinstance(ev.get("items"), dict) or not ev.get("name"):
+                continue
+        except (OSError, ValueError, KeyError, TypeError):
+            continue
+        if (today or date.today()) - saved <= timedelta(days=CACHE_DAYS):
+            out.append({**ev, "collected_at": data["collected_at"], "scores": data.get("scores")})
+    return out
+
+
+def save_scores(name: str, items: dict) -> None:
+    """採点した共通項目の点数を、データベース（その企業の保存ファイル）に記録する。保存ファイルがなければ、何もしない。
+    記録するのは、点数と「根拠なし」かどうかだけ（言語に依存しない）。次回、譲れない条件での絞り込みに使う。"""
+    path = _cache_path(name)
+    with _cache_lock:
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            data["scores"] = {"scored_at": date.today().isoformat(),
+                              "items": {iid: {"score": int(it["score"]), "unconfirmed": bool(it["unconfirmed"])}
+                                        for iid, it in items.items()}}
+            tmp = path.with_suffix(f".{os.getpid()}.{threading.get_ident()}.tmp")
+            tmp.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+            os.replace(tmp, path)
+        except (OSError, ValueError, KeyError, TypeError):
+            return
+
+
+MUST_SCORE = 4          # 「譲れない」項目は、この点以上で、根拠があることが必要（ranking.MUST_MIN = 0.75 と同じ）
+
+
+def meets_must(ev: dict, must_ids: list[str]) -> bool:
+    """データベースの企業が、「譲れない」共通項目をすべて満たすか。
+    記録した点数があれば、それで確かめる（4点以上で、根拠あり）。まだ採点していない企業は、出典つきの事実があるかだけを見る。"""
+    scored = ((ev.get("scores") or {}).get("items")) or {}
+    for iid in must_ids:
+        if iid in scored:
+            sc = scored[iid]
+            if sc.get("unconfirmed") or sc.get("score", 0) < MUST_SCORE:
+                return False
+            continue
+        it = (ev.get("items") or {}).get(iid) or {}
+        if not it.get("source_url") or str(it.get("finding", "")).startswith("未確認"):
+            return False
+    return True
+
+
+def pick_from_db(axes: list[str], pool: list[dict], n: int, conditions: list[str], client,
+                 model: str = MAIN_MODEL) -> list[dict]:
+    """データベースで条件に合った企業が n 社より多いとき、就活軸に合う n 社を選ぶ。"""
+    if len(pool) <= n:
+        return list(pool)
+    nl = chr(10)
+    listing = nl.join(f"{i}. {c['name']}（{c.get('industry', '')}）{(c.get('profile') or '')[:60]}" for i, c in enumerate(pool))
+    cond = ("\n\n# 譲れない条件\n" + nl.join(f"- {c}" for c in conditions)) if conditions else ""
+    axes_text = nl.join(f"- {a}" for a in axes)
+    prompt = f"""日本で就職活動をしている外国人留学生（新卒）の「就活軸」を渡します。
+下の企業の一覧（番号つき）から、この留学生に合いそうな企業を {n} 社選び、番号を返してください。
+就活軸のそれぞれに合う企業が含まれるようにする。同じ業界は、多くても4社まで。一覧にない番号は返さない。
+
+# 就活軸
+{axes_text}{cond}
+
+# 企業の一覧
+{listing}"""
+    schema = {"type": "object", "properties": {"picks": {"type": "array", "items": {"type": "integer"}}},
+              "required": ["picks"], "additionalProperties": False}
+    data = structured(client, model, prompt, schema, effort="low", max_tokens=2000)
+    seen, out = set(), []
+    for i in data["picks"]:
+        if isinstance(i, int) and 0 <= i < len(pool) and i not in seen:
+            seen.add(i)
+            out.append(pool[i])
+    for i, c in enumerate(pool):          # 足りないぶんは、一覧の順で補う
+        if len(out) >= n:
+            break
+        if i not in seen:
+            out.append(c)
+    return out[:n]
 
 
 # ---------------------------------------------------------------- 2. Webで調べる（サブエージェント）
@@ -427,80 +516,140 @@ def score_company(ev: dict, axes: list[str], rubric: list[dict], client, model: 
 
 def run_research(axes: list[str], client=None, progress=None, *, main_model: str = MAIN_MODEL,
                  sub_model: str = SUB_MODEL, n_companies: int = N_COMPANIES, avoid: list[str] | None = None,
-                 research_only: bool = False, lang: str = "ja") -> dict:
-    """企業を選び、サブエージェントで調べ、採点する。戻り値は {"companies": [...], "fits": {企業id: [...]}, "failed": [...]}。"""
+                 research_only: bool = False, lang: str = "ja", must: list[dict] | None = None) -> dict:
+    """企業を集め、採点する。戻り値は {"companies": [...], "fits": {企業id: [...]}, "failed": [...]}。
+
+    must: 「譲れない」項目 [{"qid": 項目id, "label": 表示名}]。
+    集め方：① データベース（cache/）の企業を、譲れない共通項目の事実があるものに絞り、n社を選ぶ
+            ② 足りないぶんは、Webから集める（メインが企業を選び、サブエージェントが調べる）。最大2回
+    research_only のときは、データベースを使わず、Webで調べて保存するだけ（保存を増やすとき）。
+    """
     client = client or anthropic.Anthropic(max_retries=4)
     progress = progress or (lambda stage, detail="": None)
     rubric = load_rubric()
-
-    progress("select", "あなたの就活軸に合う企業を選んでいます")
-    chosen = select_companies(axes, client, main_model, n_companies, avoid)
-
-    # 一度調べた企業は、保存した結果を使う（調べるのは、まだ保存がない企業だけ）
-    cached, todo = [], []
-    for c in chosen:
-        hit = load_cached(c["name"])
-        if hit:
-            cached.append({**hit, "id": c["id"], "name_en": c.get("name_en") or hit.get("name_en", ""),
-                           "industry_en": c.get("industry_en") or hit.get("industry_en", "")})      # id と英語名は、今回の選定のものにそろえる
-        else:
-            todo.append(c)
-
-    # サブエージェント1体あたり SUB_BATCH 社に分ける（既定は1社ずつ）
-    batches = [todo[i:i + SUB_BATCH] for i in range(0, len(todo), SUB_BATCH)]
-    done_agents = []
+    must = must or []
+    must_common = [m["qid"] for m in must if m["qid"] in IDS]
+    conditions = [m["label"] for m in must]
     failed: list[str] = []
 
-    def research(batch):
-        try:
-            for attempt in range(2):                   # 形が壊れて失敗したときは、1回だけ、その企業を調べ直す
-                try:
-                    raw = _run_subagent(client, _research_prompt(batch, axes, rubric), sub_model, len(batch))
-                    break
-                except PipelineError:
-                    if attempt == 1:
-                        raise
-            found = _clean_evidence(raw, batch)
-            for ev in found:
-                save_cached(ev)
-            return found
-        except (PipelineError, anthropic.APIError, ValueError) as exc:
-            print(f"調査担当の失敗: {type(exc).__name__}: {exc}")
-            failed.extend(c["name"] for c in batch)
-            return []
-        finally:
-            done_agents.append(1)
-            progress("research", f"{len(done_agents)}/{len(batches)} 件の調査が終わりました")
+    def research_web(chosen: list[dict]) -> tuple[list[dict], int]:
+        """選んだ企業を、Webで調べる（保存があれば、それを使う）。戻り値は（調査結果, 保存を使った数）。"""
+        cached, todo = [], []
+        for c in chosen:
+            hit = load_cached(c["name"])
+            if hit:
+                cached.append({**hit, "id": c["id"], "name_en": c.get("name_en") or hit.get("name_en", ""),
+                               "industry_en": c.get("industry_en") or hit.get("industry_en", "")})
+            else:
+                todo.append(c)
+        batches = [todo[i:i + SUB_BATCH] for i in range(0, len(todo), SUB_BATCH)]
+        done_agents = []
 
-    note = f"（調査済みの{len(cached)}社は、保存した結果を使います）" if cached else ""
-    if batches:
-        progress("research", f"{len(todo)}社をWebで調べています{note}")
-        with ThreadPoolExecutor(max_workers=len(batches)) as pool:
-            evidence = cached + [e for part in pool.map(research, batches) for e in part]
-    else:
-        evidence = cached
-    if not evidence:
-        raise PipelineError("企業の情報を集められませんでした")
+        def research(batch):
+            try:
+                for attempt in range(2):                   # 形が壊れて失敗したときは、1回だけ、その企業を調べ直す
+                    try:
+                        raw = _run_subagent(client, _research_prompt(batch, axes, rubric), sub_model, len(batch))
+                        break
+                    except PipelineError:
+                        if attempt == 1:
+                            raise
+                found = _clean_evidence(raw, batch)
+                for ev in found:
+                    save_cached(ev)
+                return found
+            except (PipelineError, anthropic.APIError, ValueError) as exc:
+                print(f"調査担当の失敗: {type(exc).__name__}: {exc}")
+                failed.extend(c["name"] for c in batch)
+                return []
+            finally:
+                done_agents.append(1)
+                progress("research", f"{len(done_agents)}/{len(batches)} 件の調査が終わりました")
+
+        if batches:
+            progress("research", f"{len(todo)}社をWebで調べています")
+            with ThreadPoolExecutor(max_workers=len(batches)) as pool:
+                return cached + [e for part in pool.map(research, batches) for e in part], len(cached)
+        return cached, len(cached)
 
     if research_only:      # 調査と保存だけ（採点しない）。保存を増やすときに使う
-        return {"companies": evidence, "fits": {}, "failed": failed, "cached": len(cached), "new": len(evidence) - len(cached)}
+        progress("select", "あなたの就活軸に合う企業を選んでいます")
+        evidence, n_cached = research_web(select_companies(axes, client, main_model, n_companies, avoid))
+        if not evidence:
+            raise PipelineError("企業の情報を集められませんでした")
+        return {"companies": evidence, "fits": {}, "failed": failed, "cached": n_cached, "new": len(evidence) - n_cached}
+
+    # 譲れない条件で、採点した結果を確かめる（共通項目は4点以上・根拠あり、個人軸は判定4以上・根拠あり）
+    def passes(company: dict, fits: list[dict]) -> bool:
+        for m in must:
+            if m["qid"] in IDS:
+                it = company["items"].get(m["qid"]) or {}
+                if it.get("unconfirmed", True) or it.get("score", 0) < MUST_SCORE:
+                    return False
+            elif m.get("axis") is not None and m["axis"] < len(fits):
+                f = fits[m["axis"]]
+                if not (f.get("basis") and f.get("url")) or f["fit"] < MUST_SCORE:
+                    return False
+        return True
 
     done_scores = []
 
     def score(ev):
         try:
-            return score_company(ev, axes, rubric, client, main_model, lang)
+            company, fits = score_company(ev, axes, rubric, client, main_model, lang)
+            save_scores(ev["name"], company["items"])          # 点数をデータベースに記録する
+            return company, fits
         except (PipelineError, anthropic.APIError, ValueError, KeyError) as exc:
             print(f"採点の失敗（{ev['name']}）: {type(exc).__name__}: {exc}")
             failed.append(ev["name"])
             return None
         finally:
             done_scores.append(1)
-            progress("score", f"集めた情報を採点しています（{len(done_scores)}/{len(evidence)}社）")
+            progress("score", f"集めた情報を採点しています（{len(done_scores)}社）")
 
-    progress("score", f"集めた情報を採点しています（0/{len(evidence)}社）")
-    with ThreadPoolExecutor(max_workers=SCORE_WORKERS) as pool:
-        scored = [s for s in pool.map(score, evidence) if s]
-    if not scored:
-        raise PipelineError("採点できませんでした")
-    return {"companies": [c for c, _ in scored], "fits": {c["id"]: f for c, f in scored}, "failed": failed}
+    results: list[tuple[dict, list[dict]]] = []      # 譲れない条件を満たした企業（採点済み）
+    rejected: list[tuple[dict, list[dict]]] = []     # 採点したが、条件を満たさなかった企業
+    seen_ids: set[str] = set()
+
+    def take(evs: list[dict]) -> None:
+        """採点して、譲れない条件を満たす企業だけを、集めた企業に加える。"""
+        for e in evs:          # id が重ならないようにする（軸の判定を、id で持つため）
+            base, k = e["id"], 2
+            while e["id"] in seen_ids:
+                e["id"], k = f"{base}{k}", k + 1
+            seen_ids.add(e["id"])
+        with ThreadPoolExecutor(max_workers=SCORE_WORKERS) as pool:
+            scored = [x for x in pool.map(score, evs) if x]
+        for company, fits in scored:
+            (results if passes(company, fits) else rejected).append((company, fits))
+
+    # ① データベースから、譲れない条件に合う企業を集める（記録した点数で絞り、選んで、採点して、もう一度確かめる）
+    progress("select", "保存したデータベースから、条件に合う企業を探しています")
+    db_all = list_cached()
+    pool_db = [e for e in db_all if meets_must(e, must_common)]
+    for _ in range(3):
+        need = n_companies - len(results)
+        if need <= 0 or not pool_db:
+            break
+        picks = pick_from_db(axes, pool_db, need, conditions, client, main_model)
+        taken = {e["name"] for e in picks}
+        pool_db = [e for e in pool_db if e["name"] not in taken]
+        take(picks)
+
+    # ② 足りないぶんは、Webから集める（調べて、採点して、譲れない条件を満たす企業だけを入れる）。最大2回
+    tried = [e["name"] for e in db_all]
+    for _ in range(2):
+        need = n_companies - len(results)
+        if need <= 0:
+            break
+        progress("select", f"データベースに{len(results)}社だけだったので、残り{need}社をWebから探します")
+        chosen = select_companies(axes, client, main_model, need, avoid=tried, conditions=conditions)
+        tried += [c["name"] for c in chosen]
+        found, _ = research_web(chosen)
+        take(found)
+
+    if not results:
+        if not rejected:
+            raise PipelineError("企業の情報を集められませんでした")
+        results = rejected          # 条件を満たす企業が1社もないとき：除外の理由を見せるために、採点した企業を返す
+    return {"companies": [c for c, _ in results], "fits": {c["id"]: f for c, f in results}, "failed": failed}

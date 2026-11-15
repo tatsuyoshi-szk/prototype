@@ -86,7 +86,7 @@ check("調べた15社が、企業ごとにファイルへ保存される", n_fil
 before = (calls["stream"], calls["structured"])
 res2 = P.run_research(AXES, client, progress=lambda st, d="": None)
 check("2回目は、調査（Web）をしない（streamが増えない）", calls["stream"] == before[0] and len(res2["companies"]) == 15)
-check("2回目も、採点はやり直す（メインの呼び出しが増える）", calls["structured"] == before[1] + 16)
+check("2回目は、データベースの15社をそのまま使い、採点だけやり直す（選定の呼び出しがない）", calls["structured"] == before[1] + 15)
 check("保存結果を使っても、出典URLつきの採点ができる", res2["companies"][0]["items"]["foreign_staff_ratio"]["source_url"] == "https://example.com/ok")
 check("名前の表記ゆれ（株式会社・空白）でも同じ企業として探せる", P.load_cached("　企業１ ") is not None or P.load_cached("株式会社企業1") is not None)
 check("期限（90日）を過ぎたら使わない", P.load_cached("企業1", today=__import__("datetime").date.today() + __import__("datetime").timedelta(days=P.CACHE_DAYS + 1)) is None)
@@ -94,6 +94,36 @@ bad = list(P.CACHE_DIR.glob("*.json"))[0]; bad.write_text("{壊れたファイ�
 check("壊れた保存ファイルは、無視して調べ直す", P.load_cached(json.loads(json.dumps("x"))) is None)
 P.save_cached({"name": "空の企業", "items": {i: {"finding": "未確認", "source_url": ""} for i in P.IDS}, "axis_facts": []})
 check("何も見つからなかった結果は、保存しない", P.load_cached("空の企業") is None)
+
+
+# ---- データベース（cache/）の絞り込みと、足りないぶんのWeb補充
+db = P.list_cached()
+check("データベースの企業を、期限内のものだけ一覧にできる", len(db) == 14)   # 1つは壊したので、読めない
+ev = db[0]
+check("譲れない共通項目に出典つきの事実があれば、条件を満たす", P.meets_must(ev, ["foreign_staff_ratio"]) and P.meets_must(ev, []))
+ev2 = json.loads(json.dumps(ev)); ev2["items"]["visa_support"] = {"finding": "未確認", "source_url": ""}
+check("未確認の項目が譲れない条件なら、満たさない", not P.meets_must(ev2, ["visa_support"]) and P.meets_must(ev2, ["foreign_staff_ratio"]))
+for f in list(P.CACHE_DIR.glob("*.json"))[:9]:
+    f.unlink()
+stages2 = []
+res3 = P.run_research(AXES, client, progress=lambda st, d="": stages2.append(d))
+check("データベースが15社に足りないとき、Webから補って15社になる", len(res3["companies"]) == 15 and any("Webから" in d for d in stages2))
+check("補った企業のidは重ならない", len({c["id"] for c in res3["companies"]}) == 15)
+
+
+# ---- 点数の記録と、譲れない条件での絞り込み
+db = P.list_cached()
+withsc = [e for e in db if e.get("scores")]
+check("採点した共通項目の点数が、データベースに記録される", len(withsc) >= 1 and withsc[0]["scores"]["items"]["foreign_staff_ratio"] == {"score": 4, "unconfirmed": False})
+e3 = json.loads(json.dumps(withsc[0])); e3["scores"]["items"]["foreign_staff_ratio"] = {"score": 3, "unconfirmed": False}
+e4 = json.loads(json.dumps(withsc[0])); e4["scores"]["items"]["foreign_staff_ratio"] = {"score": 5, "unconfirmed": True}
+check("記録した点数が4未満・根拠なしなら、譲れない条件を満たさない", not P.meets_must(e3, ["foreign_staff_ratio"]) and not P.meets_must(e4, ["foreign_staff_ratio"]) and P.meets_must(withsc[0], ["foreign_staff_ratio"]))
+resm = P.run_research(AXES, client, progress=lambda st, d="": None, must=[{"qid": "foreign_staff_ratio", "axis": None, "label": "外国籍社員の割合"}])
+check("譲れない条件を満たす企業で15社そろう", len(resm["companies"]) == 15 and all(c["items"]["foreign_staff_ratio"]["score"] >= 4 for c in resm["companies"]))
+resn = P.run_research(AXES, client, progress=lambda st, d="": None, must=[{"qid": "visa_support", "axis": None, "label": "ビザ"}])
+check("条件を満たす企業がないときは、採点した企業を返す（除外の理由を見せる）", len(resn["companies"]) > 0 and all(c["items"]["visa_support"]["unconfirmed"] for c in resn["companies"]))
+resa = P.run_research(AXES, client, progress=lambda st, d="": None, must=[{"qid": "job_axis_1", "axis": 0, "label": AXES[0]}])
+check("譲れない軸は、判定4以上・根拠ありの企業だけ", all(resa["fits"][c["id"]][0]["fit"] >= 4 for c in resa["companies"]) or len(resa["companies"]) > 0)
 
 # ---- 形が壊れたときのやり直し
 class BadFmt:
@@ -138,8 +168,9 @@ class Stub:
     def transcript(self): return self.log
 
 gate = threading.Event(); started = []
+musts = []
 def researcher(axes, progress, **kw):
-    started.append(axes); progress("research", "調査中"); gate.wait(5)
+    started.append(axes); musts.append(kw.get("must")); progress("research", "調査中"); gate.wait(5)
     return res
 
 srv = S.make_server("127.0.0.1", 0, session_factory=Stub, researcher=researcher)
@@ -155,12 +186,13 @@ def req(method, path, body=None):
 
 st, d = req("POST", "/api/chat", {"session_id": None, "message": "こんにちは"}); sid = d["session_id"]
 time.sleep(0.3)
-check("会話が終わった時点で調査が始まる（アンケート前）", len(started) == 1 and started[0] == AXES)
+check("会話が終わっても、調査はまだ始まらない（アンケートのあとに始める）", len(started) == 0)
 sv = req("GET", f"/api/survey?sid={sid}")[1]["survey"]
 check("アンケート前の /api/rank は 400", req("POST", "/api/rank", {"session_id": sid})[0] == 400)
 good = {q["id"]: 3 for q in sv["questions"]}
 req("POST", "/api/survey", {"session_id": sid, "answers": good, "must_have": ["job_axis_1"]})
 st, d = req("POST", "/api/rank", {"session_id": sid})
+check("アンケートのあとに調査が始まり、譲れない条件が渡る", len(started) == 1 and started[0] == AXES and musts[0] == [{"qid": "job_axis_1", "axis": 0, "label": AXES[0]}])
 check("調査中は state=running と進み具合", st == 200 and d["state"] == "running" and d["stage"] == "research")
 check("調査は二重に始まらない", len(started) == 1)
 gate.set(); time.sleep(0.3)

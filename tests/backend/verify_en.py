@@ -66,7 +66,7 @@ class Stub:
         return SimpleNamespace(kind="finish", message="ok", finished=True, axes=self.axes)
     def transcript(self): return self.log
 got = {}
-def researcher(axes, progress, lang="ja"):
+def researcher(axes, progress, lang="ja", **kw):
     got["lang"] = lang
     return {"companies": [co_en], "fits": {"x": fits_en}, "failed": []}
 srv = S.make_server("127.0.0.1", 0, session_factory=Stub, researcher=researcher)
@@ -79,15 +79,14 @@ def req(method, path, body=None):
     r = c.getresponse(); return r.status, json.loads(r.read())
 st, d = req("POST", "/api/chat", {"session_id": None, "message": "Hello, I am from Vietnam."}); sid = d["session_id"]
 check("チャットの返事に lang=en", d["lang"] == "en")
-time.sleep(0.3)
-check("調査に lang=en が渡る", got.get("lang") == "en")
 check("/api/session に lang", req("GET", f"/api/session?sid={sid}")[1]["lang"] == "en")
 sv2 = req("GET", f"/api/survey?sid={sid}")[1]["survey"]
 check("アンケートが英語", sv2["lang"] == "en" and sv2["scale"][4]["label"] == "Important" and sv2["questions"][1]["name"] == "Share of foreign-national employees")
 st, d = req("POST", "/api/rank", {"session_id": sid})
 check("アンケート前の /api/rank のエラーが英語", st == 400 and d["error"] == "Please answer the survey first.")
 req("POST", "/api/survey", {"session_id": sid, "answers": {q["id"]: 3 for q in sv2["questions"]}, "must_have": []})
-time.sleep(0.2)
+time.sleep(0.3)
+check("調査に lang=en が渡る", got.get("lang") == "en")
 st, d = req("POST", "/api/rank", {"session_id": sid})
 check("結果に lang=en と英語名", st == 200 and d["ranking"]["lang"] == "en" and d["ranking"]["top"][0]["name_en"] == "Test Trading")
 check("tr: 英語・日本語", S.tr(S.MSG_FAIL, "en").startswith("An error occurred") and S.tr(S.MSG_FAIL, "ja") == S.MSG_FAIL and S.tr(S.MSG_RANK + "（x）", "en").startswith("Could not build"))
