@@ -44,7 +44,7 @@ MAX_BODY = 32 * 1024              # リクエスト本文の上限（バイト�
 MAX_MESSAGE = 2000                # 相談者のメッセージの上限（文字）
 SID_RE = re.compile(r"^[A-Za-z0-9_-]{16,64}$")
 
-MSG_AUTH = "APIキーが正しくありません。prottype フォルダの .env を確認してください。"
+MSG_AUTH = "APIキーが正しくありません。prototype フォルダの .env を確認してください。"
 MSG_BUSY = "AIが混み合っています。少し待ってから、もう一度送ってください。"
 MSG_FAIL = "AIとの通信でエラーが起きました。もう一度送ってください。"
 MSG_REFUSED = "この内容には、AIが答えられませんでした。言い方を変えて、もう一度送ってください。"
@@ -53,7 +53,7 @@ MSG_RANK_BUSY = "AIが混み合っています。少し待ってから、ペー�
 
 # 英語の画面向けの文言（日本語の文言が、先頭から一致したら、対応する英語にする）
 MSG_EN = {
-    MSG_AUTH: "The API key is not valid. Check the .env file in the prottype folder.",
+    MSG_AUTH: "The API key is not valid. Check the .env file in the prototype folder.",
     MSG_BUSY: "The AI is busy. Please wait a moment and send again.",
     MSG_FAIL: "An error occurred while talking to the AI. Please send again.",
     MSG_REFUSED: "The AI could not answer this. Please rephrase and send again.",
@@ -280,7 +280,7 @@ def make_handler(store: Store, ranker, researcher):
         threading.Thread(target=work, daemon=True).start()
 
     class Handler(BaseHTTPRequestHandler):
-        server_version = "prottype"
+        server_version = "prototype"
         protocol_version = "HTTP/1.1"      # 1.0 のままだと、応答のあと、すぐ接続を閉じる。ブラウザが次の要求を送っていると、接続が切れて（RST）、画面が真っ白になることがあった
 
         # --- 共通

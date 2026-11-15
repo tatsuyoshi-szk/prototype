@@ -1,8 +1,8 @@
-# prottype（就活相談チャットボット）の開発メモ
+# prototype（就活相談チャットボット）の開発メモ
 
 外国人留学生（日本の新卒就活）向けのチャットボット。会話で「その人の就活軸」を見つけ、アンケートで重みをつけ、
 **実在の企業を、使うたびにWebで調べて採点し、合う企業をランキングで出す**。ローカルで動くプロトタイプ。
-このフォルダ（prottype）だけが対象。親フォルダ（`c:\d\JDSC`）の `pdca/` `product/` `prompts/` `config/` `archive/` `runs/` は、以前の検証用の残りで、触らない。
+このフォルダ（prototype）だけが対象。親フォルダ（`c:\d\JDSC`）の `pdca/` `product/` `prompts/` `config/` `archive/` `runs/` は、以前の検証用の残りで、触らない。
 
 ## 流れ
 ```
@@ -29,16 +29,16 @@ tools/      measure.py（所要時間とトークンの実測）, collect_loop.p
 
 ## 動かし方（Windows。ターミナルを2つ）
 ```powershell
-cd c:\d\JDSC\prottype\backend ; ..\..\.venv\Scripts\python server.py     # API: http://127.0.0.1:8000/
-cd c:\d\JDSC\prottype\frontend ; npm install ; npm run dev               # 画面: http://127.0.0.1:5173/（/api は 8000 へ中継）
+cd c:\d\JDSC\prototype\backend ; ..\..\.venv\Scripts\python server.py     # API: http://127.0.0.1:8000/
+cd c:\d\JDSC\prototype\frontend ; npm install ; npm run dev               # 画面: http://127.0.0.1:5173/（/api は 8000 へ中継）
 ```
 - `npm run build` すると、バックエンド単独でも 8000 番で画面が出る（frontend/dist）。
 - **バックエンドのコードを直したら、必ず再起動する。** Python は読み込んだモジュールを使い続ける（`pipeline` などは最初の利用時に読み込まれるので、
   「まだ使っていないから大丈夫」は当てにならない。実際にこれで、古いコードのまま動いて失敗したことがある）。
 - フロントは、開発サーバー（5173）なら自動で反映。8000 番で見るなら、ビルドし直す。
-- APIキー：`prottype\.env`（または `backend\.env`）に `ANTHROPIC_API_KEY=...`。起動時に、読んだ場所と末尾4文字だけを表示する。
+- APIキー：`prototype\.env`（または `backend\.env`）に `ANTHROPIC_API_KEY=...`。起動時に、読んだ場所と末尾4文字だけを表示する。
   **`.env` の中身は、読まない・表示しない・作らない**（ユーザーが自分で書く）。環境変数のキーが使われていることもある（`.env` が優先）。
-- 仮想環境は `c:\d\JDSC\.venv`（prottype の外）。
+- 仮想環境は `c:\d\JDSC\.venv`（prototype の外）。
 
 ## テスト（変更したら回す）
 ```powershell
@@ -80,7 +80,7 @@ node chat.mjs ; node survey.mjs <sid>                         # 本物のAPIで�
 - Windows の Bash では、ヒアドキュメントのバックスラッシュ・引用符が壊れることがある。複雑なパッチは、Write でファイルに書いて Python で実行する。
 
 ## git
-`prottype` が、ローカルのリポジトリ（名前・メールは、このリポジトリだけの仮の設定）。コミットの最後に、次の行を付ける。
+`prototype` が、ローカルのリポジトリ（名前・メールは、このリポジトリだけの仮の設定）。コミットの最後に、次の行を付ける。
 `Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>`
 `.env`、`backend/data/`、`backend/cache/`、`frontend/node_modules/`、`frontend/dist/`、`_snapshots/` は、管理外。
 

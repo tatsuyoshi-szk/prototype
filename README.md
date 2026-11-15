@@ -5,7 +5,7 @@
 ```
 
 ```
-prottype/
+prototype/
   backend/     バックエンド（Python。JSON APIだけ）
     server.py         ローカルサーバー（標準ライブラリ）
     pipeline.py       企業を探す処理：メインが企業を選ぶ → サブエージェント3体がWebで調べる → メインが採点する
@@ -22,11 +22,11 @@ prottype/
   CLAUDE.md    開発メモ（別のチャットで続けるとき用）
   frontend/    フロントエンド（React + Vite）
     src/              App.jsx（画面の流れ）, Chat.jsx, Survey.jsx, Result.jsx, api.js
-  .env         APIキー（自分で作る。prottype 直下、または backend 内）
+  .env         APIキー（自分で作る。prototype 直下、または backend 内）
 ```
 
 ## 1. APIキー
-`prottype\.env` に1行だけ書く（`.env.example` をコピーしてもよい）。`.env` は、PCの環境変数より優先される。
+`prototype\.env` に1行だけ書く（`.env.example` をコピーしてもよい）。`.env` は、PCの環境変数より優先される。
 ```
 ANTHROPIC_API_KEY=sk-ant-...
 ```
@@ -35,11 +35,11 @@ ANTHROPIC_API_KEY=sk-ant-...
 ## 2. 起動する（ターミナルを2つ）
 ```powershell
 # ① バックエンド  http://127.0.0.1:8000/
-cd c:\d\JDSC\prottype\backend
+cd c:\d\JDSC\prototype\backend
 ..\..\.venv\Scripts\python server.py
 
 # ② フロントエンド（開発用）  → ブラウザで http://127.0.0.1:5173/ を開く
-cd c:\d\JDSC\prottype\frontend
+cd c:\d\JDSC\prototype\frontend
 npm install        # 初回だけ
 npm run dev
 ```
