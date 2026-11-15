@@ -580,17 +580,19 @@ def run_research(axes: list[str], client=None, progress=None, *, main_model: str
         return {"companies": evidence, "fits": {}, "failed": failed, "cached": n_cached, "new": len(evidence) - n_cached}
 
     # 譲れない条件で、採点した結果を確かめる（共通項目は4点以上・根拠あり、個人軸は判定4以上・根拠あり）
-    def passes(company: dict, fits: list[dict]) -> bool:
+    def unmet_count(company: dict, fits: list[dict]) -> int:
+        """満たさない「譲れない」項目の数（0 なら、すべて満たす）。"""
+        n = 0
         for m in must:
             if m["qid"] in IDS:
                 it = company["items"].get(m["qid"]) or {}
                 if it.get("unconfirmed", True) or it.get("score", 0) < MUST_SCORE:
-                    return False
+                    n += 1
             elif m.get("axis") is not None and m["axis"] < len(fits):
                 f = fits[m["axis"]]
                 if not (f.get("basis") and f.get("url")) or f["fit"] < MUST_SCORE:
-                    return False
-        return True
+                    n += 1
+        return n
 
     done_scores = []
 
@@ -621,7 +623,7 @@ def run_research(axes: list[str], client=None, progress=None, *, main_model: str
         with ThreadPoolExecutor(max_workers=SCORE_WORKERS) as pool:
             scored = [x for x in pool.map(score, evs) if x]
         for company, fits in scored:
-            (results if passes(company, fits) else rejected).append((company, fits))
+            (results if unmet_count(company, fits) == 0 else rejected).append((company, fits))
 
     # ① データベースから、譲れない条件に合う企業を集める（記録した点数で絞り、選んで、採点して、もう一度確かめる）
     progress("select", "保存したデータベースから、条件に合う企業を探しています")
@@ -648,8 +650,12 @@ def run_research(axes: list[str], client=None, progress=None, *, main_model: str
         found, _ = research_web(chosen)
         take(found)
 
+    need = n_companies - len(results)
+    if need > 0 and rejected:
+        # 条件をすべて満たす企業が足りないときは、満たさない項目が少ない企業から、足りないぶんを加える
+        # （順位づけで、「満たさなかった条件」の印がつき、条件をすべて満たす企業の後ろに並ぶ）
+        rejected.sort(key=lambda cf: unmet_count(*cf))
+        results += rejected[:need]
     if not results:
-        if not rejected:
-            raise PipelineError("企業の情報を集められませんでした")
-        results = rejected          # 条件を満たす企業が1社もないとき：除外の理由を見せるために、採点した企業を返す
+        raise PipelineError("企業の情報を集められませんでした")
     return {"companies": [c for c, _ in results], "fits": {c["id"]: f for c, f in results}, "failed": failed}

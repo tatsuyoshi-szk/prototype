@@ -121,7 +121,7 @@ check("記録した点数が4未満・根拠なしなら、譲れない条件を
 resm = P.run_research(AXES, client, progress=lambda st, d="": None, must=[{"qid": "foreign_staff_ratio", "axis": None, "label": "外国籍社員の割合"}])
 check("譲れない条件を満たす企業で15社そろう", len(resm["companies"]) == 15 and all(c["items"]["foreign_staff_ratio"]["score"] >= 4 for c in resm["companies"]))
 resn = P.run_research(AXES, client, progress=lambda st, d="": None, must=[{"qid": "visa_support", "axis": None, "label": "ビザ"}])
-check("条件を満たす企業がないときは、採点した企業を返す（除外の理由を見せる）", len(resn["companies"]) > 0 and all(c["items"]["visa_support"]["unconfirmed"] for c in resn["companies"]))
+check("条件を満たす企業がないときは、条件に近い企業で15社まで埋める", len(resn["companies"]) == 15 and all(c["items"]["visa_support"]["unconfirmed"] for c in resn["companies"]))
 resa = P.run_research(AXES, client, progress=lambda st, d="": None, must=[{"qid": "job_axis_1", "axis": 0, "label": AXES[0]}])
 check("譲れない軸は、判定4以上・根拠ありの企業だけ", all(resa["fits"][c["id"]][0]["fit"] >= 4 for c in resa["companies"]) or len(resa["companies"]) > 0)
 
@@ -151,10 +151,16 @@ result = {"questions": [{"id": i, "name": i, "source": "common"} for i in P.IDS]
 answers = {q["id"]: 3 for q in result["questions"]}
 result["answers"] = answers; result["weights"] = {k: round(1 / len(answers), 4) for k in answers}
 rk = ranking.rank(AXES, result, companies=res["companies"], fits=res["fits"])
-check("譲れない条件(ビザ=根拠なし)で、全社除外", rk["top"] == [] and rk["screening"]["passed"] == 0 and len(rk["screening"]["excluded"]) == 15)
+check("譲れない条件(ビザ=根拠なし)で、条件を満たす企業は0社。全社に「満たさなかった条件」の印がつき、並べて出る", len(rk["top"]) == 5 and rk["screening"]["passed"] == 0 and len(rk["screening"]["excluded"]) == 15 and all(r["failed"] for r in rk["top"]))
 result["must_have"] = ["job_axis_1", "foreign_staff_ratio"]
 rk = ranking.rank(AXES, result, companies=res["companies"], fits=res["fits"])
 check("譲れない条件(根拠あり4点)で、15社が残る", rk["screening"]["passed"] == 15 and len(rk["top"]) == 5)
+import copy
+mixed = copy.deepcopy(res["companies"])
+mixed[0]["items"]["foreign_staff_ratio"]["unconfirmed"] = True      # 1社だけ、譲れない項目の根拠がない
+rkm = ranking.rank(AXES, result, companies=mixed, fits=res["fits"])
+allrows = rkm["top"] + rkm["others"]
+check("条件を満たさない企業も順位に残り、満たす企業のあとに並ぶ（印つき）", rkm["screening"]["passed"] == 14 and rkm["others"][-1]["unmet"] and rkm["others"][-1]["name"] == mixed[0]["name"] and all(not r["failed"] for r in rkm["top"]))
 check("理由にURL", any(x["url"].startswith("https://example.com") for x in rk["top"][0]["strengths"]))
 
 # ---- サーバー：会話が終わると調査が始まり、アンケート後に結果が出る

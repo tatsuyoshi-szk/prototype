@@ -254,9 +254,10 @@ def rank(axes: list[str], result: dict, top_n: int = TOP_N, client=None, model: 
             "sources": [u for u in [c.get("profile_url", "")] + list(c.get("sources") or []) if u][:3],
             "profile": c.get("profile", ""), "failed": failed,
         })
-    rows.sort(key=lambda r: (not r["low_evidence"], r["score"]), reverse=True)      # 情報不足の企業は、点が高くても最後
-    excluded = [{"name": r["name"], "name_en": r["name_en"], "failed": r["failed"]} for r in rows if r["failed"]]
-    rows = [r for r in rows if not r["failed"]]          # 譲れない条件を、すべて満たした企業だけを順位づけする
+    # 並び順：譲れない条件をすべて満たす企業が先（満たさない項目が少ない順）。そのなかで、情報不足の企業は、点が高くても後ろ
+    rows.sort(key=lambda r: (not r["failed"], -len(r["failed"]), not r["low_evidence"], r["score"]), reverse=True)
+    unmet = [{"name": r["name"], "name_en": r["name_en"], "failed": r["failed"]} for r in rows if r["failed"]]
+    passed = sum(1 for r in rows if not r["failed"])
     for i, r in enumerate(rows, 1):
         r["rank"] = i
     dates = sorted(c["collected_at"] for c in companies if c.get("collected_at") and not c.get("dummy"))
@@ -264,11 +265,11 @@ def rank(axes: list[str], result: dict, top_n: int = TOP_N, client=None, model: 
         "dummy": all(c.get("dummy") for c in companies),     # ダミーデータだけで計算したか
         "top": rows[:top_n],
         "others": [{"rank": r["rank"], "name": r["name"], "name_en": r["name_en"], "score": r["score"],
-                    "low_evidence": r["low_evidence"]} for r in rows[top_n:]],
+                    "low_evidence": r["low_evidence"], "unmet": bool(r["failed"])} for r in rows[top_n:]],
         "companies_count": len(companies),
         "axes": job_axes, "lang": lang,
         "screening": {"labels": must_labels, "total": len(companies),
-                      "passed": len(rows), "excluded": excluded},
+                      "passed": passed, "excluded": unmet},
         "collected_from": dates[0] if dates else "", "collected_to": dates[-1] if dates else "",
     }
 

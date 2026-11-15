@@ -57,12 +57,13 @@ const ja = {
   sourcesLabel: '企業の紹介の出典：',
   screenTitle: '譲れない条件：',
   screenResult: (total, passed) => (
-    <>{total}社のうち、すべて満たした企業は <b>{passed}社</b> です（4点以上で、根拠が確認できた企業だけを残しています）。</>
+    <>{total}社のうち、すべて満たした企業は <b>{passed}社</b> です（4点以上で、根拠が確認できたものだけを「満たす」としています）。{passed < total && ' 足りないぶんは、満たさない条件が少ない企業を、印をつけて後ろに加えています。'}</>
   ),
-  screenLess: '条件を減らすと、企業が見つかりやすくなります。',
-  excluded: (n) => `除かれた企業（${n}社）と、満たさなかった条件`,
+  screenLess: '条件を減らすと、条件をすべて満たす企業が見つかりやすくなります。',
+  excluded: (n) => `条件を満たさなかった企業（${n}社）と、その条件`,
+  unmetTitle: '満たさなかった「譲れない」条件',
   others: 'ほかの企業：',
-  otherItem: (o, name) => `${o.rank}位 ${name}（${o.score}点）${o.low_evidence ? '※情報不足' : ''}`,
+  otherItem: (o, name) => `${o.rank}位 ${name}（${o.score}点）${o.unmet ? '※条件を一部満たさない' : ''}${o.low_evidence ? '※情報不足' : ''}`,
   knownCount: (n) => `点数の計算に使った項目（根拠のあるもの）：${n}個`,
   lowEvidence: '根拠のある項目が少ないため、順位は参考です（情報不足）',
   failedPrefix: (names) => `（調べられなかった企業：${names}）`,
@@ -124,12 +125,13 @@ const en = {
   sourcesLabel: 'Company overview sources: ',
   screenTitle: 'Your must-haves: ',
   screenResult: (total, passed) => (
-    <>Of {total} companies, <b>{passed}</b> meet all of them (only companies with a score of 4 or higher and confirmed evidence are kept).</>
+    <>Of {total} companies, <b>{passed}</b> meet all of them (a must-have counts as met only with a score of 4 or higher and confirmed evidence).{passed < total && ' To fill the list, companies that miss the fewest must-haves are added at the end, with a note.'}</>
   ),
   screenLess: 'Try ticking fewer must-haves to see more companies.',
-  excluded: (n) => `Excluded companies (${n}) and the conditions they did not meet`,
+  excluded: (n) => `Companies that did not meet every must-have (${n}) and what they missed`,
+  unmetTitle: 'Must-haves this company does not meet',
   others: 'Other companies: ',
-  otherItem: (o, name) => `#${o.rank} ${name} (${o.score})${o.low_evidence ? ' [little evidence]' : ''}`,
+  otherItem: (o, name) => `#${o.rank} ${name} (${o.score})${o.unmet ? ' [misses a must-have]' : ''}${o.low_evidence ? ' [little evidence]' : ''}`,
   knownCount: (n) => `Items used for the score (those with evidence): ${n}`,
   lowEvidence: 'Few items have evidence, so treat this rank as a rough guide (little evidence)',
   failedPrefix: (names) => ` (Could not research: ${names})`,

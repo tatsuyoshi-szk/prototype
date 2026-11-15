@@ -43,6 +43,12 @@ function Card({ c }) {
         <div className="pt"><span className="pt-n">{c.score}</span><span className="pt-u">/100</span></div>
       </div>
       <div className="bar" role="img" aria-label={t.barAria(c.score)}><span style={{ width: `${Math.min(100, c.score)}%` }} /></div>
+      {c.failed?.length > 0 && (
+        <div className="unmet">
+          <b>{t.unmetTitle}</b>
+          <ul>{c.failed.map((f, i) => <li key={i}>{t.detail(f.label, f.reason)}</li>)}</ul>
+        </div>
+      )}
       {c.low_evidence && <div className="lowev">{t.lowEvidence}</div>}
       <div className="compare">{t.knownCount(c.known_count)}</div>
       {c.strengths.length > 0 && (
