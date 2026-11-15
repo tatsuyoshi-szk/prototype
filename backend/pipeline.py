@@ -101,10 +101,13 @@ def structured(client, model: str, prompt: str, schema: dict, effort: str = "med
 # ---------------------------------------------------------------- 1. 企業を選ぶ（メイン）
 
 def select_companies(axes: list[str], client, model: str = MAIN_MODEL, n: int = N_COMPANIES,
-                     avoid: list[str] | None = None, conditions: list[str] | None = None) -> list[dict]:
+                     avoid: list[str] | None = None, conditions: list[str] | None = None,
+                     focus: str | None = None) -> list[dict]:
     avoid_text = ("\n\n# 選ばない企業（すでに調査済み）\n" + "、".join(avoid)) if avoid else ""
     if conditions:
         avoid_text += "\n\n# 譲れない条件（必ず満たす企業を選ぶ）\n" + chr(10).join(f"- {c}" for c in conditions)
+    if focus:
+        avoid_text += "\n\n# 対象の絞り込み（必ず守る）\n" + focus
     axes_text = chr(10).join(f"- {a}" for a in axes)
     prompt = f"""日本で就職活動をしている外国人留学生（新卒）の「就活軸」を渡します。
 この留学生に合いそうな、**実在する**日本の企業（日本法人・外資系の日本法人を含む）を {n} 社選んでください。
@@ -124,7 +127,7 @@ def select_companies(axes: list[str], client, model: str = MAIN_MODEL, n: int = 
            "required": ["id", "name", "industry", "name_en", "industry_en"], "additionalProperties": False}
     schema = {"type": "object", "properties": {"companies": {"type": "array", "items": row}},
               "required": ["companies"], "additionalProperties": False}
-    data = structured(client, model, prompt, schema, effort="low", max_tokens=4000)
+    data = structured(client, model, prompt, schema, effort="low", max_tokens=8000)
     out, seen_id, seen_name = [], set(), set()
     for c in data["companies"]:
         cid = re.sub(r"[^a-z0-9_]", "", (c["id"] or "").lower())
@@ -201,7 +204,7 @@ def list_cached(today: date | None = None) -> list[dict]:
         except (OSError, ValueError, KeyError, TypeError):
             continue
         if (today or date.today()) - saved <= timedelta(days=CACHE_DAYS):
-            out.append({**ev, "collected_at": data["collected_at"], "scores": data.get("scores")})
+            out.append({**ev, "collected_at": data["collected_at"], "scores": data.get("scores"), "tags": data.get("tags") or []})
     return out
 
 
@@ -215,6 +218,41 @@ def save_scores(name: str, items: dict) -> None:
             data["scores"] = {"scored_at": date.today().isoformat(),
                               "items": {iid: {"score": int(it["score"]), "unconfirmed": bool(it["unconfirmed"])}
                                         for iid, it in items.items()}}
+            tmp = path.with_suffix(f".{os.getpid()}.{threading.get_ident()}.tmp")
+            tmp.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+            os.replace(tmp, path)
+        except (OSError, ValueError, KeyError, TypeError):
+            return
+
+
+SME_MAX_EMPLOYEES = 300        # 中小企業の目安：従業員300人以下（または、資本金3億円以下の非上場）
+SME_MAX_CAPITAL_YEN = 300_000_000
+
+
+def classify_sme(profile: str) -> bool | None:
+    """企業の紹介文から、中小企業かどうかを判定する。True＝中小企業、False＝大きい、None＝紹介文から分からない。
+    従業員数が書かれていれば、それで決める。なければ、資本金と「非上場」で決める。"""
+    text = (profile or "").replace(",", "").replace("，", "")
+    m = re.search(r"(?:従業員|社員|スタッフ)(?:数)?[はがのを]?[^0-9。、]{0,6}?(?:約|およそ|連結で|単体で)?\s*([0-9]+)\s*(?:名|人)", text)
+    if m:
+        return int(m.group(1)) <= SME_MAX_EMPLOYEES
+    m = re.search(r"資本金[はがの]?[^0-9。、]{0,6}?(?:約)?([0-9.]+)\s*(億|百万|万)\s*円", text)
+    if m and ("非上場" in text or "上場" not in text):
+        yen = float(m.group(1)) * {"億": 100_000_000, "百万": 1_000_000, "万": 10_000}[m.group(2)]
+        return yen <= SME_MAX_CAPITAL_YEN
+    return None
+
+
+def save_tag(name: str, tag: str, remove: bool = False) -> None:
+    """データベースの企業に、印（例：sme = 中小企業）をつける（remove=True なら外す）。保存ファイルがなければ、何もしない。"""
+    path = _cache_path(name)
+    with _cache_lock:
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            tags = [t for t in (data.get("tags") or []) if t != tag]
+            if not remove:
+                tags.append(tag)
+            data["tags"] = tags
             tmp = path.with_suffix(f".{os.getpid()}.{threading.get_ident()}.tmp")
             tmp.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
             os.replace(tmp, path)
@@ -253,7 +291,8 @@ def pick_from_db(axes: list[str], pool: list[dict], n: int, conditions: list[str
     catalog = catalog or pool
     index = {c["name"]: i for i, c in enumerate(catalog)}
     eligible = [index[c["name"]] for c in pool if c["name"] in index]
-    listing = nl.join(f"{i}. {c['name']}（{c.get('industry', '')}）{(c.get('profile') or '')[:60]}" for i, c in enumerate(catalog))
+    listing = nl.join(f"{i}. {'［中小］' if 'sme' in (c.get('tags') or []) else ''}{c['name']}（{c.get('industry', '')}）{(c.get('profile') or '')[:60]}"
+                      for i, c in enumerate(catalog))
     prefix = f"""日本で就職活動をしている外国人留学生（新卒）に合いそうな企業を、下の企業の一覧（番号つき）から選びます。
 
 # 企業の一覧
@@ -267,7 +306,8 @@ def pick_from_db(axes: list[str], pool: list[dict], n: int, conditions: list[str
 {", ".join(str(i) for i in eligible)}
 
 上の一覧のうち、「選べる番号」の中から、この留学生に合いそうな企業を {n} 社選び、番号を返してください。
-就活軸のそれぞれに合う企業が含まれるようにする。同じ業界は、多くても4社まで。「選べる番号」にない番号は返さない。"""
+就活軸のそれぞれに合う企業が含まれるようにする。同じ業界は、多くても4社まで。「選べる番号」にない番号は返さない。
+一覧に「［中小］」の印がついた中小企業は、大企業と同じように、軸に合うなら選ぶ。大企業だけに偏らず、合う中小企業があれば、{n}社のうち3〜5社は含める。"""
     schema = {"type": "object", "properties": {"picks": {"type": "array", "items": {"type": "integer"}}},
               "required": ["picks"], "additionalProperties": False}
     data = structured(client, model, prompt, schema, effort="low", max_tokens=2000, cache_prefix=prefix)
@@ -332,7 +372,7 @@ def _research_prompt(batch: list[dict], axes: list[str], rubric: list[dict]) -> 
 最後のメッセージには、次の形のJSONだけを書く（前後に説明を書かない）。担当の全社を入れる。
 {{"companies": [
   {{"id": "担当企業のid", "name": "企業名", "industry": "業界",
-    "profile": "事業内容、海外展開、外国人の働きやすさの特徴を、200字以内で（出典に基づく）",
+    "profile": "事業内容、従業員数（概数と時点。例：従業員48名・2025年）、上場か非上場か、海外展開、外国人の働きやすさの特徴を、250字以内で（出典に基づく。従業員数が見つからなければ「従業員数は未確認」と書く）",
     "profile_url": "https://...",
     "global_offices_list": ["開いたページで確認できた、海外拠点のある国・地域（なければ空の配列）"],
     "items": {{"項目id": {{"finding": "事実を短く。なければ「未確認」", "source_url": "https://...（なければ空文字）"}}}},
@@ -531,7 +571,8 @@ def score_company(ev: dict, axes: list[str], rubric: list[dict], client, model: 
 
 def run_research(axes: list[str], client=None, progress=None, *, main_model: str = MAIN_MODEL,
                  sub_model: str = SUB_MODEL, n_companies: int = N_COMPANIES, avoid: list[str] | None = None,
-                 research_only: bool = False, lang: str = "ja", must: list[dict] | None = None) -> dict:
+                 research_only: bool = False, lang: str = "ja", must: list[dict] | None = None,
+                 focus: str | None = None) -> dict:
     """企業を集め、採点する。戻り値は {"companies": [...], "fits": {企業id: [...]}, "failed": [...]}。
 
     must: 「譲れない」項目 [{"qid": 項目id, "label": 表示名}]。
@@ -589,7 +630,7 @@ def run_research(axes: list[str], client=None, progress=None, *, main_model: str
 
     if research_only:      # 調査と保存だけ（採点しない）。保存を増やすときに使う
         progress("select", "あなたの就活軸に合う企業を選んでいます")
-        evidence, n_cached = research_web(select_companies(axes, client, main_model, n_companies, avoid))
+        evidence, n_cached = research_web(select_companies(axes, client, main_model, n_companies, avoid, focus=focus))
         if not evidence:
             raise PipelineError("企業の情報を集められませんでした")
         return {"companies": evidence, "fits": {}, "failed": failed, "cached": n_cached, "new": len(evidence) - n_cached}
